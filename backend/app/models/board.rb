@@ -7,16 +7,14 @@ class Board < ApplicationRecord
   def self.custom_create(game:, player:)
     board = self.create(game: game, player: player)
     (0..9).to_a.each do |x|
-      space = Space.create(x_coordinate: x, board: board)
       (0..9).to_a.each do |y|
-        space.y_coordinate = y
+        Space.create(board: board, x_coordinate: x, y_coordinate: y)
       end
     end
 
     (0..9).to_a.each do |x|
-      guess = Guess.create(x_coordinate: x, board: board)
       (0..9).to_a.each do |y|
-        guess.y_coordinate = y
+        Guess.create(board: board, x_coordinate: x, y_coordinate: y)
       end
     end
     board
