@@ -8,3 +8,4 @@
 
 natedogg = Player.create(name: "natedogg", in_game: false)
 opponent = Player.create(name: "opponent", in_game: false)
+
