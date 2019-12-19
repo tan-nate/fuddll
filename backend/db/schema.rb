@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_19_161600) do
+ActiveRecord::Schema.define(version: 2019_12_19_164839) do
 
   create_table "guesses", force: :cascade do |t|
-    t.integer "player_id"
     t.integer "x_coordinate"
     t.integer "y_coordinate"
     t.string "hit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "board_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -29,13 +29,13 @@ ActiveRecord::Schema.define(version: 2019_12_19_161600) do
   end
 
   create_table "spaces", force: :cascade do |t|
-    t.integer "player_id"
     t.integer "x_coordinate"
     t.integer "y_coordinate"
     t.string "ship"
     t.boolean "hit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "board_id"
   end
 
 end
