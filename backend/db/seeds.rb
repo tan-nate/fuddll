@@ -8,3 +8,7 @@
 
 natedogg = Player.create(name: "natedogg", in_game: false)
 opponent = Player.create(name: "opponent", in_game: false)
+game = Game.create
+
+nate_board = Board.custom_create(game: game, player: natedogg)
+opp_board = Board.custom_create(game: game, player: opponent)
