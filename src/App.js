@@ -1,9 +1,10 @@
 import React from 'react';
+import BoardContainer from './containers/BoardContainer';
 
 function App() {
   return (
     <div>
-      hello
+      <BoardContainer />
     </div>
   );
 }
