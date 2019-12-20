@@ -1,17 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchBoards } from '../actions/boardActions';
+import Boards from '../components/Boards';
 
 class BoardContainer extends React.Component {
   componentDidMount() {
-    console.log(this.props);
     this.props.fetchBoards();
   }
 
   render() {
-    console.log(this.props.boards);
     return (
-      <div></div>
+      <Boards boards={this.props.boards} />
     );
   }
 }
