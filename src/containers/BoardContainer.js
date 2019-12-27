@@ -9,7 +9,6 @@ class BoardContainer extends React.Component {
   }
 
   render() {
-    debugger
     return (
       <Boards boards={this.props.boards} />
     );
@@ -24,8 +23,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // boards are rendered correctly in BoardActions / fetchboards(). however not present in props.
-    boards: () => dispatch(fetchBoards())
+    fetchBoards: () => dispatch(fetchBoards())
   }
 };
 

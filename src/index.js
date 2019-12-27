@@ -5,10 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-
-import { combineReducers } from 'redux';
 import boardsReducer from './reducers/boardsReducer';
 
 const rootReducer = combineReducers({
