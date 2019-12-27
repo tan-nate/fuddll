@@ -1,11 +1,11 @@
 class BoardSerializer
-  def initialize(plant_object)
-    @plant = plant_object
+  def initialize(board_object)
+    @board = board_object
   end
   def to_serialized_json
     options = {
       except: [:created_at, :updated_at]
     }
-    @plant.to_json(options)
+    @board.to_json(options)
   end
 end
