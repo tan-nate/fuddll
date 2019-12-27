@@ -10,7 +10,10 @@ class BoardContainer extends React.Component {
 
   render() {
     return (
-      <Boards boards={this.props.boards} />
+      <div>
+        <h2>Boards</h2>
+        <Boards boards={this.props.boards} />
+      </div>
     );
   }
 }
