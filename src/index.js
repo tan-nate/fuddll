@@ -6,13 +6,16 @@ import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import boardsReducer from './reducers/boardsReducer';
 
 const rootReducer = combineReducers({
   boards: boardsReducer
 });
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, composeWithDevTools(
+  applyMiddleware(thunk)
+));
 
 ReactDOM.render(
   <Provider store={store}>
