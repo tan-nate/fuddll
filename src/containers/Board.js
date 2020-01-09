@@ -3,15 +3,14 @@ import Space from '../components/Space';
 
 class Board extends React.Component {
   renderSpaces = () => {
-    return this.props.board.spaces.map(space => {
-      <Space id={space.id} />
-    })
+    return this.props.board.spaces.map(space => <Space id={space.id} />)
   }
   
   render() {
+    console.log(this.props);
     return (
       <div className="board">
-        {this.renderSpaces()}
+        {/* {this.renderSpaces()} */}
       </div>
     );
   }
