@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_09_154513) do
+ActiveRecord::Schema.define(version: 2020_01_09_204835) do
 
   create_table "boards", force: :cascade do |t|
     t.integer "player_id"
@@ -36,12 +36,6 @@ ActiveRecord::Schema.define(version: 2020_01_09_154513) do
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.boolean "in_game"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "ships", force: :cascade do |t|
-    t.integer "space_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

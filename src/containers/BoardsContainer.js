@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchBoards } from '../actions/boardActions';
-import Board from '../components/Board';
+import Board from '../containers/Board';
 
 class BoardsContainer extends React.Component {
   componentDidMount() {
