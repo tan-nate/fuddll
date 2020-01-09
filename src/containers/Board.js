@@ -1,9 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchSpaces } from '../actions/boardActions';
 import Space from '../components/Space';
 
 class Board extends React.Component {
+  componentDidMount() {
+    this.props.fetchSpaces();
+  }
+  
+  filteredSpaces = () => {
+    return this.props.spaces.filter(space => space.boardId === this.props.board.id);
+  }
+
   renderSpaces = () => {
-    return this.props.board.spaces.map(space => <Space id={space.id} />)
+    return this.filteredSpaces.map(space => <Space space={space} />)
   }
   
   render() {
@@ -16,4 +26,12 @@ class Board extends React.Component {
   }
 }
 
-export default Board;
+const mapStateToProps = ({ spaces }) => ({ spaces });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchSpaces: () => dispatch(fetchSpaces())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board);

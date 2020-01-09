@@ -6,6 +6,14 @@ export function fetchBoards() {
   };
 };
 
+export function fetchSpaces() {
+  return dispatch => {
+    fetch('http://localhost:3000/spaces')
+      .then(response => response.json())
+      .then(spaces => dispatch({ type: 'ADD_SPACES', spaces: spaces }));
+  };
+}
+
 export function placeShip({ id, shipType }) {
   let data = { id, shipType }
   
