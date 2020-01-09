@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchBoards } from '../actions/boardActions';
 import Board from '../components/Board';
 
-class BoardContainer extends React.Component {
+class BoardsContainer extends React.Component {
   componentDidMount() {
     this.props.fetchBoards();
   }
@@ -12,9 +12,9 @@ class BoardContainer extends React.Component {
     return (
       <div>
         <h2>Natedogg's Board</h2>
-        <Board boards={this.props.boards} />
+        <Board board={this.props.boards[0]} />
         <h2>Opponent's Board</h2>
-        <Board boards={this.props.boards} />
+        <Board board={this.props.boards[1]} />
       </div>
     );
   }
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(BoardsContainer);

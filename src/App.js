@@ -1,10 +1,10 @@
 import React from 'react';
-import BoardContainer from './containers/BoardContainer';
+import BoardsContainer from './containers/BoardsContainer';
 
 function App() {
   return (
     <div>
-      <BoardContainer />
+      <BoardsContainer />
     </div>
   );
 }
