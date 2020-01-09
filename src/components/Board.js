@@ -1,5 +1,5 @@
 import React from 'react';
-import Space from './Space';
+import Space from '../containers/Space';
 
 class Board extends React.Component {
   render() {
