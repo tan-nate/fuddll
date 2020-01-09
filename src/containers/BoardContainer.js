@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchBoards } from '../actions/boardActions';
-import Boards from '../components/Boards';
+import Board from '../components/Board';
 
 class BoardContainer extends React.Component {
   componentDidMount() {
@@ -11,8 +11,10 @@ class BoardContainer extends React.Component {
   render() {
     return (
       <div>
-        <h2>Boards</h2>
-        <Boards boards={this.props.boards} />
+        <h2>Natedogg's Board</h2>
+        <Board boards={this.props.boards} />
+        <h2>Opponent's Board</h2>
+        <Board boards={this.props.boards} />
       </div>
     );
   }
