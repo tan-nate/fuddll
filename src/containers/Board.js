@@ -1,13 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSpaces } from '../actions/boardActions';
+import { fetchSpaces } from '../actions/gameActions';
 import Space from '../components/Space';
 
 class Board extends React.Component {
-  componentDidMount() {
-    this.props.fetchSpaces();
-  }
-  
   filteredSpaces = () => {
     if(this.props.board !== undefined) {
       return this.props.spaces.filter(space => space.board_id === this.props.board.id);
@@ -17,11 +13,14 @@ class Board extends React.Component {
   }
 
   renderSpaces = () => {
-    return this.filteredSpaces().map(space => <Space space={space} />)
+    if(this.filteredSpaces().length !== 0) {
+      return this.filteredSpaces().map(space => <Space space={space} />)
+    } else {
+      return null;
+    }
   }
   
   render() {
-    console.log(this.props);
     return (
       <div className="board">
         {this.renderSpaces()}

@@ -1,10 +1,10 @@
 import React from 'react';
-import BoardsContainer from './containers/BoardsContainer';
+import Game from './containers/Game';
 
 function App() {
   return (
     <div>
-      <BoardsContainer />
+      <Game />
     </div>
   );
 }
