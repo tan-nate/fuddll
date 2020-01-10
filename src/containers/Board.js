@@ -9,18 +9,22 @@ class Board extends React.Component {
   }
   
   filteredSpaces = () => {
-    return this.props.spaces.filter(space => space.boardId === this.props.board.id);
+    if(this.props.board !== undefined) {
+      return this.props.spaces.filter(space => space.board_id === this.props.board.id);
+    } else {
+      return [];
+    }
   }
 
   renderSpaces = () => {
-    return this.filteredSpaces.map(space => <Space space={space} />)
+    return this.filteredSpaces().map(space => <Space space={space} />)
   }
   
   render() {
     console.log(this.props);
     return (
       <div className="board">
-        {/* {this.renderSpaces()} */}
+        {this.renderSpaces()}
       </div>
     );
   }
