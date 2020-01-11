@@ -1,4 +1,4 @@
-*fuddll* is a game where you draw fuddlls onto your secret board and hide them from your opponent. Try to guess your opponent's fuddlls before they guess yours!
+__*fuddll*__ is a game where you draw fuddlls onto your secret board and hide them from your opponent. Try to guess your opponent's fuddlls before they guess yours!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
