@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_13_142329) do
+ActiveRecord::Schema.define(version: 2020_01_13_161618) do
 
   create_table "boards", force: :cascade do |t|
     t.integer "player_id"
@@ -24,11 +24,24 @@ ActiveRecord::Schema.define(version: 2020_01_13_142329) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "lines", force: :cascade do |t|
+    t.integer "point1_id"
+    t.integer "point2_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.boolean "in_game"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.integer "x"
+    t.integer "y"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "board_id"
   end
 
 end

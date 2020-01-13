@@ -1,6 +1,5 @@
 class Board < ApplicationRecord
-  has_many :spaces
-  has_many :guesses
+  has_many :points
   belongs_to :player
   belongs_to :game
 
@@ -8,13 +7,13 @@ class Board < ApplicationRecord
     board = self.create(game: game, player: player)
     (0..9).to_a.each do |y|
       (0..9).to_a.each do |x|
-        Space.create(board: board, x_coordinate: x, y_coordinate: y)
+        Point.create(board: board, x: x, y: y)
       end
     end
 
     (0..9).to_a.each do |y|
       (0..9).to_a.each do |x|
-        Guess.create(board: board, x_coordinate: x, y_coordinate: y)
+        Point.create(board: board, x: x, y: y)
       end
     end
     board
