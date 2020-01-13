@@ -14,8 +14,22 @@ code {
 
 .board {
   display: grid;
-  grid-template-columns: repeat(10, 50px);
-  grid-template-rows: repeat(10, 50px);
+  grid-template-columns: repeat(5, 50px);
+  grid-template-rows: repeat(5, 50px);
   border: 2px solid black;
   width: fit-content;
+}
+
+.point {
+  position: relative;
+  text-align: center;
+}
+
+.checkbox {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

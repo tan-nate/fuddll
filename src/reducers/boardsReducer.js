@@ -5,6 +5,6 @@ const boardsReducer = (state = [], action) => {
     default:
       return state;
   }
-}
+};
  
 export default boardsReducer;
