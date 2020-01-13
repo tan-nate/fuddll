@@ -31,10 +31,4 @@ class Board extends React.Component {
 
 const mapStateToProps = ({ points }) => ({ points });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchPoints: () => dispatch(fetchPoints())
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+export default connect(mapStateToProps)(Board);

@@ -13,15 +13,15 @@ class Game extends React.Component {
     return (
       <div>
         <h2>Natedogg's Board</h2>
-        <Board board={this.props.boards[0]} spaces={this.props.spaces} />
+        <Board board={this.props.boards[0]} points={this.props.points} />
         <h2>Opponent's Board</h2>
-        <Board board={this.props.boards[1]} spaces={this.props.spaces} />
+        <Board board={this.props.boards[1]} points={this.props.points} />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ boards, spaces }) => ({ boards, spaces });
+const mapStateToProps = ({ boards, points }) => ({ boards, points });
 
 const mapDispatchToProps = dispatch => {
   return {

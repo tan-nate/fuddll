@@ -10,12 +10,6 @@ class Board < ApplicationRecord
         Point.create(board: board, x: x, y: y)
       end
     end
-
-    (0..9).to_a.each do |y|
-      (0..9).to_a.each do |x|
-        Point.create(board: board, x: x, y: y)
-      end
-    end
     board
   end
 end

@@ -1,6 +1,6 @@
 const spacesReducer = (state = [], action) => {
   switch(action.type) {
-    case 'ADD_SPACES':
+    case 'ADD_POINTS':
       debugger
       return [...state, ...action.points];
     case 'PLACE_SHIP':
