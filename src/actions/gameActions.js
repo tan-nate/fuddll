@@ -6,11 +6,11 @@ export function fetchBoards() {
   };
 };
 
-export function fetchSpaces() {
+export function fetchPoints() {
   return dispatch => {
-    fetch('http://localhost:3000/spaces')
+    fetch('http://localhost:3000/points')
       .then(response => response.json())
-      .then(spaces => dispatch({ type: 'ADD_SPACES', spaces: spaces }));
+      .then(points => dispatch({ type: 'ADD_POINTS', points: points }));
   };
 }
 

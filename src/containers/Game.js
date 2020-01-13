@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchBoards, fetchSpaces } from '../actions/gameActions';
+import { fetchBoards, fetchPoints } from '../actions/gameActions';
 import Board from './Board';
 
 class Game extends React.Component {
   componentDidMount() {
     this.props.fetchBoards();
-    this.props.fetchSpaces();
+    this.props.fetchPoints();
   }
 
   render() {
@@ -26,7 +26,7 @@ const mapStateToProps = ({ boards, spaces }) => ({ boards, spaces });
 const mapDispatchToProps = dispatch => {
   return {
     fetchBoards: () => dispatch(fetchBoards()),
-    fetchSpaces: () => dispatch(fetchSpaces())
+    fetchPoints: () => dispatch(fetchPoints())
   }
 };
 

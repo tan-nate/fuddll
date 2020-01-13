@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSpaces } from '../actions/gameActions';
-import Space from '../components/Space';
+import { fetchPoints } from '../actions/gameActions';
+import Point from '../components/Point';
 
 class Board extends React.Component {
-  filteredSpaces = () => {
+  filteredPoints = () => {
     if(this.props.board !== undefined) {
-      return this.props.spaces.filter(space => space.board_id === this.props.board.id);
+      return this.props.points.filter(point => point.board_id === this.props.board.id);
     } else {
       return [];
     }
   }
 
-  renderSpaces = () => {
-    if(this.filteredSpaces().length !== 0) {
-      return this.filteredSpaces().map(space => <Space space={space} />)
+  renderPoints = () => {
+    if(this.filteredPoints().length !== 0) {
+      return this.filteredPoints().map(point => <Point point={point} />)
     } else {
       return null;
     }
@@ -23,17 +23,17 @@ class Board extends React.Component {
   render() {
     return (
       <div className="board">
-        {this.renderSpaces()}
+        {this.renderPoints()}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ spaces }) => ({ spaces });
+const mapStateToProps = ({ points }) => ({ points });
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSpaces: () => dispatch(fetchSpaces())
+    fetchPoints: () => dispatch(fetchPoints())
   }
 };
 
