@@ -10,10 +10,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import boardsReducer from './reducers/boardsReducer';
 import pointsReducer from './reducers/pointsReducer';
+import linesReducer from './reducers/linesReducer';
 
 const rootReducer = combineReducers({
   boards: boardsReducer,
-  points: pointsReducer
+  points: pointsReducer, 
+  lines: linesReducer
 });
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)

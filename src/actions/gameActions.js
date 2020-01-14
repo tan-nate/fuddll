@@ -15,6 +15,7 @@ export function fetchPoints() {
 };
 
 export function sendPoints(points) {
+  debugger
   let formData = {
     line: {
       point1_id: points[0].id,

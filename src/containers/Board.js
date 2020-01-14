@@ -42,7 +42,9 @@ class Board extends React.Component {
   }
 
   checkAndSendPoints = () => {
+    debugger
     if(this.state.connectedPoints.length === 2) {
+      debugger
       this.props.sendPoints(this.state.connectedPoints);
     }
   }
