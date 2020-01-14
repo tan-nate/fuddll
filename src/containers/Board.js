@@ -21,7 +21,7 @@ class Board extends React.Component {
 
   renderPoints = () => {
     if(this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} />)
+      return this.filteredPoints().map(point => <Point key={point.id} ref="child" point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} connectedPoints={this.state.connectedPoints.map(point => point.id)} />);
     } else {
       return null;
     }
