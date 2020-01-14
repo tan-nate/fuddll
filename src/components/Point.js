@@ -7,7 +7,6 @@ class Point extends React.Component {
     } else {
       this.props.removePoint(this.props.point);
     }
-    this.props.checkAndSendPoints();
   }
   
   render() {

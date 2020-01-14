@@ -21,7 +21,7 @@ class Board extends React.Component {
 
   renderPoints = () => {
     if(this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints = {this.connectPoints} removePoint = {this.removePoint} checkAndSendPoints={this.checkAndSendPoints} />)
+      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} />)
     } else {
       return null;
     }
@@ -43,12 +43,12 @@ class Board extends React.Component {
 
   checkAndSendPoints = () => {
     if(this.state.connectedPoints.length === 2) {
-      debugger
       this.props.sendPoints(this.state.connectedPoints);
     }
   }
 
   render() {
+    this.checkAndSendPoints();
     return (
       <div className="board">
         {this.renderPoints()}
@@ -62,7 +62,7 @@ const mapStateToProps = ({ points }) => ({ points });
 const mapDispatchToProps = dispatch => {
   return {
     sendPoints: (points) => dispatch(sendPoints(points))
-  }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

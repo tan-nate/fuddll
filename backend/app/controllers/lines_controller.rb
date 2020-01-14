@@ -1,6 +1,6 @@
 class LinesController < ApplicationController
   def create
-    line = Line.create(line_params)
+    line = Line.find_or_create_by(line_params)
     render json: LineSerializer.new(line).to_serialized_json
   end
 
