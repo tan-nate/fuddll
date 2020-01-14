@@ -31,8 +31,16 @@ export function sendPoints(points) {
   };
   return dispatch => {
     fetch('http://localhost:3000/lines', configObj)
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Connected points must be adjacent");
+        }
+      })
       .then(line => dispatch({ type: 'ADD_LINE', line: line }))
-      .catch(error => console.log(error.message));
+      .catch(error => {
+        console.log(error);
+      });
   };
 };

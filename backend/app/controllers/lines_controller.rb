@@ -1,7 +1,11 @@
 class LinesController < ApplicationController
   def create
-    line = Line.find_or_create_by(line_params)
-    render json: LineSerializer.new(line).to_serialized_json
+    line = Line.find_or_initialize_by(line_params)
+    if line.save
+      render json: LineSerializer.new(line).to_serialized_json
+    else
+      render json: line.errors, status: :unprocessable_entity
+    end
   end
 
   private
