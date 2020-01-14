@@ -10,7 +10,7 @@ class Point extends React.Component {
   }
 
   isChecked = () => {
-    if (this.props.connectPoints.includes(this.props.point.id)) {
+    if (this.props.connectedPoints.includes(this.props.point.id)) {
       return true;
     } else {
       return false;
@@ -21,7 +21,7 @@ class Point extends React.Component {
     return (
       <div className="point">
         <div className="checkbox">
-          <input onClick={this.handleClick} type="checkbox" checked={this.isChecked} />
+          <input onClick={this.handleClick} type="checkbox" />
         </div>
       </div>
     );
