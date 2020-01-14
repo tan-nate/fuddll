@@ -15,13 +15,12 @@ export function fetchPoints() {
 };
 
 export function sendPoints(points) {
-  debugger
   let formData = {
     line: {
       point1_id: points[0].id,
       point2_id: points[1].id
     }
-  }
+  };
   let configObj = {
     method: "POST",
     headers: {
@@ -29,13 +28,11 @@ export function sendPoints(points) {
       "Accept": "application/json"
     }, 
     body: JSON.stringify(formData)
-  }
+  };
   return dispatch => {
     fetch('http://localhost:3000/lines', configObj)
       .then(response => response.json())
       .then(line => dispatch({ type: 'ADD_LINE', line: line }))
-      .catch(function(error) {
-        console.log(error.message);
-      });
-  }
-}
+      .catch(error => console.log(error.message));
+  };
+};
