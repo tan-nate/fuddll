@@ -12,7 +12,7 @@ class Board extends React.Component {
   }
   
   filteredPoints = () => {
-    if(this.props.board !== undefined) {
+    if (this.props.board !== undefined) {
       return this.props.points.filter(point => point.board_id === this.props.board.id);
     } else {
       return [];
@@ -20,7 +20,7 @@ class Board extends React.Component {
   }
 
   renderPoints = () => {
-    if(this.filteredPoints().length !== 0) {
+    if (this.filteredPoints().length !== 0) {
       return this.filteredPoints().map(point => <Point key={point.id} ref="child" point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} />);
     } else {
       return null;
@@ -42,7 +42,7 @@ class Board extends React.Component {
   }
 
   checkAndSendPoints = () => {
-    if(this.state.connectedPoints.length === 2) {
+    if (this.state.connectedPoints.length === 2) {
       this.props.sendPoints(this.state.connectedPoints);
       this.setState({
         connectedPoints: []

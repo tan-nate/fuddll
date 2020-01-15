@@ -1,4 +1,4 @@
-const spacesReducer = (state = [], action) => {
+const pointsReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_POINTS':
       return [...state, ...action.points];
@@ -7,4 +7,4 @@ const spacesReducer = (state = [], action) => {
   }
 };
  
-export default spacesReducer;
+export default pointsReducer;
