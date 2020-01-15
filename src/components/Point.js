@@ -8,14 +8,6 @@ class Point extends React.Component {
       this.props.removePoint(this.props.point);
     }
   }
-
-  isChecked = () => {
-    if (this.props.connectedPoints.includes(this.props.point.id)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
   
   render() {
     return (
