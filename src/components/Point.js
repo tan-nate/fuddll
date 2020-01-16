@@ -13,7 +13,7 @@ class Point extends React.Component {
     return (
       <div className="point">
         <div className="checkbox">
-          <input onClick={this.handleClick} type="checkbox" />
+          <button onClick={this.handleClick} value="x" />
         </div>
       </div>
     );
