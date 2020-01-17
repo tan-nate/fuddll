@@ -1,19 +1,19 @@
 import React from 'react';
 
 class Point extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { buttonColor: "blank" };
+  }
+  
   handleClick = (event) => {
-    if(event.target.checked) {
-      this.props.connectPoints(this.props.point);
-    } else {
-      this.props.removePoint(this.props.point);
-    }
   }
   
   render() {
     return (
       <div className="point">
-        <div className="checkbox">
-          <button onClick={this.handleClick} value="x" />
+        <div className="button">
+          <button onClick={this.handleClick} className={this.state.buttonColor} />
         </div>
       </div>
     );
