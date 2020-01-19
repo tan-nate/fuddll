@@ -44,6 +44,7 @@ class Board extends React.Component {
   checkAndSendPoints = () => {
     if (this.state.connectedPoints.length === 2) {
       this.props.sendPoints(this.state.connectedPoints);
+      this.clearPointsButtonColors();
       this.setState({
         connectedPoints: []
       });

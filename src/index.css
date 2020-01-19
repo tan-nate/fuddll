@@ -27,9 +27,26 @@ code {
 
 .button {
   position: absolute;
-  margin: 0;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+button {
+  border-radius: 50%;
+}
+
+.button .blank {
+  background-color: white;
+}
+
+.button .green {
+  background-color: green;
+  color: white;
+}
+
+.button .red {
+  background-color: red;
+  color: white;
 }
