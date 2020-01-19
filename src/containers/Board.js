@@ -59,7 +59,7 @@ class Board extends React.Component {
   }
 }
 
-const mapStateToProps = ({ points }) => ({ points });
+const mapStateToProps = ({ points, lines }) => ({ points, lines });
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -7,6 +7,7 @@ class Point extends React.Component {
   }
   
   handleClick = (event) => {
+
   }
   
   render() {
