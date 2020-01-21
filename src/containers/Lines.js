@@ -8,6 +8,13 @@ class Lines extends React.Component {
       pointPositions = []
     };
   }
+
+  passPointPosition = (point) => {
+    const newPointPositions = [...this.state.pointPositions, point];
+    this.setState({
+      pointPositions: newPointPositions
+    });
+  }
   
   renderLines = () => {
     
