@@ -65,19 +65,24 @@ class Board extends React.Component {
   }
 
   renderLines = () => {
-    return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.state.filteredPointPositions} />)
+    return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.filteredPointPositions} />);
   }
 
   render() {
     return (
       <div className="board">
         {this.renderPoints()}
+        {this.renderLines()}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ points, lines }) => ({ points: points.points, pointPositions: points.pointPositions, lines });
+const mapStateToProps = ({ points, lines }) => ({
+  points: points.points, 
+  pointPositions: points.pointPositions, 
+  lines 
+});
 
 const mapDispatchToProps = dispatch => {
   return {
