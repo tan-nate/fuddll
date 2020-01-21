@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sendPoints } from '../actions/gameActions';
 import Point from '../components/Point';
+import Lines from './Lines';
 
 class Board extends React.Component {
   constructor(props) {
@@ -57,9 +58,7 @@ class Board extends React.Component {
   render() {
     return (
       <div className="board">
-        <Lines filteredLines={this.filteredLines()}>
-          {this.renderPoints()}
-        </Lines>
+        <Lines filteredLines={this.filteredLines()} renderPoints={this.renderPoints} />
       </div>
     );
   }
