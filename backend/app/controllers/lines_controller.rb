@@ -9,8 +9,8 @@ class LinesController < ApplicationController
   end
 
   def destroy
-    line = Line.find(params[:line][:id])
-    render json: LineSerializer.new(line.to_serialized_json)
+    line = Line.find(params[:id])
+    render json: LineSerializer.new(line).to_serialized_json
     line.destroy
   end
 

@@ -46,17 +46,13 @@ export function sendPoints({ points, board }) {
   };
 };
 
-export function deleteLine({ line }) {
-  let formData = {
-    line
-  };
+export function deleteLine(line) {
   let configObj = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
-    }, 
-    body: JSON.stringify(formData)
+    }
   };
   return dispatch => {
     fetch(`http://localhost:3000/lines/${line.id}`, configObj)

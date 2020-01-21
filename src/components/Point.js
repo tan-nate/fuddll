@@ -83,7 +83,7 @@ class Point extends React.Component {
   }
   
   render() {
-    {this.clearRed()}
+    this.clearRed()
     return (
       <div className="point">
         <div className="button" ref={this.pointRef}>
