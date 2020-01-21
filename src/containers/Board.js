@@ -8,7 +8,8 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      connectedPoints: []
+      connectedPoints: [],
+      pointPositions = []
     };
   }
   
@@ -20,13 +21,9 @@ class Board extends React.Component {
     }
   }
 
-  filteredLines = () => {
-    return this.props.lines.filter(line => line.board_id === this.props.board.id);
-  }
-
   renderPoints = () => {
     if (this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.props.lines} connectedPoints={this.state.connectedPoints} />);
+      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.props.lines} connectedPoints={this.state.connectedPoints} passPointPosition={this.passPointPosition} />);
     } else {
       return null;
     }
@@ -55,10 +52,25 @@ class Board extends React.Component {
     }
   }
 
+  filteredLines = () => {
+    return this.props.lines.filter(line => line.board_id === this.props.board.id);
+  }
+
+  renderLines = () => {
+    return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.state.pointPositions} />)
+  }
+
+  passPointPosition = (point) => {
+    const newPointPositions = [...this.state.pointPositions, point];
+    this.setState({
+      pointPositions: newPointPositions
+    });
+  }
+
   render() {
     return (
       <div className="board">
-        <Lines filteredLines={this.filteredLines()} renderPoints={this.renderPoints} />
+        {this.renderPoints()}
       </div>
     );
   }
