@@ -25,7 +25,7 @@ class Point extends React.Component {
 
   handleClick = () => {
     const lines = this.checkForLines();
-    if (lines.length === 0 || lines.length === 1) {
+    if ( lines.length === 1) {
       if (this.state.buttonColor === "blank") {
         this.props.connectPoints(this.props.point);
         this.setState({
@@ -52,6 +52,18 @@ class Point extends React.Component {
           buttonColor: "blank"
         });
       }
+    } else if (lines.length === 0) {
+      if (this.state.buttonColor === "blank") {
+        this.props.connectPoints(this.props.point);
+        this.setState({
+          buttonColor: "green"
+        });
+      } else if (this.state.buttonColor === "green") {
+        this.props.removePoint(this.props.point);
+        this.setState({
+          buttonColor: "blank"
+        });
+      }
     }
   }
 
@@ -65,7 +77,7 @@ class Point extends React.Component {
     return (
       <div className="point">
         <div className="button" ref={this.pointRef}>
-          <button onClick={this.handleClick} className={this.state.buttonColor}>{this.props.point.id}</button>
+          <button onClick={this.handleClick} className={this.state.buttonColor}></button>
         </div>
       </div>
     );

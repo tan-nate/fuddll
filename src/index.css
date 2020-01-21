@@ -35,6 +35,9 @@ code {
 
 button {
   border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
 }
 
 .button .blank {
@@ -42,13 +45,14 @@ button {
 }
 
 .button .green {
-  background-color: green;
+  background-color: rgb(8, 160, 79);
   color: white;
 }
 
 .button .red {
-  background-color: red;
+  background-color: rgb(251, 57, 57);
   color: white;
+  content: 'x';
 }
 
 .svg {
@@ -61,6 +65,6 @@ button {
 }
 
 .line {
-  stroke-width:2px;
-  stroke:rgb(0,0,0);
+  stroke-width: 2px;
+  stroke: rgb(0,0,0);
 }
