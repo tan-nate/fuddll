@@ -31,6 +31,10 @@ code {
   color: rgba(255, 102, 0, 0.856);
 }
 
+.instructions:disabled {
+  display: none;
+}
+
 .point {
   position: relative;
   text-align: center;
@@ -71,6 +75,10 @@ button.submit {
   width: auto;
   height: auto;
   background-color: aqua;
+}
+
+button.submit:disabled {
+  display: none;
 }
 
 .svg {

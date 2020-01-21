@@ -94,7 +94,7 @@ class Board extends React.Component {
               all points containing lines must have two and only two lines
             </p>
           </div>
-          <button className="submit" type="submit">submit fuddll</button>
+          <button className="submit" type="submit" disabled="true">submit fuddll</button>
         </div>
       </div>
     );
