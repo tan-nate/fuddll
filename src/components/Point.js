@@ -6,6 +6,11 @@ class Point extends React.Component {
     this.state = {
       buttonColor: "blank"
     };
+    this.pointRef = React.createRef();
+  }
+  
+  componentDidMount() {
+    this.passPointPosition();
   }
 
   componentDidUpdate(prevProps) {
@@ -49,11 +54,17 @@ class Point extends React.Component {
       }
     }
   }
+
+  passPointPosition = () => {
+    const x = this.pointRef.current.getBoundingClientRect().x;
+    const y = this.pointRef.current.getBoundingClientRect().y;
+    this.props.passPointPosition({ point_id: this.props.point.id, x, y });
+  }
   
   render() {
     return (
       <div className="point">
-        <div className="button">
+        <div className="button" ref={this.pointRef}>
           <button onClick={this.handleClick} className={this.state.buttonColor}>{this.props.point.id}</button>
         </div>
       </div>

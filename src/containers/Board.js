@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendPoints } from '../actions/gameActions';
+import { storePointPosition } from '../actions/drawingActions';
 import Point from '../components/Point';
-import Lines from './Lines';
+import Line from '../components/Line';
 
 class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      connectedPoints: [],
-      pointPositions = []
+      connectedPoints: []
     };
   }
   
@@ -61,10 +61,7 @@ class Board extends React.Component {
   }
 
   passPointPosition = (point) => {
-    const newPointPositions = [...this.state.pointPositions, point];
-    this.setState({
-      pointPositions: newPointPositions
-    });
+    this.props.storePointPosition(point);
   }
 
   render() {
@@ -76,11 +73,12 @@ class Board extends React.Component {
   }
 }
 
-const mapStateToProps = ({ points, lines }) => ({ points, lines });
+const mapStateToProps = ({ points, lines }) => ({ points: points.points, pointPositions: points.pointPositions, lines });
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendPoints: ({ points, board }) => dispatch(sendPoints({ points, board }))
+    sendPoints: ({ points, board }) => dispatch(sendPoints({ points, board })),
+    storePointPosition: point => dispatch(storePointPosition(point))
   };
 };
 
