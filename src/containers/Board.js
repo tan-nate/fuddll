@@ -30,10 +30,6 @@ class Board extends React.Component {
       return null;
     }
   }
-
-  renderLines = () => {
-
-  }
   
   connectPoints = (point) => {
     const newConnectedPoints = this.state.connectedPoints.slice();
@@ -61,7 +57,9 @@ class Board extends React.Component {
   render() {
     return (
       <div className="board">
-        {this.renderPoints()}
+        <Lines filteredLines={this.filteredLines()}>
+          {this.renderPoints()}
+        </Lines>
       </div>
     );
   }
