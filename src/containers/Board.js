@@ -23,7 +23,7 @@ class Board extends React.Component {
 
   renderPoints = () => {
     if (this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.props.lines} connectedPoints={this.state.connectedPoints} passPointPosition={this.passPointPosition} deleteLines={this.deleteLines} />);
+      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.props.lines} connectedPoints={this.state.connectedPoints} passPointPosition={this.passPointPosition} deleteLines={this.deleteLines} checkForLines={this.checkPointForLines} />);
     } else {
       return null;
     }
@@ -78,6 +78,37 @@ class Board extends React.Component {
     return <p>{10 - this.filteredLines().length} lines left</p>
   }
 
+  checkPointForLines = (point) => {
+    return this.filteredLines().filter(line => line.point1_id === point.id || line.point2_id === point.id);
+  }
+
+  checkShapesClosed = () => {
+    const checkPointsArray = this.filteredPoints().map(point => {
+      if (this.checkPointForLines(point).length !== 0) {
+        if (this.checkPointForLines(point).length === 2) {
+          return 1;
+        } else {
+          return 0;
+        }
+      } else {
+        return 1;
+      }
+    });
+    if (checkPointsArray.includes(0)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  checkLinesLeftAndShapesClosed = () => {
+    if (this.checkShapesClosed() && this.filteredLines().length === 10) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     return (
       <div className="board-container">
@@ -89,12 +120,12 @@ class Board extends React.Component {
           <div className="lines-left">
             {this.linesLeft()}
           </div>
-          <div className="instructions">
+          <div className="instructions" hidden={this.checkShapesClosed()}>
             <p>
-              all points containing lines must have two and only two lines
+              |_/
             </p>
           </div>
-          <button className="submit" type="submit" disabled="true">submit fuddll</button>
+          <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()}>submit fuddll</button>
         </div>
       </div>
     );
