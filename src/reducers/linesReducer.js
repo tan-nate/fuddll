@@ -3,7 +3,6 @@ const linesReducer = (state = [], action) => {
     case 'ADD_LINE':
       return [...state, action.line];
     case 'DELETE_LINE':
-      debugger
       return state.filter(line => line.id !== action.line.id);
     default:
       return state;
