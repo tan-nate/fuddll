@@ -8,6 +8,12 @@ class Point extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.connectedPoints.length < prevProps.connectedPoints.length) {
+      this.setState({ buttonColor: "blank" });
+    }
+  }
+
   checkForLines = () => {
     return this.props.lines.filter(line => line.point1_id === this.props.point.id || line.point2_id === this.props.point.id);
   }
