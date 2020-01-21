@@ -23,6 +23,14 @@ class Point extends React.Component {
     return this.props.lines.filter(line => line.point1_id === this.props.point.id || line.point2_id === this.props.point.id);
   }
 
+  clearRed = () => {
+    if (this.state.buttonColor === "red") {
+      setTimeout(() => {
+        this.setState({ buttonColor: "blank" })
+      }, 3000);
+    }
+  }
+
   handleClick = () => {
     const lines = this.checkForLines();
     if ( lines.length === 1) {
@@ -74,6 +82,7 @@ class Point extends React.Component {
   }
   
   render() {
+    {this.clearRed()}
     return (
       <div className="point">
         <div className="button" ref={this.pointRef}>
