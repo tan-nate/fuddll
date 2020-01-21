@@ -14,11 +14,12 @@ export function fetchPoints() {
   };
 };
 
-export function sendPoints(points) {
+export function sendPoints({ points, board }) {
   let formData = {
     line: {
       point1_id: points[0].id,
-      point2_id: points[1].id
+      point2_id: points[1].id,
+      board_id: board
     }
   };
   let configObj = {

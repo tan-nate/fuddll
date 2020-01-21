@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_13_161618) do
+ActiveRecord::Schema.define(version: 2020_01_21_035411) do
 
   create_table "boards", force: :cascade do |t|
     t.integer "player_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_01_13_161618) do
   create_table "lines", force: :cascade do |t|
     t.integer "point1_id"
     t.integer "point2_id"
+    t.integer "board_id"
   end
 
   create_table "players", force: :cascade do |t|
