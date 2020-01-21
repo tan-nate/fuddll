@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendPoints } from '../actions/gameActions';
+import { sendPoints, deleteLine } from '../actions/gameActions';
 import { storePointPosition } from '../actions/drawingActions';
 import Point from '../components/Point';
 import Line from '../components/Line';
@@ -23,7 +23,7 @@ class Board extends React.Component {
 
   renderPoints = () => {
     if (this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.props.lines} connectedPoints={this.state.connectedPoints} passPointPosition={this.passPointPosition} />);
+      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.props.lines} connectedPoints={this.state.connectedPoints} passPointPosition={this.passPointPosition} deleteLines={this.deleteLines} />);
     } else {
       return null;
     }
@@ -68,6 +68,11 @@ class Board extends React.Component {
     return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.filteredPointPositions()} />);
   }
 
+  deleteLines = (point) => {
+    const deletedLines = this.props.lines.filter(line => line.point1_id === point.id || line.point2_id === point.id);
+    deletedLines.forEach(line => this.props.deleteLine(line));
+  }
+
   render() {
     return (
       <div className="board">
@@ -87,7 +92,8 @@ const mapStateToProps = ({ points, lines }) => ({
 const mapDispatchToProps = dispatch => {
   return {
     sendPoints: ({ points, board }) => dispatch(sendPoints({ points, board })),
-    storePointPosition: point => dispatch(storePointPosition(point))
+    storePointPosition: point => dispatch(storePointPosition(point)),
+    deleteLine: line => dispatch(deleteLine(line))
   };
 };
 

@@ -40,11 +40,12 @@ class Point extends React.Component {
           buttonColor: "green"
         });
       } else if (this.state.buttonColor === "green") {
+        this.props.removePoint(this.props.point);
         this.setState({
           buttonColor: "red"
         });
       } else if (this.state.buttonColor === "red") {
-        this.props.removePoint(this.props.point);
+        this.props.deleteLines(this.props.point);
         this.setState({
           buttonColor: "blank"
         });
@@ -55,7 +56,7 @@ class Point extends React.Component {
           buttonColor: "red"
         });
       } else if (this.state.buttonColor === "red") {
-        this.props.removePoint(this.props.point);
+        this.props.deleteLines(this.props.point);
         this.setState({
           buttonColor: "blank"
         });
