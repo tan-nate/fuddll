@@ -28,6 +28,10 @@ class Board extends React.Component {
       return null;
     }
   }
+
+  passPointPosition = (point) => {
+    this.props.storePointPosition(point);
+  }
   
   connectPoints = (point) => {
     const newConnectedPoints = this.state.connectedPoints.slice();
@@ -56,12 +60,12 @@ class Board extends React.Component {
     return this.props.lines.filter(line => line.board_id === this.props.board.id);
   }
 
-  renderLines = () => {
-    return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.state.pointPositions} />)
+  filteredPointPositions = () => {
+    return this.props.pointPositions.filter(pointPosition => pointPosition.board_id === this.props.board.id);
   }
 
-  passPointPosition = (point) => {
-    this.props.storePointPosition(point);
+  renderLines = () => {
+    return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.state.filteredPointPositions} />)
   }
 
   render() {

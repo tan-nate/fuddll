@@ -58,7 +58,7 @@ class Point extends React.Component {
   passPointPosition = () => {
     const x = this.pointRef.current.getBoundingClientRect().x;
     const y = this.pointRef.current.getBoundingClientRect().y;
-    this.props.passPointPosition({ point_id: this.props.point.id, x, y });
+    this.props.passPointPosition({ point_id: this.props.point.id, board_id: this.props.point.board_id, x, y });
   }
   
   render() {
