@@ -51,7 +51,7 @@ class Board extends React.Component {
 
   checkAndSendPoints = () => {
     if (this.state.connectedPoints.length === 2) {
-      this.props.sendPoints(this.state.connectedPoints);
+      this.props.sendPoints({ points: this.state.connectedPoints, board: this.props.board.id });
       this.setState({
         connectedPoints: []
       });
@@ -71,7 +71,7 @@ const mapStateToProps = ({ points, lines }) => ({ points, lines });
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendPoints: (points) => dispatch(sendPoints({ points: points, board: this.props.board.id }))
+    sendPoints: ({ points, board }) => dispatch(sendPoints({ points, board }))
   };
 };
 

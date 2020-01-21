@@ -11,6 +11,6 @@ class LinesController < ApplicationController
   private
 
   def line_params
-    params.require(:line).permit(:point1_id, :point2_id)
+    params.require(:line).permit(:point1_id, :point2_id, :board_id)
   end
 end
