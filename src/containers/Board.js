@@ -69,8 +69,9 @@ class Board extends React.Component {
   }
 
   deleteLines = (point) => {
-    const deletedLines = this.props.lines.filter(line => line.point1_id === point.id || line.point2_id === point.id);
-    deletedLines.forEach(line => this.props.deleteLine(line));
+    this.setState({ connectedPoints: [] })
+    const deletedLine = this.props.lines.find(line => line.point1_id === point.id || line.point2_id === point.id);
+    this.props.deleteLine(deletedLine);
   }
 
   render() {
