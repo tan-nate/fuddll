@@ -5,8 +5,8 @@ class Board < ApplicationRecord
 
   def self.custom_create(game:, player:)
     board = self.create(game: game, player: player)
-    (0..4).to_a.each do |y|
-      (0..4).to_a.each do |x|
+    (0..3).to_a.each do |y|
+      (0..3).to_a.each do |x|
         Point.create(board: board, x: x, y: y)
       end
     end

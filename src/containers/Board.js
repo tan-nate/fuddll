@@ -74,11 +74,28 @@ class Board extends React.Component {
     this.props.deleteLine(deletedLine);
   }
 
+  linesLeft = () => {
+    return <p>{10 - this.filteredLines().length} lines left</p>
+  }
+
   render() {
     return (
-      <div className="board">
-        {this.renderPoints()}
-        {this.renderLines()}
+      <div className="board-container">
+        <div className="board">
+          {this.renderPoints()}
+          {this.renderLines()}
+        </div>
+        <div className="toolbox">
+          <div className="lines-left">
+            {this.linesLeft()}
+          </div>
+          <div className="instructions">
+            <p>
+              all points containing lines must have two and only two lines
+            </p>
+          </div>
+          <button className="submit" type="submit">submit fuddll</button>
+        </div>
       </div>
     );
   }
