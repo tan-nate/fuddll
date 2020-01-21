@@ -15,6 +15,14 @@ class Lines extends React.Component {
       pointPositions: newPointPositions
     });
   }
+
+  renderPoints = () => {
+    if (this.filteredPoints().length !== 0) {
+      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.props.lines} connectedPoints={this.state.connectedPoints} />);
+    } else {
+      return null;
+    }
+  }
   
   renderLines = () => {
     

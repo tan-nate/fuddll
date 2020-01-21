@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendPoints } from '../actions/gameActions';
-import Point from '../components/Point';
 import Lines from './Lines';
 
 class Board extends React.Component {
@@ -22,14 +21,6 @@ class Board extends React.Component {
 
   filteredLines = () => {
     return this.props.lines.filter(line => line.board_id === this.props.board.id);
-  }
-
-  renderPoints = () => {
-    if (this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.props.lines} connectedPoints={this.state.connectedPoints} />);
-    } else {
-      return null;
-    }
   }
   
   connectPoints = (point) => {
