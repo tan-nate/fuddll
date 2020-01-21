@@ -65,7 +65,7 @@ class Board extends React.Component {
   }
 
   renderLines = () => {
-    return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.filteredPointPositions} />);
+    return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.filteredPointPositions()} />);
   }
 
   render() {
