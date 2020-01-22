@@ -7,9 +7,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1 {
+  color: blue;
+}
+
+p {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.board-container {
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;;
 }
 
 .board {
@@ -18,10 +33,19 @@ code {
   grid-template-rows: repeat(4, 50px);
   border: 2px solid black;
   width: fit-content;
+  float: left;
 }
 
-.instructions {
-  color: rgb(251, 57, 57);
+.toolbox {
+  float: left;
+  margin-left: 20px;
+  border: solid blue 1.5px;
+  padding: 0 10px 0 10px;
+  border-radius: 10px;
+}
+
+.toolbox[data-hidden=true] {
+  border: none;
 }
 
 .instructions:disabled {
@@ -67,7 +91,9 @@ button.submit {
   border-radius: 0;
   width: auto;
   height: auto;
+  font-size: 1.1em;
   background-color: aqua;
+  border-radius: 10px;
 }
 
 button.submit:disabled {

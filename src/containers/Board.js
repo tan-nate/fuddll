@@ -75,7 +75,13 @@ class Board extends React.Component {
   }
 
   linesLeft = () => {
-    return <p>{12 - this.filteredLines().length} lines left</p>
+    if (12 - this.filteredLines().length === 1) {
+      return <p>{12 - this.filteredLines().length} line left</p>;
+    } else if (12 - this.filteredLines().length < 0) {
+      return <p>{this.filteredLines().length - 12} too many lines</p>;
+    } else {
+      return <p>{12 - this.filteredLines().length} lines left</p>;
+    }
   }
 
   checkPointForLines = (point) => {
@@ -116,8 +122,8 @@ class Board extends React.Component {
           {this.renderPoints()}
           {this.renderLines()}
         </div>
-        <div className="toolbox">
-          <div className="lines-left">
+        <div className="toolbox" data-hidden={this.checkLinesLeftAndShapesClosed()}>
+          <div className="lines-left" hidden={this.filteredLines().length === 12}>
             {this.linesLeft()}
           </div>
           <div className="instructions" hidden={this.checkShapesClosed()}>
