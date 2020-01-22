@@ -75,7 +75,7 @@ class Board extends React.Component {
   }
 
   linesLeft = () => {
-    return <p>{10 - this.filteredLines().length} lines left</p>
+    return <p>{12 - this.filteredLines().length} lines left</p>
   }
 
   checkPointForLines = (point) => {
@@ -102,7 +102,7 @@ class Board extends React.Component {
   }
 
   checkLinesLeftAndShapesClosed = () => {
-    if (this.checkShapesClosed() && this.filteredLines().length === 10) {
+    if (this.checkShapesClosed() && this.filteredLines().length === 12) {
       return true;
     } else {
       return false;
@@ -125,7 +125,7 @@ class Board extends React.Component {
               close shapes
             </p>
           </div>
-          <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()}>submit fuddll</button>
+          <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()}>fuddll</button>
         </div>
       </div>
     );
