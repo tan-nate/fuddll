@@ -6,25 +6,38 @@ class Shapes extends React.Component {
     return this.props.lines.filter(line => line.board_id === this.props.board.id);
   }
 
-  isolateShape = () => {
-    if (this.filteredLines().length !== 0) {
-      const includedPoints = [];
-      const linesConnectedToPoint = (point) => {
-        return this.filteredLines().filter(line => line.point1_id === point || line.point2_id === point);
-      }
-      const findUnincludedPoint = (lines) => {
-        const points = [...lines.map(line => line.point1_id), ...lines.map(line => line.point1_id)];
-        return points.find(point => !includedPoints.includes(point));
-      }
+  isolateShape = (firstLine) => {
+    const includedPoints = [];
+    const linesConnectedToPoint = (point) => {
+      return this.filteredLines().filter(line => line.point1_id === point || line.point2_id === point);
+    }
+    const findUnincludedPoint = (lines) => {
+      const points = [...lines.map(line => line.point1_id), ...lines.map(line => line.point1_id)];
+      return points.find(point => !includedPoints.includes(point));
+    }
 
-      let unincludedPoint = this.filteredLines()[0].point1_id;
+    let unincludedPoint = firstLine.point1_id;
+    while (unincludedPoint !== undefined) {
       includedPoints.push(unincludedPoint);
-      while (!unincludedPoint === undefined) {
-        let unincludedPoint = findUnincludedPoint(linesConnectedToPoint(unincludedPoint));
-        includedPoints.push(unincludedPoint);
+      unincludedPoint = findUnincludedPoint(linesConnectedToPoint(unincludedPoint));
+    }
+    // const filteredIncludedPoints = includedPoints.filter(point => Number.isInteger(point));
+    return includedPoints;
+  }
+
+  isolateAllShapes = () => {
+    if (this.filteredLines().length !== 0) {
+      const foundPoints = [];
+      foundPoints.push(this.isolateShape(this.filteredLines()[0]));
+      let flatFoundPoints = foundPoints.flat();
+      let unfoundLines = this.filteredLines().filter(line => !flatFoundPoints.includes(line.point1_id) && !flatFoundPoints.includes(line.point2_id));
+      while (unfoundLines.length !== 0) {
+        foundPoints.push(this.isolateShape(unfoundLines[0]));
+        flatFoundPoints = foundPoints.flat();
+        unfoundLines = this.filteredLines().filter(line => !flatFoundPoints.includes(line.point1_id) && !flatFoundPoints.includes(line.point2_id));
       }
 
-      return includedPoints;
+      return foundPoints;
     } else {
       return null;
     }
@@ -32,7 +45,7 @@ class Shapes extends React.Component {
   
   render() {
     return (
-      <div>{this.isolateShape()}</div>
+      <div>{JSON.stringify(this.isolateAllShapes())}</div>
     );
   }
 }
