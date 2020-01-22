@@ -115,6 +115,12 @@ class Board extends React.Component {
     }
   }
 
+  showShapes = () => {
+    if (this.props.board !== undefined) {
+      this.props.showShapes(this.props.board.id);
+    }
+  }
+
   render() {
     return (
       <div className="board-container">
@@ -131,7 +137,7 @@ class Board extends React.Component {
               close shapes
             </p>
           </div>
-          <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()}>fuddll</button>
+          <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={this.showShapes}>fuddll</button>
         </div>
       </div>
     );

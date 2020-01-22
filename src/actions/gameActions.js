@@ -14,6 +14,14 @@ export function fetchPoints() {
   };
 };
 
+export function fetchLines() {
+  return dispatch => {
+    fetch('http://localhost:3000/lines')
+      .then(response => response.json())
+      .then(lines => dispatch({ type: 'ADD_LINES', lines: lines }));
+  };
+};
+
 export function sendPoints({ points, board }) {
   let formData = {
     line: {

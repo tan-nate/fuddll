@@ -21,7 +21,7 @@ class Shapes extends React.Component {
       includedPoints.push(unincludedPoint);
       unincludedPoint = findUnincludedPoint(linesConnectedToPoint(unincludedPoint));
     }
-    // const filteredIncludedPoints = includedPoints.filter(point => Number.isInteger(point));
+
     return includedPoints;
   }
 
@@ -36,16 +36,25 @@ class Shapes extends React.Component {
         flatFoundPoints = foundPoints.flat();
         unfoundLines = this.filteredLines().filter(line => !flatFoundPoints.includes(line.point1_id) && !flatFoundPoints.includes(line.point2_id));
       }
-
       return foundPoints;
     } else {
       return null;
     }
   }
+
+  showShapes = () => {
+    if (this.props.board !== undefined) {
+      if (this.props.showingShapes.includes(this.props.board.id)) {
+        return JSON.stringify(this.isolateAllShapes);
+      }
+    }
+  }
   
   render() {
     return (
-      <div>{JSON.stringify(this.isolateAllShapes())}</div>
+      <div>
+        {this.showShapes()}
+      </div>
     );
   }
 }
