@@ -20,13 +20,6 @@ code {
   width: fit-content;
 }
 
-.toolbox {
-  margin-left: 15%;
-  margin-top: -14%;
-  position: absolute;
-  width: 15%;
-}
-
 .instructions {
   color: rgba(255, 102, 0, 0.856);
 }
