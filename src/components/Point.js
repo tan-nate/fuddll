@@ -8,7 +8,7 @@ class Point extends React.Component {
     };
     this.pointRef = React.createRef();
   }
-  
+
   componentDidMount() {
     this.passPointPosition();
   }
