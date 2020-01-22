@@ -57,7 +57,11 @@ class Board extends React.Component {
   }
 
   filteredLines = () => {
-    return this.props.lines.filter(line => line.board_id === this.props.board.id);
+    if (this.props.lines.length !== 0 || this.props.board !== undefined) {
+      return this.props.lines.filter(line => line.board_id === this.props.board.id);
+    } else {
+      return [];
+    }
   }
 
   filteredPointPositions = () => {
@@ -65,7 +69,9 @@ class Board extends React.Component {
   }
 
   renderLines = () => {
-    return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.filteredPointPositions()} />);
+    if (this.props.lines.length !== 0) {
+      return this.filteredLines().map(line => <Line key={line.id} line={line} pointPositions={this.filteredPointPositions()} />);
+    }
   }
 
   deleteLines = (point) => {
@@ -108,10 +114,12 @@ class Board extends React.Component {
   }
 
   checkLinesLeftAndShapesClosed = () => {
-    if (this.checkShapesClosed() && this.filteredLines().length === 12) {
-      return true;
-    } else {
-      return false;
+    if (this.props.lines.length !== 0) {
+      if (this.checkShapesClosed() && this.filteredLines().length === 12) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
