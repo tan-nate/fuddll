@@ -12,9 +12,10 @@ class Game extends React.Component {
   render() {
     return (
       <>
-        <h2>Natedogg's Board</h2>
+        <h1>fuddll</h1>
+        <h2>natedogg</h2>
         <Board board={this.props.boards[0]} points={this.props.points} />
-        <h2>Opponent's Board</h2>
+        <h2>opponent</h2>
         <Board board={this.props.boards[1]} points={this.props.points} />
       </>
     );

@@ -45,3 +45,18 @@ export function sendPoints({ points, board }) {
       });
   };
 };
+
+export function deleteLine(line) {
+  let configObj = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  };
+  return dispatch => {
+    fetch(`http://localhost:3000/lines/${line.id}`, configObj)
+      .then(response => response.json())
+      .then(line => dispatch({ type: 'DELETE_LINE', line: line }));
+  };
+}
