@@ -45,7 +45,7 @@ class Shapes extends React.Component {
   showShapes = () => {
     if (this.props.board !== undefined) {
       if (this.props.showingShapes.includes(this.props.board.id)) {
-        return JSON.stringify(this.isolateAllShapes);
+        return <p>{JSON.stringify(this.isolateAllShapes())}</p>;
       }
     }
   }
