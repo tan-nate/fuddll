@@ -21,7 +21,7 @@ code {
 }
 
 .instructions {
-  color: rgba(255, 102, 0, 0.856);
+  color: rgb(251, 57, 57);
 }
 
 .instructions:disabled {

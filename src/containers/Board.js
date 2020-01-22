@@ -122,7 +122,7 @@ class Board extends React.Component {
           </div>
           <div className="instructions" hidden={this.checkShapesClosed()}>
             <p>
-              |_/
+              close shapes
             </p>
           </div>
           <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()}>submit fuddll</button>
