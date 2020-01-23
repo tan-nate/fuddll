@@ -5,23 +5,10 @@ import Board from './Board';
 import Shapes from './Shapes';
 
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showingShapes: []
-    };
-  }
-
   componentDidMount() {
     this.props.fetchBoards();
     this.props.fetchPoints();
     this.props.fetchLines();
-  }
-
-  showShapes = (boardId) => {
-    this.setState({
-      showingShapes: [...this.state.showingShapes, boardId]
-    });
   }
 
   render() {
@@ -29,11 +16,9 @@ class Game extends React.Component {
       <>
         <h1>fuddll</h1>
         <h2>natedogg</h2>
-        <Board board={this.props.boards[0]} showShapes={this.showShapes} />
-        <Shapes board={this.props.boards[1]} showingShapes={this.state.showingShapes} />
+        <Board board={this.props.boards[0]} />
         <h2>opponent</h2>
-        <Board board={this.props.boards[1]} showShapes={this.showShapes} />
-        <Shapes board={this.props.boards[0]} showingShapes={this.state.showingShapes} />
+        <Board board={this.props.boards[1]} />
       </>
     );
   }
