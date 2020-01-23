@@ -83,11 +83,7 @@ class Shapes extends React.Component {
   }
 
   showShapes = () => {
-    if (this.props.board !== undefined) {
-      if (this.props.showingShapes.includes(this.props.board.id)) {
-        return <p>{JSON.stringify(this.isolateAllShapes())}</p>;
-      }
-    }
+    return <p>{JSON.stringify(this.isolateAllShapes())}</p>;
   }
   
   render() {
@@ -102,6 +98,7 @@ class Shapes extends React.Component {
           </p>
         </div>
         <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={this.showShapes}>fuddl</button>
+        {this.showShapes()}
       </div>
     );
   }
