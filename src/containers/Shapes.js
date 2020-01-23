@@ -10,6 +10,10 @@ class Shapes extends React.Component {
     };
   }
 
+  componentDidUpdate() {
+    this.fitSvgs();
+  }
+
   checkPointForLines = (point) => {
     return this.props.filteredLines().filter(line => line.point1_id === point.id || line.point2_id === point.id);
   }
@@ -111,7 +115,6 @@ class Shapes extends React.Component {
   }
   
   render() {
-    this.fitSvgs();
     return (
       <div className="shapes">
         <div className="toolbox" data-hidden={this.checkLinesLeftAndShapesClosed()}>
