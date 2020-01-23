@@ -2,6 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class Shapes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shapes: []
+    };
+  }
+
   checkPointForLines = (point) => {
     return this.props.filteredLines().filter(line => line.point1_id === point.id || line.point2_id === point.id);
   }
@@ -51,9 +58,8 @@ class Shapes extends React.Component {
       return this.props.filteredLines().filter(line => line.point1_id === point || line.point2_id === point);
     }
     const findUnincludedPoint = (lines) => {
-      const points = [...lines.map(line => line.point1_id), ...lines.map(line => line.point1_id)];
+      const points = [...lines.map(line => line.point1_id), ...lines.map(line => line.point2_id)];
       return points.find(point => !includedPoints.includes(point));
-      debugger
     }
 
     let unincludedPoint = firstLine.point1_id;
@@ -76,14 +82,8 @@ class Shapes extends React.Component {
         flatFoundPoints = foundPoints.flat();
         unfoundLines = this.props.filteredLines().filter(line => !flatFoundPoints.includes(line.point1_id) && !flatFoundPoints.includes(line.point2_id));
       }
-      return foundPoints;
-    } else {
-      return null;
+      this.setState({ shapes: foundPoints })
     }
-  }
-
-  showShapes = () => {
-    return <p>{JSON.stringify(this.isolateAllShapes())}</p>;
   }
   
   render() {
@@ -97,8 +97,8 @@ class Shapes extends React.Component {
             close shapes
           </p>
         </div>
-        <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={this.showShapes}>fuddl</button>
-        {this.showShapes()}
+        <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={this.isolateAllShapes}>fuddl</button>
+        <p>{JSON.stringify(this.state.shapes)}</p>
       </div>
     );
   }

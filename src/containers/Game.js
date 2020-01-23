@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchBoards, fetchPoints, fetchLines } from '../actions/gameActions';
 import Board from './Board';
-import Shapes from './Shapes';
 
 class Game extends React.Component {
   componentDidMount() {
