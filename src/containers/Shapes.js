@@ -93,10 +93,25 @@ class Shapes extends React.Component {
   }
 
   renderShapes = () => {
-    return this.state.shapes.map(shape => <Shape key={shape.index} shape={shape} />);
+    return this.state.shapes.map(shape => <Shape key={this.state.shapes.indexOf(shape)} shape={shape} />);
+  }
+
+  fitSvgs = () => {
+    function resizeSVG(svg) {
+      const bbox = svg.getBBox();
+      svg.setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
+      svg.setAttribute("width", `${bbox.width}`);
+      svg.setAttribute("height", `${bbox.height}`);
+    }
+
+    const svgs = document.getElementsByClassName("rotate-svg");
+    Array.prototype.forEach.call(svgs, svg => {
+      resizeSVG(svg);
+    });
   }
   
   render() {
+    this.fitSvgs();
     return (
       <div className="shapes">
         <div className="toolbox" data-hidden={this.checkLinesLeftAndShapesClosed()}>
