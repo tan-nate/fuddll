@@ -93,7 +93,7 @@ class Shapes extends React.Component {
   }
 
   renderShapes = () => {
-    return this.state.shapes.map(shape => <Shape shape={shape} />);
+    return this.state.shapes.map(shape => <Shape key={shape.index} shape={shape} />);
   }
   
   render() {
