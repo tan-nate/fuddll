@@ -9,27 +9,6 @@ class Shapes extends React.Component {
     };
   }
 
-  pointPositions = () => {
-    return {
-      0: { x: 0, y: 0 },
-      1: { x: 0, y: 50 },
-      2: { x: 0, y: 100 },
-      3: { x: 0, y: 150 },
-      4: { x: 50, y: 0 },
-      5: { x: 50, y: 50 },
-      6: { x: 50, y: 100 },
-      7: { x: 50, y: 150 },
-      8: { x: 100, y: 0 },
-      9: { x: 100, y: 50 },
-      10: { x: 100, y: 100 },
-      11: { x: 100, y: 150 },
-      12: { x: 150, y: 0 },
-      13: { x: 150, y: 50 },
-      14: { x: 150, y: 100 },
-      15: { x: 150, y: 150 },
-    };
-  }
-
   checkPointForLines = (point) => {
     return this.props.filteredLines().filter(line => line.point1_id === point.id || line.point2_id === point.id);
   }
@@ -109,13 +88,21 @@ class Shapes extends React.Component {
 
   groupLinesByShapeAndSendToCanvas = () => {
     const shapes = this.isolateAllShapes().map(shape => this.props.filteredLines().filter(line => shape.includes(line.point1_id) || shape.includes(line.point2_id)));
-    this.setState({ shapes: shapes });
-    this.rotateShapesOntoCanvas();
+    this.setState({ shapes: shapes }, this.rotateShapesOntoCanvas);
   }
 
   rotateShapesOntoCanvas = () => {
-    const canvas = document.getElementById(this.props.board.id);
-    const ctx = canvas.getContext('2d');
+    const svg = document.getElementById("rotate-svg-" + this.props.board.id);
+    let svgline;
+    this.state.shapes[0].forEach(line => {
+      svgline = document.createElement("line");
+      svgline.className = "line";
+      svgline.setAttribute("x1", `${line.point1.x * 50}`);
+      svgline.setAttribute("x2", `${line.point2.x * 50}`);
+      svgline.setAttribute("y1", `${line.point1.y * 50}`);
+      svgline.setAttribute("y2", `${line.point2.y * 50}`);
+      svg.appendChild(svgline);
+    })
   }
   
   render() {
@@ -132,8 +119,8 @@ class Shapes extends React.Component {
           </div>
           <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={this.groupLinesByShapeAndSendToCanvas}>fuddl</button>
         </div>
-        <div className="rotated-shapes-canvas">
-          <canvas id={this.props.board.id}></canvas>
+        <div className="rotated-shapes-svg">
+          <svg id={"rotate-svg-" + this.props.board.id} className="rotate-svg"></svg>
         </div>
       </div>
     );

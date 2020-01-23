@@ -113,6 +113,11 @@ button.submit:disabled {
   pointer-events: none;
 }
 
+.rotate-svg {
+  height: 300px;
+  width: 300px;
+}
+
 .line {
   stroke-width: 2px;
   stroke: black;
