@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Shape from '../components/Shape';
 
 class Shapes extends React.Component {
   constructor(props) {
@@ -88,21 +89,11 @@ class Shapes extends React.Component {
 
   groupLinesByShapeAndSendToCanvas = () => {
     const shapes = this.isolateAllShapes().map(shape => this.props.filteredLines().filter(line => shape.includes(line.point1_id) || shape.includes(line.point2_id)));
-    this.setState({ shapes: shapes }, this.rotateShapesOntoCanvas);
+    this.setState({ shapes: shapes });
   }
 
-  rotateShapesOntoCanvas = () => {
-    const svg = document.getElementById("rotate-svg-" + this.props.board.id);
-    let svgline;
-    this.state.shapes[0].forEach(line => {
-      svgline = document.createElement("line");
-      svgline.className = "line";
-      svgline.setAttribute("x1", `${line.point1.x * 50}`);
-      svgline.setAttribute("x2", `${line.point2.x * 50}`);
-      svgline.setAttribute("y1", `${line.point1.y * 50}`);
-      svgline.setAttribute("y2", `${line.point2.y * 50}`);
-      svg.appendChild(svgline);
-    })
+  renderShapes = () => {
+    return this.state.shapes.map(shape => <Shape shape={shape} />);
   }
   
   render() {
@@ -120,7 +111,7 @@ class Shapes extends React.Component {
           <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={this.groupLinesByShapeAndSendToCanvas}>fuddl</button>
         </div>
         <div className="rotated-shapes-svg">
-          <svg id={"rotate-svg-" + this.props.board.id} className="rotate-svg"></svg>
+          {this.renderShapes()}
         </div>
       </div>
     );
