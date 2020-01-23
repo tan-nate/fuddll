@@ -4,7 +4,15 @@ class LineSerializer
   end
   def to_serialized_json
     options = {
-      except: [:created_at, :updated_at]
+      except: [:created_at, :updated_at],
+      include: {
+        point1: {
+          only: [:x, :y]
+        },
+        point2: {
+          only: [:x, :y]
+        }
+      }
     }
     @line.to_json(options)
   end
