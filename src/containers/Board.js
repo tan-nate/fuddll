@@ -57,7 +57,7 @@ class Board extends React.Component {
   }
 
   filteredLines = () => {
-    if (this.props.lines.length !== 0 || this.props.board !== undefined) {
+    if (this.props.lines.length !== 0 && this.props.board !== undefined) {
       return this.props.lines.filter(line => line.board_id === this.props.board.id);
     } else {
       return [];
@@ -76,8 +76,8 @@ class Board extends React.Component {
 
   deleteLines = (point) => {
     this.setState({ connectedPoints: [] })
-    const deletedLine = this.props.lines.find(line => line.point1_id === point.id || line.point2_id === point.id);
-    this.props.deleteLine(deletedLine);
+    const deletedLines = this.props.lines.filter(line => line.point1_id === point.id || line.point2_id === point.id);
+    deletedLines.forEach(line => setTimeout((this.props.deleteLine(line), 1000)));
   }
 
   linesLeft = () => {
