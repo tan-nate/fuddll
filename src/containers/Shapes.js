@@ -77,6 +77,23 @@ class Shapes extends React.Component {
   }
 
   isolateAllShapes = () => {
+    const shuffle = function(array) {
+      let currentIndex = array.length;
+      let temporaryValue
+      let randomIndex
+    
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+    
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+    
+      return array;
+    };
+
     if (this.props.filteredLines().length !== 0) {
       const foundPoints = [];
       foundPoints.push(this.isolateShape(this.props.filteredLines()[0]));
@@ -87,7 +104,8 @@ class Shapes extends React.Component {
         flatFoundPoints = foundPoints.flat();
         unfoundLines = this.props.filteredLines().filter(line => !flatFoundPoints.includes(line.point1_id) && !flatFoundPoints.includes(line.point2_id));
       }
-      return foundPoints;
+
+      return shuffle(foundPoints);
     }
   }
 
