@@ -62,6 +62,7 @@ class Shapes extends React.Component {
     const linesConnectedToPoint = (point) => {
       return this.props.filteredLines().filter(line => line.point1_id === point || line.point2_id === point);
     }
+    
     const findUnincludedPoint = (lines) => {
       const points = [...lines.map(line => line.point1_id), ...lines.map(line => line.point2_id)];
       return points.find(point => !includedPoints.includes(point));
