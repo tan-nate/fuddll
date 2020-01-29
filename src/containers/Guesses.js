@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendGuess } from '../actions/guessingActions';
-import Point from '../components/Point';
-import Board from './Board';
+import GuessPoint from '../components/GuessPoint';
 
 class Guesses extends React.Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class Guesses extends React.Component {
 
   renderPoints = () => {
     if (this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} connectedPoints={this.state.connectedPoints} />);
+      return this.filteredPoints().map(point => <GuessPoint key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} connectedPoints={this.state.connectedPoints} />);
     } else {
       return null;
     }
@@ -42,6 +41,15 @@ class Guesses extends React.Component {
     });
   }
 
+  checkAndSendPoints = () => {
+    if (this.state.connectedPoints.length === 2) {
+      this.props.sendGuess({ points: this.state.connectedPoints, board: this.props.board.id });
+      this.setState({
+        connectedPoints: []
+      });
+    }
+  }
+
   render() {
     return (
       <div className="board-container">
@@ -55,7 +63,6 @@ class Guesses extends React.Component {
 
 const mapStateToProps = ({ points, guesses }) => ({
   points: points.points, 
-  pointPositions: points.pointPositions, 
   guesses,  
 });
 

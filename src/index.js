@@ -11,11 +11,13 @@ import thunk from 'redux-thunk';
 import boardsReducer from './reducers/boardsReducer';
 import pointsReducer from './reducers/pointsReducer';
 import linesReducer from './reducers/linesReducer';
+import guessesReducer from './reducers/guessesReducer';
 
 const rootReducer = combineReducers({
   boards: boardsReducer,
   points: pointsReducer, 
-  lines: linesReducer
+  lines: linesReducer,
+  guesses: guessesReducer,
 });
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)

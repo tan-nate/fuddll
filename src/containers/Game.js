@@ -10,6 +10,7 @@ class Game extends React.Component {
     this.props.fetchBoards();
     this.props.fetchPoints();
     this.props.fetchLines();
+    this.props.fetchGuesses();
   }
 
   render() {
@@ -34,7 +35,7 @@ const mapDispatchToProps = dispatch => {
     fetchBoards: () => dispatch(fetchBoards()),
     fetchPoints: () => dispatch(fetchPoints()),
     fetchLines: () => dispatch(fetchLines()),
-    fetchGuesses: () => dispatch(fetchGuesses),
+    fetchGuesses: () => dispatch(fetchGuesses()),
   }
 };
 
