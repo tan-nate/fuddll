@@ -45,7 +45,9 @@ class Guesses extends React.Component {
   render() {
     return (
       <div className="board-container">
-
+        <div className="board">
+          {this.renderPoints()}
+        </div>
       </div>
     );
   }
@@ -63,4 +65,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+export default connect(mapStateToProps, mapDispatchToProps)(Guesses);
