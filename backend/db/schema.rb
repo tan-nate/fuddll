@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_01_29_184103) do
   create_table "guesses", force: :cascade do |t|
     t.integer "point1_id"
     t.integer "point2_id"
+    t.integer "board_id"
     t.boolean "hit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

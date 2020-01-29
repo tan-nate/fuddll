@@ -3,6 +3,7 @@ class CreateGuesses < ActiveRecord::Migration[6.0]
     create_table :guesses do |t|
       t.integer :point1_id
       t.integer :point2_id
+      t.integer :board_id
       t.boolean :hit
 
       t.timestamps
