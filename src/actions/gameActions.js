@@ -30,6 +30,7 @@ export function sendPoints({ points, board }) {
       board_id: board
     }
   };
+
   let configObj = {
     method: "POST",
     headers: {
@@ -38,6 +39,7 @@ export function sendPoints({ points, board }) {
     }, 
     body: JSON.stringify(formData)
   };
+
   return dispatch => {
     fetch('http://localhost:3000/lines', configObj)
       .then(response => {
@@ -62,6 +64,7 @@ export function deleteLine(line) {
       "Accept": "application/json"
     }
   };
+  
   return dispatch => {
     fetch(`http://localhost:3000/lines/${line.id}`, configObj)
       .then(response => response.json())

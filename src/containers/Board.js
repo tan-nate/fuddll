@@ -23,7 +23,7 @@ class Board extends React.Component {
 
   renderPoints = () => {
     if (this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.filteredLines()} connectedPoints={this.state.connectedPoints} deleteLines={this.deleteLines} checkForLines={this.checkPointForLines} />);
+      return this.filteredPoints().map(point => <Point key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} lines={this.filteredLines()} connectedPoints={this.state.connectedPoints} deleteLines={this.deleteLines} />);
     } else {
       return null;
     }
@@ -74,7 +74,7 @@ class Board extends React.Component {
     this.setState({ connectedPoints: [] })
     const deletedLines = this.props.lines.filter(line => line.point1_id === point.id || line.point2_id === point.id);
     const deleteLine = this.props.deleteLine;
-    deletedLines.forEach(line => setTimeout(deleteLine(line), 5000));
+    deletedLines.forEach(line => deleteLine(line));
   }
 
   render() {
