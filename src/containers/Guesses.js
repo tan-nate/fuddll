@@ -51,10 +51,6 @@ class Guesses extends React.Component {
     }
   }
 
-  filteredPointPositions = () => {
-    return this.props.pointPositions.filter(pointPosition => pointPosition.board_id === this.props.board.id);
-  }
-
   filteredGuesses = () => {
     if (this.props.guesses.length !== 0 && this.props.board !== undefined) {
       return this.props.guesses.filter(guess => guess.board_id === this.props.board.id);
@@ -63,9 +59,13 @@ class Guesses extends React.Component {
     }
   }
 
+  filteredGuessPointPositions = () => {
+    return this.props.guessPointPositions.filter(pointPosition => pointPosition.board_id === this.props.board.id);
+  }
+
   renderGuesses = () => {
     if (this.props.guesses.length !== 0) {
-      return this.filteredGuesses().map(guess => <Guess key={guess.id} guess={guess} pointPositions={this.filteredPointPositions()} />);
+      return this.filteredGuesses().map(guess => <Guess key={guess.id} guess={guess} pointPositions={this.filteredGuessPointPositions()} />);
     }
   }
 
@@ -81,10 +81,10 @@ class Guesses extends React.Component {
   }
 }
 
-const mapStateToProps = ({ points, guesses }) => ({
+const mapStateToProps = ({ points, guesses, guessPointPositions }) => ({
   points: points.points, 
-  pointPositions: points.pointPositions, 
-  guesses,  
+  guesses,
+  guessPointPositions,
 });
 
 const mapDispatchToProps = dispatch => {

@@ -22,8 +22,8 @@ class Point extends React.Component {
   }
 
   passPointPosition = () => {
-    const x = this.pointRef.current.getBoundingClientRect().x + this.pointRef.current.getBoundingClientRect().width / 2;
-    const y = this.pointRef.current.getBoundingClientRect().y + this.pointRef.current.getBoundingClientRect().height / 2;
+    const x = this.pointRef.current.getBoundingClientRect().x + this.pointRef.current.getBoundingClientRect().width / 2 + window.scrollX;
+    const y = this.pointRef.current.getBoundingClientRect().y + this.pointRef.current.getBoundingClientRect().height / 2 + window.scrollY;
     this.props.storePointPosition({ point_id: this.props.point.id, board_id: this.props.point.board_id, x, y });
   }
 

@@ -39,3 +39,7 @@ export function sendGuess({ points, board }) {
       });
   };
 };
+
+export function storeGuessPointPosition(point) {
+  return dispatch => dispatch({ type: 'STORE_GUESS_POINT_POSITION', point: point });
+};
