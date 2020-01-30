@@ -9,13 +9,13 @@ class Guess extends React.Component {
       const y1 = point1Position.y;
       const x2 = point2Position.x;
       const y2 = point2Position.y;
-      return <guess className="guess" x1={x1} y1={y1} x2={x2} y2={y2} />
+      return <line className="line" x1={x1} y1={y1} x2={x2} y2={y2} />
     }
   }
   
   render() {
     return (
-      <svg id={this.props.guess.id} className="svg">
+      <svg className="svg">
         {this.renderGuess()}
       </svg>
     );

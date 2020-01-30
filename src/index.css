@@ -108,9 +108,10 @@ button.submit:disabled {
   position: absolute;
   top: 0;
   left: 0;
-  width: 860px;
-  height: 625px;
+  width: 1500px;
+  height: 1500px;
   pointer-events: none;
+  z-index: 1;
 }
 
 .rotate-svg {
