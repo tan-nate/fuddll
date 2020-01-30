@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { storePointPosition } from '../actions/drawingActions';
 
 class GuessPoint extends React.Component {
   constructor(props) {
@@ -39,10 +37,4 @@ class GuessPoint extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    storePointPosition: point => dispatch(storePointPosition(point))
-  };
-};
-
-export default connect(null, mapDispatchToProps)(GuessPoint);
+export default GuessPoint;

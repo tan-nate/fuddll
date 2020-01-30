@@ -99,7 +99,7 @@ const mapStateToProps = ({ points, lines }) => ({
 const mapDispatchToProps = dispatch => {
   return {
     sendPoints: ({ points, board }) => dispatch(sendPoints({ points, board })),
-    deleteLine: line => dispatch(deleteLine(line))
+    deleteLine: line => dispatch(deleteLine(line)),
   };
 };
 
