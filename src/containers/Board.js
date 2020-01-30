@@ -4,6 +4,7 @@ import { sendPoints, deleteLine } from '../actions/drawingActions';
 import Point from '../components/Point';
 import Line from '../components/Line';
 import Shapes from './Shapes';
+import OpponentGuess from '../components/OpponentGuess';
 
 class Board extends React.Component {
   constructor(props) {
@@ -97,6 +98,7 @@ class Board extends React.Component {
         <div className="board">
           {this.renderPoints()}
           {this.renderLines()}
+          {this.renderGuesses()}
         </div>
         <Shapes board={this.props.board} filteredPoints={this.filteredPoints} filteredLines={this.filteredLines} />
       </div>
