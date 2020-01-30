@@ -52,16 +52,16 @@ class Board extends React.Component {
     }
   }
 
+  filteredPointPositions = () => {
+    return this.props.pointPositions.filter(pointPosition => pointPosition.board_id === this.props.board.id);
+  }
+
   filteredLines = () => {
     if (this.props.lines.length !== 0 && this.props.board !== undefined) {
       return this.props.lines.filter(line => line.board_id === this.props.board.id);
     } else {
       return [];
     }
-  }
-
-  filteredPointPositions = () => {
-    return this.props.pointPositions.filter(pointPosition => pointPosition.board_id === this.props.board.id);
   }
 
   renderLines = () => {
@@ -77,6 +77,20 @@ class Board extends React.Component {
     deletedLines.forEach(line => deleteLine(line));
   }
 
+  filteredGuesses = () => {
+    if (this.props.guesses.length !== 0 && this.props.board !== undefined) {
+      return this.props.guesses.filter(guess => guess.board_id === this.props.opponentBoard.id);
+    } else {
+      return [];
+    }
+  }
+
+  renderGuesses = () => {
+    if (this.props.guesses.length !== 0) {
+      return this.filteredGuesses().map(guess => <OpponentGuess key={guess.id} guess={guess} pointPositions={this.filteredPointPositions()} />);
+    }
+  }
+
   render() {
     return (
       <div className="board-container">
@@ -90,10 +104,11 @@ class Board extends React.Component {
   }
 }
 
-const mapStateToProps = ({ points, lines }) => ({
+const mapStateToProps = ({ points, lines, guesses }) => ({
   points: points.points, 
   pointPositions: points.pointPositions, 
-  lines 
+  lines,
+  guesses, 
 });
 
 const mapDispatchToProps = dispatch => {
