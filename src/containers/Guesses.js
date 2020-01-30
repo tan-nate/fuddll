@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sendGuess } from '../actions/guessingActions';
 import GuessPoint from '../components/GuessPoint';
+import Guess from '../components/Guess';
 
 class Guesses extends React.Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class Guesses extends React.Component {
 
   filteredGuesses = () => {
     if (this.props.guesses.length !== 0 && this.props.board !== undefined) {
-      return this.props.guesses.filter(line => line.board_id === this.props.board.id);
+      return this.props.guesses.filter(guess => guess.board_id === this.props.board.id);
     } else {
       return [];
     }
@@ -73,6 +74,7 @@ class Guesses extends React.Component {
       <div className="board-container">
         <div className="board">
           {this.renderPoints()}
+          {this.renderGuesses()}
         </div>
       </div>
     );
