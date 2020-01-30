@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendPoints, deleteLine } from '../actions/gameActions';
+import { sendPoints, deleteLine } from '../actions/drawingActions';
 import Point from '../components/Point';
 import Line from '../components/Line';
 import Shapes from './Shapes';
