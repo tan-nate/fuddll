@@ -1,4 +1,9 @@
 class LinesController < ApplicationController
+  def index
+    lines = Line.all
+    render json: LineSerializer.new(lines).to_serialized_json
+  end
+  
   def create
     line = Line.find_or_initialize_by(line_params)
     if line.save

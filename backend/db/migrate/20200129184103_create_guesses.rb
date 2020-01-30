@@ -1,10 +1,10 @@
 class CreateGuesses < ActiveRecord::Migration[6.0]
   def change
     create_table :guesses do |t|
-      t.integer :player_id
-      t.integer :x_coordinate
-      t.integer :y_coordinate
-      t.string :hit
+      t.integer :point1_id
+      t.integer :point2_id
+      t.integer :board_id
+      t.boolean :hit
 
       t.timestamps
     end

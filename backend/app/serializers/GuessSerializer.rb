@@ -1,6 +1,6 @@
-class LineSerializer
-  def initialize(line_object)
-    @line = line_object
+class GuessSerializer
+  def initialize(guess_object)
+    @guess = guess_object
   end
   def to_serialized_json
     options = {
@@ -14,6 +14,6 @@ class LineSerializer
         }
       }
     }
-    @line.to_json(options)
+    @guess.to_json(options)
   end
 end
