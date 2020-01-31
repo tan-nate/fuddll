@@ -9,10 +9,8 @@ class Guess extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.lines !== prevProps.lines) {
-      this.setGuessColor();
-    }
+  componentDidMount() {
+    this.setGuessColor();
   }
 
   filteredLines = () => {
@@ -20,12 +18,11 @@ class Guess extends React.Component {
   }
 
   setGuessColor = () => {
-    debugger
-    if (this.filteredLines().filter(line => {
-      [line.point1_id, line.point2_id].every(point => {
+    if (this.filteredLines().filter(line =>
+      [line.point1_id, line.point2_id].every(point =>
         [this.props.guess.point1_id, this.props.point2_id].includes(point)
-      })
-    }).length > 0) {
+      )
+    ).length > 0) {
       this.setState({ color: "green" });
     } else {
       this.setState({ color: "red" });
