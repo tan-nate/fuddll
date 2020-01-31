@@ -122,3 +122,18 @@ button.submit:disabled {
   stroke-width: 2px;
   stroke: black;
 }
+
+.line-green {
+  stroke-width: 2px;
+  stroke: rgb(8, 160, 79);
+}
+
+.line-red {
+  stroke-width: 2px;
+  stroke: rgb(251, 57, 57);
+}
+
+.line-blue {
+  stroke-width: 2px;
+  stroke: blue;
+}
