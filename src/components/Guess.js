@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class Guess extends React.Component {
+  componentDidMount() {
+    this.setGuessColor();
+  }
+
   filteredLines = () => {
     return this.props.lines.filter(line => line.board_id === this.props.board.id);
   }
@@ -9,10 +13,9 @@ class Guess extends React.Component {
   setGuessColor = () => {
     if (this.filteredLines().filter(line =>
       [line.point1_id, line.point2_id].every(point =>
-        [this.props.guess.point1_id, this.props.point2_id].includes(point)
+        [this.props.guess.point1_id, this.props.guess.point2_id].includes(point)
       )
     ).length > 0) {
-      debugger
       return "green";
     } else {
       return "red";
