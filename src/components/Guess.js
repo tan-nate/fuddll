@@ -2,17 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class Guess extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      color: "red",
-    };
-  }
-
-  componentDidMount() {
-    this.setGuessColor();
-  }
-
   filteredLines = () => {
     return this.props.lines.filter(line => line.board_id === this.props.board.id);
   }
@@ -23,9 +12,10 @@ class Guess extends React.Component {
         [this.props.guess.point1_id, this.props.point2_id].includes(point)
       )
     ).length > 0) {
-      this.setState({ color: "green" });
+      debugger
+      return "green";
     } else {
-      this.setState({ color: "red" });
+      return "red";
     }
   }
 
@@ -37,7 +27,7 @@ class Guess extends React.Component {
       const y1 = point1Position.y;
       const x2 = point2Position.x;
       const y2 = point2Position.y;
-      return <line className={`line-${this.state.color}`} x1={x1} y1={y1} x2={x2} y2={y2} />;
+      return <line className={`line-${this.setGuessColor()}`} x1={x1} y1={y1} x2={x2} y2={y2} />;
     }
   }
   
