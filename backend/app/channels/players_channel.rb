@@ -1,4 +1,4 @@
-class UsersChannel < ApplicationCable::Channel
+class PlayersChannel < ApplicationCable::Channel
   def subscribed
     game = Game.find(params[:game])
     stream_for game
