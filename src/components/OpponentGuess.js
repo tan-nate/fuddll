@@ -9,7 +9,7 @@ class OpponentGuess extends React.Component {
       const y1 = point1Position.y;
       const x2 = point2Position.x;
       const y2 = point2Position.y;
-      return <line className="line" x1={x1} y1={y1} x2={x2} y2={y2} />
+      return <line className="line-blue" x1={x1} y1={y1} x2={x2} y2={y2} />
     }
   }
   
