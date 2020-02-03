@@ -1,4 +1,5 @@
 export function createPlayer(formData) {
+  debugger
   let configObj = {
     method: "POST",
     headers: {
