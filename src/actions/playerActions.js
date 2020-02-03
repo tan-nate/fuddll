@@ -1,5 +1,4 @@
 export function createPlayer(formData) {
-  debugger
   let configObj = {
     method: "POST",
     headers: {
@@ -12,7 +11,7 @@ export function createPlayer(formData) {
   return dispatch => {
     fetch('http://localhost:3000/players', configObj)
       .then(response => response.json())
-      .then(player => dispatch({ type: 'LOGIN_PLAYER', player: player }))
-      .catch(() => console.log("Something went wrong"));
+      .then(player => console.log(player));
+      // .then(player => dispatch({ type: 'LOGIN_PLAYER', player: player }))
   };
 };

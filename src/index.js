@@ -13,6 +13,7 @@ import pointsReducer from './reducers/pointsReducer';
 import linesReducer from './reducers/linesReducer';
 import guessesReducer from './reducers/guessesReducer';
 import guessPointsReducer from './reducers/guessPointsReducer';
+import playersReducer from './reducers/playersReducer';
 
 const rootReducer = combineReducers({
   boards: boardsReducer,
@@ -20,7 +21,9 @@ const rootReducer = combineReducers({
   lines: linesReducer,
   guesses: guessesReducer,
   guessPointPositions: guessPointsReducer,
+  players: playersReducer,
 });
+
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)
 ));

@@ -25,11 +25,11 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={event => this.handleSubmit(event)}>
         <input type="text" name="name" value={this.state.name} placeholder="username:" onChange={event => this.handleChange(event)} /><br />
         <input type="password" name="password" value={this.state.password} placeholder="password:" onChange={event => this.handleChange(event)} /><br />
         <input type="password" name="password_confirmation" value={this.state.password_confirmation} placeholder="confirm password:" onChange={event => this.handleChange(event)} /><br />
-        <input type="submit" onSubmit={event => this.handleSubmit(event)} />
+        <input type="submit" />
       </form>
     );
   }
