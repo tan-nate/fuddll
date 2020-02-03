@@ -10,8 +10,17 @@ export function createPlayer(formData) {
 
   return dispatch => {
     fetch('http://localhost:3000/players', configObj)
-      .then(response => response.json())
-      .then(player => console.log(player));
-      // .then(player => dispatch({ type: 'LOGIN_PLAYER', player: player }))
+      .then(response => {
+        if (!response.ok) {
+          return response.json()
+          .then(json => {
+            throw Error(json.errors.toString());
+          })
+        }
+        
+        return response.json();
+      })
+      .then(player => dispatch({ type: 'LOGIN_PLAYER', player: player }))
+      .catch(error => console.log(error));
   };
 };
