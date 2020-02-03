@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_151248) do
+ActiveRecord::Schema.define(version: 2020_02_03_194203) do
 
   create_table "boards", force: :cascade do |t|
     t.integer "player_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2020_02_03_151248) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
+    t.boolean "logged_in"
   end
 
   create_table "points", force: :cascade do |t|
