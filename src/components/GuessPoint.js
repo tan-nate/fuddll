@@ -31,9 +31,9 @@ class GuessPoint extends React.Component {
     if (this.state.buttonColor === "blank") {
       this.props.connectPoints(this.props.point);
       this.setState({
-        buttonColor: "green"
+        buttonColor: "blue"
       });
-    } else if (this.state.buttonColor === "green") {
+    } else if (this.state.buttonColor === "blue") {
       this.props.removePoint(this.props.point);
     }
   }
@@ -42,7 +42,7 @@ class GuessPoint extends React.Component {
     return (
       <div className="point">
         <div className="button" ref={this.pointRef}>
-          <button onClick={this.handleClick} className={this.state.buttonColor}>{this.props.point.id}</button>
+          <button onClick={this.handleClick} className={this.state.buttonColor}></button>
         </div>
       </div>
     );

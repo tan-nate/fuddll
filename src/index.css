@@ -88,6 +88,12 @@ button {
   content: 'x';
 }
 
+.button .blue {
+  background-color: blue;
+  color: white;
+  content: 'x';
+}
+
 button.submit {
   border-radius: 0;
   width: auto;
