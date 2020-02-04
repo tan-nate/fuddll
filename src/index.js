@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { ActionCableProvider } from 'react-actioncable-provider';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -29,9 +30,11 @@ const store = createStore(rootReducer, composeWithDevTools(
 ));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>, 
+  <ActionCableProvider url={'ws://localhost:3000/cable'}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ActionCableProvider>, 
   document.getElementById('root')
 );
 
