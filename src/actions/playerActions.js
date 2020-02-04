@@ -22,9 +22,9 @@ export function createPlayer(formData) {
       })
       .then(player => {
         dispatch({ type: 'LOGIN_PLAYER', player: player });
-        return player;
+        sessionStorage.setItem("userId", player.id);
+        window.location.reload(false);
       })
-      .then(player => sessionStorage.setItem("userId", player.id))
       .catch(error => console.log(error));
   };
 };

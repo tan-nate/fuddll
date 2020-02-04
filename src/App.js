@@ -1,11 +1,11 @@
 import React from 'react';
 import Game from './containers/Game';
-import Login from './components/Login';
+import Auth from './components/Auth';
 
 function App() {
   return (
     <>
-      <Login />
+      <Auth />
       <Game />
     </>
   );

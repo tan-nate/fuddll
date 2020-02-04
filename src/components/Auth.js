@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createPlayer } from '../actions/playerActions';
 
-class Login extends React.Component {
+class Auth extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +22,15 @@ class Login extends React.Component {
     this.props.createPlayer(this.state);
   }
 
+  logOut = () => {
+    window.sessionStorage.removeItem("userId");
+    window.location.reload(false);
+  }
+
   render() {
-    return (
+    if (window.sessionStorage.getItem("userId")) {
+      return <button className="logout" onClick={this.logOut}>log out</button>;
+    } else return (
       <form onSubmit={event => this.handleSubmit(event)}>
         <input type="text" name="name" value={this.state.name} placeholder="username:" onChange={event => this.handleChange(event)} /><br />
         <input type="password" name="password" value={this.state.password} placeholder="password:" onChange={event => this.handleChange(event)} /><br />
@@ -39,4 +46,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Auth);
