@@ -20,7 +20,11 @@ export function createPlayer(formData) {
         
         return response.json();
       })
-      .then(player => dispatch({ type: 'LOGIN_PLAYER', player: player }))
+      .then(player => {
+        dispatch({ type: 'LOGIN_PLAYER', player: player });
+        return player;
+      })
+      .then(player => sessionStorage.setItem("userId", player.id))
       .catch(error => console.log(error));
   };
 };
