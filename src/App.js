@@ -1,11 +1,11 @@
 import React from 'react';
 import Game from './containers/Game';
-import Signup from './components/Signup';
+import Login from './components/Login';
 
 function App() {
   return (
     <>
-      <Signup />
+      <Login />
       <Game />
     </>
   );
