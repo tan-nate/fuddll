@@ -3,8 +3,8 @@ class PlayersController < ApplicationController
     player = Player.find_by(name: params[:name])
     if player
       if player.authenticate(params[:password])
-        serialized_data = json: PlayerSerializer.new(player).to_serialized_json
-        render serialized_data
+        serialized_data = PlayerSerializer.new(player).to_serialized_json
+        render json: serialized_data
         ActionCable.server.broadcast "players_channel", serialized_data
       else
         render json: {
@@ -15,8 +15,8 @@ class PlayersController < ApplicationController
     if !player
       player = Player.new(name: params[:name], password: params[:password])
       if player.save
-        serialized_data = json: PlayerSerializer.new(player).to_serialized_json
-        render serialized_data
+        serialized_data = PlayerSerializer.new(player).to_serialized_json
+        render json: serialized_data
         ActionCable.server.broadcast_to "players_channel", serialized_data
       else
         render json: {
