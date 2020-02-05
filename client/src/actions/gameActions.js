@@ -1,6 +1,6 @@
 export function fetchBoards() {
   return dispatch => {
-    fetch('http://localhost:3000/boards')
+    fetch('/boards')
       .then(response => response.json())
       .then(boards => dispatch({ type: 'ADD_BOARDS', boards: boards }));
   };
@@ -8,7 +8,7 @@ export function fetchBoards() {
 
 export function fetchPoints() {
   return dispatch => {
-    fetch('http://localhost:3000/points')
+    fetch('/points')
       .then(response => response.json())
       .then(points => dispatch({ type: 'ADD_POINTS', points: points }));
   };
@@ -16,7 +16,7 @@ export function fetchPoints() {
 
 export function fetchLines() {
   return dispatch => {
-    fetch('http://localhost:3000/lines')
+    fetch('/lines')
       .then(response => response.json())
       .then(lines => dispatch({ type: 'ADD_LINES', lines: lines }));
   };

@@ -1,6 +1,6 @@
 export function fetchGuesses() {
   return dispatch => {
-    fetch('http://localhost:3000/guesses')
+    fetch('/guesses')
       .then(response => response.json())
       .then(guesses => dispatch({ type: 'ADD_GUESSES', guesses: guesses }));
   };
@@ -25,7 +25,7 @@ export function sendGuess({ points, board }) {
   };
 
   return dispatch => {
-    fetch('http://localhost:3000/guesses', configObj)
+    fetch('/guesses', configObj)
       .then(response => {
         if (response.ok) {
           return response.json();
