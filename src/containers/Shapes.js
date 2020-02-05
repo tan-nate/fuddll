@@ -103,6 +103,7 @@ class Shapes extends React.Component {
       while (unfoundLines.length !== 0) {
         foundPoints.push(this.isolateShape(unfoundLines[0]));
         flatFoundPoints = foundPoints.flat();
+        // eslint-disable-next-line
         unfoundLines = this.props.filteredLines().filter(line => !flatFoundPoints.includes(line.point1_id) && !flatFoundPoints.includes(line.point2_id));
       }
 
