@@ -23,12 +23,11 @@ class Auth extends React.Component {
   }
 
   logOut = () => {
-    window.sessionStorage.removeItem("userId");
-    window.location.reload(false);
+    this.props.removePlayer();
   }
 
   render() {
-    if (window.sessionStorage.getItem("userId")) {
+    if (this.props.players.length > 0) {
       return <button className="logout" onClick={this.logOut}>log out</button>;
     } else return (
       <form onSubmit={event => this.handleSubmit(event)}>
@@ -40,10 +39,13 @@ class Auth extends React.Component {
   }
 }
 
+const mapStateToProps = ({ players }) => ({ players });
+
 const mapDispatchToProps = dispatch => {
   return {
     createPlayer: player => dispatch(createPlayer(player)),
+    removePlayer: () => dispatch({ type: 'REMOVE_PLAYER' }),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

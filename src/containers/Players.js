@@ -11,7 +11,7 @@ class Players extends React.Component {
   
   handleReceivedPlayer = response => {
     this.setState({
-      players: [...this.state.players, response]
+      players: [...this.state.players, JSON.parse(response)]
     });
   }
 

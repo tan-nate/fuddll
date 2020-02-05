@@ -23,7 +23,6 @@ export function createPlayer(formData) {
       .then(player => {
         dispatch({ type: 'LOGIN_PLAYER', player: player });
         sessionStorage.setItem("userId", player.id);
-        window.location.reload(false);
       })
       .catch(error => console.log(error));
   };
