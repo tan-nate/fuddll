@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-natedogg = Player.create(name: "natedogg", in_game: false)
-opponent = Player.create(name: "opponent", in_game: false)
+natedogg = Player.create(name: "natedogg", in_game: false, password: "bedope123")
+opponent = Player.create(name: "opponent", in_game: false, password: "fire")
 game = Game.create
 
 nate_board = Board.custom_create(game: game, player: natedogg)

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { ActionCableProvider } from 'react-actioncable-provider';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -13,6 +14,7 @@ import pointsReducer from './reducers/pointsReducer';
 import linesReducer from './reducers/linesReducer';
 import guessesReducer from './reducers/guessesReducer';
 import guessPointsReducer from './reducers/guessPointsReducer';
+import playersReducer from './reducers/playersReducer';
 
 const rootReducer = combineReducers({
   boards: boardsReducer,
@@ -20,15 +22,19 @@ const rootReducer = combineReducers({
   lines: linesReducer,
   guesses: guessesReducer,
   guessPointPositions: guessPointsReducer,
+  players: playersReducer,
 });
+
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)
 ));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>, 
+  <ActionCableProvider url={'ws://localhost:3000/cable'}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ActionCableProvider>, 
   document.getElementById('root')
 );
 

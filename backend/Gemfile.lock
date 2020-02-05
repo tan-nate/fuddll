@@ -56,6 +56,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    bcrypt (3.1.13)
     beer-advocate-cli (0.2.4)
       colorize (~> 0.8.1)
       nokogiri (~> 1.8)
@@ -94,6 +95,7 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
+    pg (1.1.4)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -133,6 +135,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.1.0)
     ruby_dep (1.5.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
@@ -145,7 +148,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.6)
@@ -159,16 +161,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   beer-advocate-cli (~> 0.2.4)
   bootsnap (>= 1.4.2)
   byebug
   listen (>= 3.0.5, < 3.2)
+  pg
   puma (~> 3.11)
   rack-cors
   rails (~> 6.0.0)
+  redis (~> 4.0)
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3 (~> 1.4)
   tzinfo-data
 
 RUBY VERSION

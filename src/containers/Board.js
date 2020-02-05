@@ -80,7 +80,7 @@ class Board extends React.Component {
 
   filteredGuesses = () => {
     if (this.props.guesses.length !== 0 && this.props.board !== undefined) {
-      return this.props.guesses.filter(guess => guess.board_id === this.props.opponentBoard.id);
+      return this.props.guesses.filter(guess => guess.board_id === this.props.board.id);
     } else {
       return [];
     }

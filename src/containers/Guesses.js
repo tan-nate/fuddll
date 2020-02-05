@@ -65,7 +65,7 @@ class Guesses extends React.Component {
 
   renderGuesses = () => {
     if (this.props.guesses.length !== 0) {
-      return this.filteredGuesses().map(guess => <Guess key={guess.id} guess={guess} pointPositions={this.filteredGuessPointPositions()} />);
+      return this.filteredGuesses().map(guess => <Guess key={guess.id} guess={guess} pointPositions={this.filteredGuessPointPositions()} board={this.props.board} />);
     }
   }
 

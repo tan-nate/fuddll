@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_29_184103) do
+ActiveRecord::Schema.define(version: 2020_02_03_194203) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
     t.integer "player_id"
@@ -44,6 +47,8 @@ ActiveRecord::Schema.define(version: 2020_01_29_184103) do
     t.boolean "in_game"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
+    t.boolean "logged_in"
   end
 
   create_table "points", force: :cascade do |t|

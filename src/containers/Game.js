@@ -18,10 +18,10 @@ class Game extends React.Component {
       <>
         <h1>fuddll</h1>
         <h2>natedogg</h2>
-        <Board board={this.props.boards[0]} opponentBoard={this.props.boards[1]} />
+        <Board board={this.props.boards[0]} />
         <Guesses board={this.props.boards[1]} />
         <h2>opponent</h2>
-        <Board board={this.props.boards[1]} opponentBoard={this.props.boards[0]} />
+        <Board board={this.props.boards[1]} />
         <Guesses board={this.props.boards[0]} />
       </>
     );
