@@ -17,12 +17,18 @@ class PlayersController < ApplicationController
       if player.save
         serialized_data = PlayerSerializer.new(player).to_serialized_json
         render json: serialized_data
-        ActionCable.server.broadcast_to "players_channel", serialized_data
+        ActionCable.server.broadcast "players_channel", serialized_data
       else
         render json: {
           errors: player.errors.full_messages
         }, status: 422
       end
     end
+  end
+
+  def log
+    player = Player.find(params[:user_id])
+    serialized_data = PlayerSerializer.new(player).to_serialized_json
+    ActionCable.server.broadcast "players_channel", serialized_data
   end
 end
