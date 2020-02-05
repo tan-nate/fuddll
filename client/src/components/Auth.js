@@ -23,11 +23,12 @@ class Auth extends React.Component {
   }
 
   logOut = () => {
+    sessionStorage.removeItem('userId');
     this.props.removePlayer();
   }
 
   render() {
-    if (this.props.players.length > 0) {
+    if (sessionStorage.getItem('userId')) {
       return <button className="logout" onClick={this.logOut}>log out</button>;
     } else return (
       <form onSubmit={event => this.handleSubmit(event)}>
