@@ -1,4 +1,4 @@
-# README
+__*fuddll*__ is a game where you draw shapes onto your secret board to fuddll your opponent. Try to guess your opponent's fuddll before they guess yours!
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
