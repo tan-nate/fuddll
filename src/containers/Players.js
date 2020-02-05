@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionCable } from 'react-actioncable-provider';
+import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class Players extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Players extends React.Component {
     }
   }
   
-  handleReceivedPlayer = response => {
+  handleReceived = response => {
     this.setState({
       players: [...this.state.players, JSON.parse(response)]
     });
@@ -26,8 +26,9 @@ class Players extends React.Component {
   render() {
     return (
       <div className="players-list">
-        <ActionCable channel={{ channel: 'PlayersChannel' }} onReceived={this.handleReceivedPlayer} />
-        {this.renderPlayers()}
+        <ActionCableConsumer channel="PlayersChannel" onReceived={this.handleReceived}>
+          {this.renderPlayers()}
+        </ActionCableConsumer>
       </div>
     );
   }
