@@ -21,7 +21,7 @@ export function sendPoints({ points, board }) {
   };
 
   return dispatch => {
-    fetch('http://localhost:3000/lines', configObj)
+    fetch('/lines', configObj)
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -46,7 +46,7 @@ export function deleteLine(line) {
   };
   
   return dispatch => {
-    fetch(`http://localhost:3000/lines/${line.id}`, configObj)
+    fetch(`/lines/${line.id}`, configObj)
       .then(response => response.json())
       .then(line => dispatch({ type: 'DELETE_LINE', line: line }));
   };

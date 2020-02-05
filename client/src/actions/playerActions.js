@@ -9,7 +9,7 @@ export function createPlayer(formData) {
   };
 
   return dispatch => {
-    fetch('http://localhost:3000/players', configObj)
+    fetch('/players', configObj)
       .then(response => {
         if (!response.ok) {
           return response.json()
