@@ -1,7 +1,4 @@
 {
-  "name": "battleship",
-  "version": "0.1.0",
-  "private": true,
   "proxy": "http://localhost:3000",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/tan-nate/fuddll",
   "author": "tan-nate <nktan93@gmail.com>",
-  "license": "Copyright 2020 Nate Tan",
+  "license": "UNLICENSED",
   "scripts": {
     "build": "cd client && yarn install && yarn build && cd ..",
     "deploy": "cp -a client/build/. public/",
