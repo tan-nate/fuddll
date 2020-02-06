@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createPlayer, logPlayerToLobby } from '../actions/playerActions';
+import { createPlayer } from '../actions/playerActions';
 
 class Auth extends React.Component {
   constructor(props) {
@@ -27,12 +27,7 @@ class Auth extends React.Component {
     this.props.removePlayer();
   }
 
-  logPlayerToLobby = () => {
-    logPlayerToLobby();
-  }
-
   render() {
-    {this.logPlayerToLobby()}
     if (sessionStorage.getItem('userId')) {
       return <button className="logout" onClick={this.logOut}>log out</button>;
     } else return (

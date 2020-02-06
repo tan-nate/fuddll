@@ -27,20 +27,3 @@ export function createPlayer(formData) {
       .catch(error => console.log(error));
   };
 };
-
-export function logPlayerToLobby() {  
-  if (sessionStorage.getItem('userId')) {
-    const player = { user_id: parseInt(sessionStorage.getItem('userId')) };
-
-    let configObj = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      }, 
-      body: JSON.stringify(player)
-    };
-  
-    fetch('/players', configObj);
-  }
-}

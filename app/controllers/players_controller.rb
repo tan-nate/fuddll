@@ -25,10 +25,4 @@ class PlayersController < ApplicationController
       end
     end
   end
-
-  def log
-    player = Player.find(params[:user_id])
-    serialized_data = PlayerSerializer.new(player).to_serialized_json
-    ActionCable.server.broadcast "players_channel", serialized_data
-  end
 end
