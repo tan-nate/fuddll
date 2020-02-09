@@ -21,8 +21,8 @@ export function createPlayer(formData) {
         return response.json();
       })
       .then(player => {
-        dispatch({ type: 'LOGIN_PLAYER', player: player });
-        sessionStorage.setItem("userId", player.id);
+        localStorage.setItem("token", player.jwt);
+        player => dispatch({ type: 'LOGIN_PLAYER', player: player })
       })
       .catch(error => console.log(error));
   };
