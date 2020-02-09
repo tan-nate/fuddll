@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { storeGuessPointPosition } from '../actions/guessingActions';
+import { storeGuessPointPosition } from '../../actions/guessingActions';
 
 class GuessPoint extends React.Component {
   constructor(props) {

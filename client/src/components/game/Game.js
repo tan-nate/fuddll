@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchBoards, fetchPoints, fetchLines } from '../actions/gameActions';
-import { fetchGuesses } from '../actions/guessingActions';
-import Board from './Board';
-import Guesses from './Guesses';
+import { fetchBoards, fetchPoints, fetchLines } from '../../actions/gameActions';
+import { fetchGuesses } from '../../actions/guessingActions';
+import Board from '../../containers/Board';
+import Guesses from '../../containers/Guesses';
 
 class Game extends React.Component {
   componentDidMount() {

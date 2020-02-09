@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { storePointPosition } from '../actions/drawingActions';
+import { storePointPosition } from '../../actions/drawingActions';
 
 class Point extends React.Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { sendPoints, deleteLine } from '../actions/drawingActions';
 import Point from '../components/Point';
 import Line from '../components/Line';
-import Shapes from './Shapes';
+import Shapes from '../drawing/Shapes';
 import OpponentGuess from '../components/OpponentGuess';
 
 class Board extends React.Component {
