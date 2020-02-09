@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Shape from '../components/Shape';
+import Shape from '../drawing/Shape';
 
 class Shapes extends React.Component {
   constructor(props) {

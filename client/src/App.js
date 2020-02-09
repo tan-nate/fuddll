@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import Game from './containers/Game';
+import Game from './components/game/Game';
 import Auth from './components/Auth';
-import Players from './containers/Players';
+import Players from './components/game/Players';
 
 function App() {
   useEffect(() => {
@@ -13,7 +13,8 @@ function App() {
         }
         .then(resp => resp.json())
         .then(data => {
-          setUser(data);
+          console.log(data)
+          // setUser(data);
         })
       })
     }

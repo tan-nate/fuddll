@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendGuess } from '../actions/guessingActions';
-import GuessPoint from '../components/GuessPoint';
-import Guess from '../components/Guess';
+import { sendGuess } from '/actions/guessingActions';
+import GuessPoint from './GuessPoint';
+import Guess from '../drawing/Guess';
 
 class Guesses extends React.Component {
   constructor(props) {

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendPoints, deleteLine } from '../actions/drawingActions';
-import Point from '../components/Point';
-import Line from '../components/Line';
+import { sendPoints, deleteLine } from '/client/src/actions/drawingActions';
+import Point from './Point';
+import Line from '../drawing/Line';
 import Shapes from '../drawing/Shapes';
-import OpponentGuess from '../components/OpponentGuess';
+import OpponentGuess from './OpponentGuess';
 
 class Board extends React.Component {
   constructor(props) {

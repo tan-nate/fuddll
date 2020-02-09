@@ -22,7 +22,7 @@ export function createPlayer(formData) {
       })
       .then(player => {
         localStorage.setItem("token", player.jwt);
-        player => dispatch({ type: 'LOGIN_PLAYER', player: player })
+        // player => dispatch({ type: 'LOGIN_PLAYER', player: player })
       })
       .catch(error => console.log(error));
   };

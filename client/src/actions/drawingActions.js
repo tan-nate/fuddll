@@ -7,7 +7,7 @@ export function sendPoints({ points, board }) {
     line: {
       point1_id: points[0].id,
       point2_id: points[1].id,
-      board_id: board
+      board_id: board,
     }
   };
 
