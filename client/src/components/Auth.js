@@ -24,7 +24,7 @@ class Auth extends React.Component {
 
   logOut = () => {
     localStorage.clear();
-    this.props.removePlayer();
+    window.location.reload(false);
   }
 
   render() {

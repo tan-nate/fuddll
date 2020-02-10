@@ -4,7 +4,7 @@ module ApplicationCable
       @current_player = player
     end
 
-    def get_current_player
+    def self.get_current_player
       @current_player
     end
   end
