@@ -9,7 +9,7 @@ import { autoLogin } from './actions/playerActions';
 class App extends React.Component {
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      autoLogin();
+      this.props.autoLogin();
     }
   }
   
@@ -30,4 +30,10 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    autoLogin: () => dispatch(autoLogin()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);

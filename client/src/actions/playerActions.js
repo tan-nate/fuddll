@@ -37,9 +37,9 @@ export function autoLogin() {
     }
   }
 
-  fetch('/auto_login', configObj)
-    .then(resp => resp.json())
-    .then(player => {
-      localStorage.setItem("token", player.jwt);
-    });
+  return dispatch => {
+    fetch('/auto_login', configObj)
+      .then(resp => resp.json())
+      .then(player => dispatch({ type: 'LOGIN_PLAYER', player }));
+  }
 }

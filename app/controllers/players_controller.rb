@@ -26,7 +26,9 @@ class PlayersController < ApplicationController
 
   def auto_login
     if session_player
-      render json: session_player
+      render json: {player: PlayerSerializer.new(session_player).to_serialized_json}
+      ApplicationCable::Channel.set_current_player(session_player)
+      ActionCable.server.broadcast "players_channel", session_player
     else
       render json: {errors: "no user logged in"}
     end
