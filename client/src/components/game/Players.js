@@ -10,8 +10,13 @@ class Players extends React.Component {
   }
   
   handleReceived = response => {
-    this.setState({
-      players: [...this.state.players, JSON.parse(response)]
+    const player = JSON.parse(response);
+    if (!player.logged_in) {
+      this.setState({
+        players: this.state.players.filter(newPlayer => newPlayer.id !== player.id),
+      })
+    } else this.setState({
+      players: [...this.state.players, player]
     });
   }
 

@@ -32,7 +32,7 @@ const store = createStore(rootReducer, composeWithDevTools(
 ReactDOM.render(
   // change to 'wss://fuddll.herokuapp.com/cable' in production
   // change to 'ws://localhost:3000/cable' in development
-  <ActionCableProvider url={'wss://fuddll.herokuapp.com/cable'}>
+  <ActionCableProvider url={'ws://localhost:3000/cable'}>
     <Provider store={store}>
       <App />
     </Provider>
