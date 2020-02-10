@@ -18,7 +18,7 @@ class Players extends React.Component {
   renderPlayers = () => {
     return (
       <ul>
-        {this.state.players.map(player => <li>{player.name}</li>)}
+        {this.state.players.map(player => <li key={player.id}>{player.name}</li>)}
       </ul>
     );
   }
