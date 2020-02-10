@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendGuess } from '/actions/guessingActions';
+import { sendGuess } from '../../../actions/guessingActions';
 import GuessPoint from './GuessPoint';
 import Guess from '../drawing/Guess';
 
