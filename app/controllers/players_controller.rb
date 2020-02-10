@@ -3,8 +3,9 @@ class PlayersController < ApplicationController
     def login_and_broadcast_player(player)
       payload = {player_id: player.id}
       token = encode_token(payload)
-      render json: {player: player, jwt: token}
-      ActionCable.server.broadcast "players_channel", {player: player}
+      render json: {player: PlayerSerializer.new(player).to_serialized_json, jwt: token}
+      ApplicationCable::Channel.set_current_player(player)
+      ActionCable.server.broadcast "players_channel", player
     end
 
     player = Player.find_by(name: params[:name])
@@ -18,7 +19,7 @@ class PlayersController < ApplicationController
           }, status: 422
       end
     else
-      player = Player.new(name: params[:name], password: params[:password])
+      player = Player.create(name: params[:name], password: params[:password])
       login_and_broadcast_player(player)
     end
   end

@@ -23,7 +23,7 @@ class Auth extends React.Component {
   }
 
   logOut = () => {
-    sessionStorage.removeItem('userId');
+    localStorage.clear();
     this.props.removePlayer();
   }
 

@@ -4,5 +4,6 @@ class PlayersChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
+    get_current_player.update(logged_in: false)
   end
 end
