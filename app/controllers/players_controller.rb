@@ -3,9 +3,10 @@ class PlayersController < ApplicationController
     def login_and_broadcast_player(player)
       payload = {player_id: player.id}
       token = encode_token(payload)
-      render json: {player: PlayerSerializer.new(player).to_serialized_json, jwt: token}
+      serialized_data = PlayerSerializer.new(player).to_serialized_json
+      render json: {player: serialized_data, jwt: token}
       ApplicationCable::Channel.set_current_player(player)
-      ActionCable.server.broadcast "players_channel", player
+      ActionCable.server.broadcast "players_channel", serialized_data
     end
 
     player = Player.find_by(name: params[:name])
@@ -26,9 +27,10 @@ class PlayersController < ApplicationController
 
   def auto_login
     if session_player
-      render json: {player: PlayerSerializer.new(session_player).to_serialized_json}
+      serialized_data = PlayerSerializer.new(session_player).to_serialized_json
+      render json: {player: serialized_data}
       ApplicationCable::Channel.set_current_player(session_player)
-      ActionCable.server.broadcast "players_channel", session_player
+      ActionCable.server.broadcast "players_channel", serialized_data
     else
       render json: {errors: "no user logged in"}
     end
