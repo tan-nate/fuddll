@@ -3,11 +3,8 @@ class PlayersController < ApplicationController
     def login_and_broadcast_player(player)
       payload = {player_id: player.id}
       token = encode_token(payload)
-      render json: {user: user, jwt: token}
-
-      # serialized_data = PlayerSerializer.new(player).to_serialized_json
-      # render json: serialized_data
-      # ActionCable.server.broadcast "players_channel", serialized_data
+      render json: {player: player, jwt: token}
+      ActionCable.server.broadcast "players_channel", {player: player}
     end
 
     player = Player.find_by(name: params[:name])

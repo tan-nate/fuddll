@@ -28,7 +28,7 @@ class Auth extends React.Component {
   }
 
   render() {
-    if (sessionStorage.getItem('userId')) {
+    if (localStorage.getItem('token')) {
       return <button className="logout" onClick={this.logOut}>log out</button>;
     } else return (
       <form onSubmit={event => this.handleSubmit(event)}>
