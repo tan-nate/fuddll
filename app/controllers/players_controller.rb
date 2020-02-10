@@ -23,4 +23,12 @@ class PlayersController < ApplicationController
       login_and_broadcast_player(player)
     end
   end
+
+  def auto_login
+    if session_player
+      render json: session_player
+    else
+      render json: {errors: "no user logged in"}
+    end
+  end
 end

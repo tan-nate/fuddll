@@ -3,11 +3,11 @@ class ApplicationController < ActionController::API
     JWT.encode(payload, 'Dope2020')
   end
 
-  def session_user
+  def session_player
     decoded_hash = decoded_token
     if !decoded_hash.empty?
-      user_id = decoded_hash[0]['user_id']
-      @user = User.find_by(id: user_id)
+      player_id = decoded_hash[0]['player_id']
+      @player = Player.find_by(id: player_id)
     else
       nil
     end
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::API
     if auth_header
       token = auth_header.split(' ')[1]
       begin
-        JWT.decode(token, 'my_secret', true, algorithm: 'HS256')
+        JWT.decode(token, 'Dope2020', true, algorithm: 'HS256')
       rescue JWT::DecodeError
         []
       end

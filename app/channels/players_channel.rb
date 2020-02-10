@@ -3,7 +3,7 @@ class PlayersChannel < ApplicationCable::Channel
     stream_from "players_channel"
   end
 
-  def unsubscribed
-    get_current_player.update(logged_in: false)
-  end
+  # def unsubscribed
+  #   get_current_player.update(logged_in: false)
+  # end
 end

@@ -22,8 +22,24 @@ export function createPlayer(formData) {
       })
       .then(player => {
         localStorage.setItem("token", player.jwt);
-        dispatch({ type: 'LOGIN_PLAYER', player })
+        dispatch({ type: 'LOGIN_PLAYER', player });
       })
       .catch(error => console.log(error));
   };
 };
+
+export function autoLogin() {
+  const token = localStorage.getItem("token");
+
+  let configObj = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  fetch('/auto_login', configObj)
+    .then(resp => resp.json())
+    .then(player => {
+      localStorage.setItem("token", player.jwt);
+    });
+}
