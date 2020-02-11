@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionCableConsumer } from 'react-actioncable-provider';
+import { ActionCableConsumer } from 'react-actioncable-provider-updated';
 
 class Players extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class Players extends React.Component {
   render() {
     return (
       <div className="players-list">
-        <ActionCableConsumer channel="PlayersChannel" onReceived={this.handleReceived}>
+        <ActionCableConsumer channel="PlayersChannel" onReceived={this.handleReceived} onConnected={console.log("connected")} onDisconnected={console.log("disconnected")} >
           {this.renderPlayers()}
         </ActionCableConsumer>
       </div>

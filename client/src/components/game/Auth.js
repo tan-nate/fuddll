@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createPlayer } from '../actions/playerActions';
+import { createPlayer } from '../../actions/playerActions';
 
 class Auth extends React.Component {
   constructor(props) {

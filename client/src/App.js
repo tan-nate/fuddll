@@ -1,6 +1,6 @@
 import React from 'react';
 import Game from './components/game/Game';
-import Auth from './components/Auth';
+import Auth from './components/game/Auth';
 import Players from './components/game/Players';
 
 import { connect } from 'react-redux';
