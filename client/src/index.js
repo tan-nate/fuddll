@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { ActionCableProvider } from 'react-actioncable-provider-updated';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -30,13 +29,9 @@ const store = createStore(rootReducer, composeWithDevTools(
 ));
 
 ReactDOM.render(
-  // change to 'wss://fuddll.herokuapp.com/cable' in production
-  // change to 'ws://localhost:3000/cable' in development
-  <ActionCableProvider url={'wss://fuddll.herokuapp.com/cable'}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </ActionCableProvider>, 
+  <Provider store={store}>
+    <App />
+  </Provider>, 
   document.getElementById('root')
 );
 

@@ -1,15 +1,25 @@
 import React from 'react';
-import { ActionCableConsumer } from 'react-actioncable-provider-updated';
+import ActionCable from 'actioncable';
 
 class Players extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       players: [],
-    }
+    };
+  }
+
+  componentDidMount() {
+    // change to 'wss://fuddll.herokuapp.com/cable' in production
+    // change to 'ws://localhost:3000/cable' in development
+    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    cable.subscriptions.create("PlayersChannel", {
+      received: (response) => {this.handleReceived(response)},
+    });
   }
   
   handleReceived = response => {
+    debugger
     const player = JSON.parse(response);
     if (!player.logged_in) {
       this.setState({
@@ -31,9 +41,7 @@ class Players extends React.Component {
   render() {
     return (
       <div className="players-list">
-        <ActionCableConsumer channel="PlayersChannel" onReceived={this.handleReceived} onConnected={console.log("connected")} onDisconnected={console.log("disconnected")} >
-          {this.renderPlayers()}
-        </ActionCableConsumer>
+        {this.renderPlayers()}
       </div>
     );
   }
