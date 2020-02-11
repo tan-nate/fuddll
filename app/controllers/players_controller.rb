@@ -1,4 +1,11 @@
 class PlayersController < ApplicationController
+  def index
+    players = Player.all
+    logged_in_players = players.where(logged_in: true)
+    serialized_data = PlayerSerializer.new(logged_in_players).to_serialized_json
+    render json: serialized_data
+  end
+  
   def create
     def login_player(player)
       player.update(logged_in: true)

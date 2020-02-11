@@ -19,7 +19,7 @@ class Auth extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createPlayer(this.state);
+    createPlayer(this.state);
   }
 
   logOut = () => {
@@ -44,7 +44,6 @@ const mapStateToProps = ({ players }) => ({ players });
 
 const mapDispatchToProps = dispatch => {
   return {
-    createPlayer: player => dispatch(createPlayer(player)),
     removePlayer: () => dispatch({ type: 'REMOVE_PLAYER' }),
   };
 };

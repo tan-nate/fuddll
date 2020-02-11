@@ -8,24 +8,23 @@ export function createPlayer(formData) {
     body: JSON.stringify(formData)
   };
 
-  return dispatch => {
-    fetch('/players', configObj)
-      .then(response => {
-        if (!response.ok) {
-          return response.json()
-          .then(json => {
-            throw Error(json.errors.toString());
-          })
-        }
-        
-        return response.json();
-      })
-      .then(player => {
-        localStorage.setItem("token", player.jwt);
-        window.location.reload(false);
-      })
-      .catch(error => console.log(error));
-  };
+  
+  fetch('/players', configObj)
+    .then(response => {
+      if (!response.ok) {
+        return response.json()
+        .then(json => {
+          throw Error(json.errors.toString());
+        })
+      }
+      
+      return response.json();
+    })
+    .then(player => {
+      localStorage.setItem("token", player.jwt);
+      window.location.reload(false);
+    })
+    .catch(error => console.log(error));
 };
 
 export function autoLogin() {
@@ -40,6 +39,14 @@ export function autoLogin() {
   return dispatch => {
     fetch('/auto_login', configObj)
       .then(resp => resp.json())
-      .then(player => dispatch({ type: 'LOGIN_PLAYER', player }));
+      .then(player => dispatch({ type: 'LOGIN_PLAYER', player: JSON.parse(player.player) }));
   }
 }
+
+export function fetchPlayers() {
+  return dispatch => {
+    fetch('/players')
+      .then(response => response.json())
+      .then(players => dispatch({ type: 'ADD_PLAYERS', players: players }));
+  };
+};

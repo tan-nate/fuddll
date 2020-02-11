@@ -1,6 +1,9 @@
 import React from 'react';
 import ActionCable from 'actioncable';
 
+import { connect } from 'react-redux';
+import { fetchPlayers } from '../../actions/playerActions';
+
 class Players extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +15,11 @@ class Players extends React.Component {
   componentDidMount() {
     // change to 'wss://fuddll.herokuapp.com/cable' in production
     // change to 'ws://localhost:3000/cable' in development
-    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
+    this.props.fetchPlayers();
+    this.setState({
+      players: this.props.players,
+    })
+    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
     cable.subscriptions.create("PlayersChannel", {
       received: (response) => {this.handleReceived(response)},
     });
@@ -46,4 +53,12 @@ class Players extends React.Component {
   }
 }
 
-export default Players;
+const mapStateToProps = ({ players }) => ({ players })
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchPlayers: () => dispatch(fetchPlayers()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Players);
