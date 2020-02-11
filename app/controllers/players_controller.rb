@@ -1,20 +1,18 @@
 class PlayersController < ApplicationController
   def create
-    def login_and_broadcast_player(player)
+    def login_player(player)
       player.update(logged_in: true)
       payload = {player_id: player.id}
       token = encode_token(payload)
       serialized_data = PlayerSerializer.new(player).to_serialized_json
       render json: {player: serialized_data, jwt: token}
-      ApplicationCable::Channel.set_current_player(player)
-      ActionCable.server.broadcast "players_channel", serialized_data
     end
 
     player = Player.find_by(name: params[:name])
 
     if player
       if player.authenticate(params[:password])
-        login_and_broadcast_player(player)
+        login_player(player)
       else
         render json: {
             errors: "incorrect password. check password or create new user"
@@ -22,7 +20,7 @@ class PlayersController < ApplicationController
       end
     else
       player = Player.create(name: params[:name], password: params[:password])
-      login_and_broadcast_player(player)
+      login_player(player)
     end
   end
 

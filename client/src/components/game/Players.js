@@ -12,21 +12,20 @@ class Players extends React.Component {
   componentDidMount() {
     // change to 'wss://fuddll.herokuapp.com/cable' in production
     // change to 'ws://localhost:3000/cable' in development
-    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
     cable.subscriptions.create("PlayersChannel", {
       received: (response) => {this.handleReceived(response)},
     });
   }
   
   handleReceived = response => {
-    debugger
     const player = JSON.parse(response);
     if (!player.logged_in) {
       this.setState({
         players: this.state.players.filter(newPlayer => newPlayer.id !== player.id),
       })
     } else this.setState({
-      players: [...this.state.players, player]
+      players: [...this.state.players, player],
     });
   }
 
