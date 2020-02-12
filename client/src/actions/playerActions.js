@@ -1,6 +1,10 @@
 export function fetchPlayers() {
   return dispatch => {
-    fetch('/players')
+    const headers = {
+      credentials: "include",
+    }
+
+    fetch('/players', headers)
       .then(response => response.json())
       .then(players => dispatch({ type: 'ADD_PLAYERS', players: players }));
   };
@@ -12,10 +16,10 @@ export function createPlayer(formData) {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
-    }, 
-    body: JSON.stringify(formData)
+    },
+    credentials: "include",
+    body: JSON.stringify(formData),
   };
-
   
   fetch('/players', configObj)
     .then(response => {
@@ -41,7 +45,8 @@ export function autoLogin() {
   let configObj = {
     headers: {
       Authorization: `Bearer ${token}`
-    }
+    },
+    credentials: "include",
   }
 
   return dispatch => {

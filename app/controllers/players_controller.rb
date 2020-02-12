@@ -9,6 +9,7 @@ class PlayersController < ApplicationController
   def create
     def login_player(player)
       player.update(logged_in: true)
+      session[:player_id] = player.id
       payload = {player_id: player.id}
       token = encode_token(payload)
       serialized_data = PlayerSerializer.new(player).to_serialized_json
@@ -34,6 +35,7 @@ class PlayersController < ApplicationController
   def auto_login
     if session_player
       session_player.update(logged_in: true)
+      session[:player_id] = player.id
       serialized_data = PlayerSerializer.new(session_player).to_serialized_json
       render json: {player: serialized_data}
       ApplicationCable::Channel.set_current_player(session_player)

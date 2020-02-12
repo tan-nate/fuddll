@@ -17,7 +17,8 @@ export function sendPoints({ points, board }) {
       "Content-Type": "application/json",
       "Accept": "application/json"
     }, 
-    body: JSON.stringify(formData)
+    credentials: "include",
+    body: JSON.stringify(formData),
   };
 
   return dispatch => {
@@ -42,7 +43,8 @@ export function deleteLine(line) {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
-    }
+    },
+    credentials: "include",
   };
   
   return dispatch => {

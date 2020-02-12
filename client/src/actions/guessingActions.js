@@ -1,6 +1,10 @@
 export function fetchGuesses() {
   return dispatch => {
-    fetch('/guesses')
+    const headers = {
+      credentials: "include",
+    }
+
+    fetch('/guesses', headers)
       .then(response => response.json())
       .then(guesses => dispatch({ type: 'ADD_GUESSES', guesses: guesses }));
   };
@@ -21,7 +25,8 @@ export function sendGuess({ points, board }) {
       "Content-Type": "application/json",
       "Accept": "application/json"
     }, 
-    body: JSON.stringify(formData)
+    credentials: "include",
+    body: JSON.stringify(formData),
   };
 
   return dispatch => {

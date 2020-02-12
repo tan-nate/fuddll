@@ -4,10 +4,8 @@ class PlayersChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    player = ApplicationCable::Channel.get_current_player
-    player.update(logged_in: false)
+    current_player.update(logged_in: false)
     serialized_data = PlayerSerializer.new(player).to_serialized_json
-
     ActionCable.server.broadcast "players_channel", serialized_data
   end
 end
