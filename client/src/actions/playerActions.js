@@ -1,3 +1,11 @@
+export function fetchPlayers() {
+  return dispatch => {
+    fetch('/players')
+      .then(response => response.json())
+      .then(players => dispatch({ type: 'ADD_PLAYERS', players: players }));
+  };
+};
+
 export function createPlayer(formData) {
   let configObj = {
     method: "POST",
@@ -39,14 +47,20 @@ export function autoLogin() {
   return dispatch => {
     fetch('/auto_login', configObj)
       .then(resp => resp.json())
-      .then(player => dispatch({ type: 'LOGIN_PLAYER', player: JSON.parse(player.player) }));
-  }
-}
-
-export function fetchPlayers() {
-  return dispatch => {
-    fetch('/players')
-      .then(response => response.json())
-      .then(players => dispatch({ type: 'ADD_PLAYERS', players: players }));
+      .then(player => {
+        if (player.errors) {
+          console.log(player.errors);
+        } else {
+          dispatch({ type: 'LOGIN_PLAYER', player: JSON.parse(player.player) });
+        }
+      })
   };
 };
+
+export function addPlayer(player) {
+  return dispatch => dispatch({ type: 'LOGIN_PLAYER', player: player });
+}
+
+export function removePlayer(player) {
+  return dispatch => dispatch({ type: 'REMOVE_PLAYER', player: player });
+}

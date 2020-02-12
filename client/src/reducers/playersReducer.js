@@ -1,11 +1,15 @@
+import { uniqueObjectIds } from '../methods';
+
 const playersReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_PLAYERS':
-      return [...state, ...action.players]
+      var newState = [...state, ...action.players];
+      return uniqueObjectIds(newState);
     case 'LOGIN_PLAYER':
-      return [...state, action.player.player];
+      newState = [...state, action.player];
+      return uniqueObjectIds(newState);
     case 'REMOVE_PLAYER':
-      return [];
+      return state.filter(player => player.id !== action.player.id);
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createPlayer } from '../../actions/playerActions';
+import { createPlayer, removePlayer } from '../../actions/playerActions';
 
 class Auth extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ const mapStateToProps = ({ players }) => ({ players });
 
 const mapDispatchToProps = dispatch => {
   return {
-    removePlayer: () => dispatch({ type: 'REMOVE_PLAYER' }),
+    removePlayer: player => removePlayer(player),
   };
 };
 

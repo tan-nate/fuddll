@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
   end
 
   def logged_in?
-    !!session_user
+    !!session_player
   end
 
   def auth_header
