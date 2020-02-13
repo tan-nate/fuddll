@@ -1,6 +1,6 @@
 const pointsReducer = (state = {
   points: [],
-  pointPositions: []
+  pointPositions: [],
 }, action) => {
   switch(action.type) {
     case 'ADD_POINTS':

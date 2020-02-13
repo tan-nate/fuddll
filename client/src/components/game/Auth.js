@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createPlayer, removePlayer } from '../../actions/playerActions';
+import { createPlayer, logOutPlayer } from '../../actions/playerActions';
 
 class Auth extends React.Component {
   constructor(props) {
@@ -22,13 +22,13 @@ class Auth extends React.Component {
     this.props.createPlayer(this.state);
   }
 
-  logOut = () => {
-    localStorage.clear();
-    window.location.reload(false);
+  logOut = (event) => {
+    event.preventDefault();
+    this.props.logOutPlayer(this.props.currentPlayer);
   }
 
   render() {
-    if (localStorage.getItem('token')) {
+    if (this.props.currentPlayer) {
       return <button className="logout" onClick={this.logOut}>log out</button>;
     } else return (
       <form onSubmit={event => this.handleSubmit(event)}>
@@ -40,12 +40,14 @@ class Auth extends React.Component {
   }
 }
 
-const mapStateToProps = ({ players }) => ({ players });
+const mapStateToProps = ({ players }) => ({
+  currentPlayer: players.currentPlayer,
+});
 
 const mapDispatchToProps = dispatch => {
   return {
     createPlayer: player => dispatch(createPlayer(player)),
-    removePlayer: player => dispatch(removePlayer(player)),
+    logOutPlayer: player => dispatch(logOutPlayer(player)),
   };
 };
 

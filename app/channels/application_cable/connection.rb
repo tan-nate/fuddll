@@ -9,7 +9,7 @@ module ApplicationCable
     private
 
     def find_verified_player
-      if verified_player = Player.find_by(id: session[:player_id])
+      if verified_player = Player.find(cookies.signed[:player_id])
         verified_player
       else
         reject_unauthorized_connection

@@ -34,7 +34,7 @@ export function createPlayer(player) {
         if (player.error) {
           console.log(player.error);
         } else {
-          dispatch({ type: 'LOGIN_PLAYER', player: player });
+          window.location.reload(false);
         }
       })
       .catch(console.log);
@@ -42,7 +42,7 @@ export function createPlayer(player) {
 };
 
 export function getCurrentPlayer() {
-  let headers = {
+  const headers = {
     credentials: "include",
   }
 
@@ -60,9 +60,34 @@ export function getCurrentPlayer() {
 };
 
 export function addPlayer(player) {
-  return dispatch => dispatch({ type: 'LOGIN_PLAYER', player: player });
+  return dispatch => dispatch({ type: 'ADD_PLAYERS', players: player });
 }
 
 export function removePlayer(player) {
   return dispatch => dispatch({ type: 'REMOVE_PLAYER', player: player });
+}
+
+export function logOutPlayer(player) {
+  const headers = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    credentials: "include",
+    body: JSON.stringify(player),
+  };
+
+  return dispatch => {
+    fetch(`/players/${player.id}`, headers)
+      .then(response => response.json())
+      .then(player => {
+        if (player.error) {
+          console.log(player.error);
+        } else {
+          dispatch({ type: 'LOGOUT_PLAYER', player: player.player });
+        }
+      })
+      .catch(console.log);
+  }
 }

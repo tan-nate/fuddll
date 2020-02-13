@@ -16,7 +16,6 @@ class Players extends React.Component {
   }
   
   handleReceived = response => {
-    debugger
     const player = JSON.parse(response);
     if (!player.logged_in) {
       this.props.removePlayer(player);
@@ -42,7 +41,9 @@ class Players extends React.Component {
   }
 }
 
-const mapStateToProps = ({ players }) => ({ players })
+const mapStateToProps = ({ players }) => ({
+  players: players.players
+});
 
 const mapDispatchToProps = dispatch => {
   return {

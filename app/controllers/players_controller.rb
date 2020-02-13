@@ -1,7 +1,10 @@
 class PlayersController < ApplicationController
+  include ActionController::Cookies
+
   def login_player(player)
     player.update(logged_in: true)
     session[:player_id] = player.id
+    cookies.signed[:player_id] = player.id
   end
   
   def render_player(player)
@@ -42,5 +45,11 @@ class PlayersController < ApplicationController
     else
       render json: {error: "no user logged in"}, status: 422
     end
+  end
+
+  def destroy
+    player = Player.find(params[:id])
+    player.update(logged_in: false)
+    session.clear
   end
 end

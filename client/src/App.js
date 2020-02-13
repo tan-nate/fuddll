@@ -12,7 +12,7 @@ class App extends React.Component {
   }
   
   render() {
-    if (this.props.players.length > 0) {
+    if (this.props.players.currentPlayer) {
       return (
         <>
           <Auth />
