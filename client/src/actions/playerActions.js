@@ -85,6 +85,7 @@ export function logOutPlayer(player) {
         if (player.error) {
           console.log(player.error);
         } else {
+          debugger
           dispatch({ type: 'LOGOUT_PLAYER', player: player.player });
         }
       })

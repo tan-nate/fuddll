@@ -22,7 +22,7 @@ class Auth extends React.Component {
     this.props.createPlayer(this.state);
   }
 
-  logOut = (event) => {
+  logOut = event => {
     event.preventDefault();
     this.props.logOutPlayer(this.props.currentPlayer);
   }
