@@ -10,55 +10,52 @@ export function fetchPlayers() {
   };
 };
 
-export function createPlayer(formData) {
-  let configObj = {
+export function createPlayer(player) {
+  const headers = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
     credentials: "include",
-    body: JSON.stringify(formData),
+    body: JSON.stringify(player),
   };
   
-  fetch('/players', configObj)
-    .then(response => {
-      if (!response.ok) {
-        return response.json()
-        .then(json => {
-          throw Error(json.errors.toString());
-        })
-      }
-      
-      return response.json();
-    })
-    .then(player => {
-      localStorage.setItem("token", player.jwt);
-      window.location.reload(false);
-    })
-    .catch(error => console.log(error));
+  return dispatch => {
+    fetch('/players', headers)
+      .then(response => {
+        if (response.status === 204) {
+          throw new Error("no content");
+        } else {
+          return response.json();
+        }
+      })
+      .then(player => {
+        if (player.error) {
+          console.log(player.error);
+        } else {
+          dispatch({ type: 'LOGIN_PLAYER', player: player });
+        }
+      })
+      .catch(console.log);
+  }
 };
 
-export function autoLogin() {
-  const token = localStorage.getItem("token");
-
-  let configObj = {
-    headers: {
-      Authorization: `Bearer ${token}`
-    },
+export function getCurrentPlayer() {
+  let headers = {
     credentials: "include",
   }
 
   return dispatch => {
-    fetch('/auto_login', configObj)
-      .then(resp => resp.json())
+    fetch('/get_current_player', headers)
+      .then(response => response.json())
       .then(player => {
-        if (player.errors) {
-          console.log(player.errors);
+        if (player.error) {
+          console.log(player.error);
         } else {
-          dispatch({ type: 'LOGIN_PLAYER', player: JSON.parse(player.player) });
+          dispatch({ type: 'LOGIN_PLAYER', player: player });
         }
-      })
+      });
   };
 };
 

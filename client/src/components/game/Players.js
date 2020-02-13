@@ -9,13 +9,14 @@ class Players extends React.Component {
     this.props.fetchPlayers();
     // change to 'wss://fuddll.herokuapp.com/cable' in production
     // change to 'ws://localhost:3000/cable' in development
-    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
+    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
     cable.subscriptions.create("PlayersChannel", {
       received: (response) => {this.handleReceived(response)},
     });
   }
   
   handleReceived = response => {
+    debugger
     const player = JSON.parse(response);
     if (!player.logged_in) {
       this.props.removePlayer(player);

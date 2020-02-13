@@ -4,17 +4,15 @@ import Auth from './components/game/Auth';
 import Players from './components/game/Players';
 
 import { connect } from 'react-redux';
-import { autoLogin } from './actions/playerActions';
+import { getCurrentPlayer } from './actions/playerActions';
 
 class App extends React.Component {
   componentDidMount() {
-    if (localStorage.getItem("token")) {
-      this.props.autoLogin();
-    }
+    this.props.getCurrentPlayer();
   }
   
   render() {
-    if (localStorage.getItem("token")) {
+    if (this.props.players.length > 0) {
       return (
         <>
           <Auth />
@@ -30,10 +28,12 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = ({ players }) => ({ players });
+
 const mapDispatchToProps = dispatch => {
   return {
-    autoLogin: () => dispatch(autoLogin()),
+    getCurrentPlayer: () => dispatch(getCurrentPlayer()),
   };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
