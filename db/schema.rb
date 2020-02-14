@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_194203) do
+ActiveRecord::Schema.define(version: 2020_02_14_215303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2020_02_03_194203) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
     t.boolean "logged_in"
+    t.integer "wins", default: 0
+    t.integer "losses", default: 0
   end
 
   create_table "points", force: :cascade do |t|
