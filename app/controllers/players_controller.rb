@@ -42,6 +42,7 @@ class PlayersController < ApplicationController
 
   def get_current_player
     if logged_in?
+      login_player(current_player)
       broadcast_player(current_player)
     else
       render json: {error: "no user logged in"}, status: 422

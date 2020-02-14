@@ -1,4 +1,4 @@
-export function fetchPlayers() {
+export function fetchPlayers(currentPlayer) {
   return dispatch => {
     const headers = {
       credentials: "include",
@@ -6,7 +6,7 @@ export function fetchPlayers() {
 
     fetch('/players', headers)
       .then(response => response.json())
-      .then(players => dispatch({ type: 'ADD_PLAYERS', players: players }));
+      .then(players => dispatch({ type: 'ADD_PLAYERS', players: players, currentPlayer: currentPlayer }));
   };
 };
 

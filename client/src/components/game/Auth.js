@@ -29,7 +29,14 @@ class Auth extends React.Component {
 
   render() {
     if (this.props.currentPlayer) {
-      return <button className="logout" onClick={this.logOut}>log out</button>;
+      return (
+        <div className="user-info">
+          <p id="current-player-name">{this.props.currentPlayer.name}</p>
+          <p>0 W</p>
+          <p>0 L</p>
+          <button className="logout" onClick={this.logOut}>log out</button>
+        </div>
+      );
     } else return (
       <>
         <h2>fuddll</h2>

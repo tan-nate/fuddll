@@ -13,7 +13,7 @@ class Players extends React.Component {
   }
   
   componentDidMount() {
-    this.props.fetchPlayers();
+    this.props.fetchPlayers(this.props.currentPlayer);
     // change to 'wss://fuddll.herokuapp.com/cable' in production
     // change to 'ws://localhost:3000/cable' in development
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
@@ -52,11 +52,12 @@ class Players extends React.Component {
 
 const mapStateToProps = ({ players }) => ({
   players: players.players,
+  currentPlayer: players.currentPlayer,
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPlayers: () => dispatch(fetchPlayers()),
+    fetchPlayers: currentPlayer => dispatch(fetchPlayers(currentPlayer)),
     addPlayer: player => dispatch(addPlayer(player)),
     removePlayer: player => dispatch(removePlayer(player)),
   }
