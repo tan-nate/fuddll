@@ -36,9 +36,16 @@ class Players extends React.Component {
   renderPlayers = () => {
     if (this.props.players.length > 0) {
       return (
-        <ul>
-          {this.props.players.map(player => <Player key={player.id} player={player} />)}
-        </ul>
+        <>
+          <h2 className="lobby">lobby</h2>
+          <ul className="player-list">
+            {this.props.players.map(player => <Player key={player.id} player={player} />)}
+          </ul>
+        </>
+      );
+    } else {
+      return (
+        <p>no one is online</p>
       );
     }
   };

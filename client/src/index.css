@@ -18,10 +18,14 @@ code {
     monospace;
 }
 
-h2 {
+h1 {
   color: blue;
   margin-top: 0;
   margin-bottom: 10px;
+  font-weight: normal;
+}
+
+h2 {
   font-weight: normal;
 }
 
@@ -74,6 +78,23 @@ hr {
   margin: 20px 0 20px -20px;
 }
 
+ul.player-list {
+  list-style: none;
+  padding: 0;
+}
+
+li.player {
+  margin-bottom: 10px;
+}
+
+button.challenge {
+  margin-left: 10px;
+  font-size: 1em;
+  border: 0.5px solid black;
+  border-radius: 10px;
+  background-color: aqua;
+}
+
 .board-container {
   width: 100%;
   float: left;
@@ -118,7 +139,7 @@ hr {
   transform: translate(-50%, -50%);
 }
 
-button {
+button.board {
   border-radius: 50%;
   width: 20px;
   height: 20px;

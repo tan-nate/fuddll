@@ -3,7 +3,10 @@ import React from 'react';
 class Player extends React.Component {
   render() {
     return (
-      <li>{this.props.player.name}</li>
+        <li className="player">
+          {this.props.player.name}
+          <button className="challenge">challenge</button>
+        </li>
     );
   }
 }

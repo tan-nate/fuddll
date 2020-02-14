@@ -13,7 +13,7 @@ function NavBar() {
   return (
     <Router>
       <div>
-        <h2>fuddll</h2>
+        <h1>fuddll</h1>
         <Link to="/">lobby</Link>
         <Link to="/scoreboard">scoreboard</Link>
         <Auth />
