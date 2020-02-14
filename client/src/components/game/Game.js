@@ -16,7 +16,6 @@ class Game extends React.Component {
   render() {
     return (
       <>
-        <h1>fuddll</h1>
         <h2>natedogg</h2>
         <Board board={this.props.boards[0]} />
         <Guesses board={this.props.boards[1]} />

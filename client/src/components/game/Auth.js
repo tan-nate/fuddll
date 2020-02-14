@@ -31,11 +31,14 @@ class Auth extends React.Component {
     if (this.props.currentPlayer) {
       return <button className="logout" onClick={this.logOut}>log out</button>;
     } else return (
-      <form onSubmit={event => this.handleSubmit(event)}>
-        <input type="text" name="name" value={this.state.name} placeholder="username:" onChange={event => this.handleChange(event)} /><br />
-        <input type="password" name="password" value={this.state.password} placeholder="password:" onChange={event => this.handleChange(event)} /><br />
-        <input type="submit" />
-      </form>
+      <>
+        <h1>fuddll</h1>
+        <form onSubmit={event => this.handleSubmit(event)}>
+          <input type="text" name="name" value={this.state.name} placeholder="username:" onChange={event => this.handleChange(event)} /><br />
+          <input type="password" name="password" value={this.state.password} placeholder="password:" onChange={event => this.handleChange(event)} /><br />
+          <input type="submit" value="submit" />
+        </form>
+      </>
     );
   }
 }
