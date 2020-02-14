@@ -8,6 +8,8 @@ body {
 
 h2 {
   color: blue;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 input {
@@ -18,7 +20,8 @@ input {
 input.submit {
   font-size: 1em;
   margin-top: 5px;
-  padding: 1px;
+  padding: 0 5px 0 5px;
+  border-width: 0.5px;
 }
 
 a, a:visited {
