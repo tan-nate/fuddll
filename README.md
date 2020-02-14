@@ -1,24 +1,5 @@
-__*fuddll*__ is a game where you draw shapes onto your secret board to fuddll your opponent. Try to guess your opponent's fuddll before they guess yours!
+fuddll is a game where you draw shapes onto your secret board to befuddll your opponent. Try to guess your opponent's fuddll before they guess yours!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run the app, fork and clone this repo onto your machine. Ensure that you have postgres installed. In the root directory, run "bundle install", then "rake db:migrate", then "rails s". Create a new terminal and cd into the client folder. Run "npm install", then "npm start". In the latest version of Chrome, navigate to localhost:3001. 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To simulate playing a game with an opponent, open a new Chrome window as a Guest or as a new "Person". You can open new windows as new people to simulate multiple users. 

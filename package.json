@@ -7,12 +7,11 @@
   "author": "tan-nate <nktan93@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "cd client && yarn install && yarn build && cd ..",
+    "build": "cd client && npm install && npm build && cd ..",
     "deploy": "cp -a client/build/. public/",
-    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
+    "postinstall": "npm build && npm deploy && echo 'Client built!'"
   },
   "engines": {
-    "yarn": "1.17.3",
     "npm": "6.11.3",
     "node": "12.11.1"
   }
