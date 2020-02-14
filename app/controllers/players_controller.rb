@@ -21,7 +21,7 @@ class PlayersController < ApplicationController
   def index
     players = Player.all
     logged_in_players = players.where(logged_in: true)
-    render_player(players)
+    render_player(logged_in_players)
   end
   
   def create

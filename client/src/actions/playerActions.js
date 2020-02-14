@@ -15,7 +15,7 @@ export function createPlayer(player) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json",
     },
     credentials: "include",
     body: JSON.stringify(player),
@@ -87,6 +87,7 @@ export function logOutPlayer(player) {
           console.log(player.error);
         } else {
           dispatch({ type: 'LOGOUT_PLAYER', player: player.player });
+          dispatch({ type: 'CLEAR_PLAYERS' });
         }
       })
       .catch(console.log);

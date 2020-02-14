@@ -13,6 +13,8 @@ const playersReducer = (state = {
       return { ...state, currentPlayer: action.player }
     case 'REMOVE_PLAYER':
       return { ...state, players: state.players.filter(player => player.id !== action.player.id) };
+    case 'CLEAR_PLAYERS':
+      return { ...state, players: [] }
     case 'LOGOUT_PLAYER':
       return { ...state, currentPlayer: null }
     default:
