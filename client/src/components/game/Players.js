@@ -4,6 +4,8 @@ import ActionCable from 'actioncable';
 import { connect } from 'react-redux';
 import { fetchPlayers, addPlayer, removePlayer } from '../../actions/playerActions';
 
+import Player from './Player';
+
 class Players extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,7 @@ class Players extends React.Component {
     if (this.props.players.length > 0) {
       return (
         <ul>
-          {this.props.players.map(player => <li key={player.id}>{player.name}</li>)}
+          {this.props.players.map(player => <Player key={player.id} player={player} />)}
         </ul>
       );
     }
