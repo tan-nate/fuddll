@@ -161,7 +161,7 @@ Shapes.defaultProps = {
 };
 
 const mapStateToProps = ({ lines }) => ({
-  lines 
+  lines,
 });
 
 export default connect(mapStateToProps)(Shapes);

@@ -5,6 +5,13 @@ import { connect } from 'react-redux';
 import { fetchPlayers, addPlayer, removePlayer } from '../../actions/playerActions';
 
 class Players extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      players: [],
+    };
+  }
+  
   componentDidMount() {
     this.props.fetchPlayers();
     // change to 'wss://fuddll.herokuapp.com/cable' in production
@@ -25,12 +32,14 @@ class Players extends React.Component {
   }
 
   renderPlayers = () => {
-    return (
-      <ul>
-        {this.props.players.map(player => <li key={player.id}>{player.name}</li>)}
-      </ul>
-    );
-  }
+    if (this.props.players.length > 0) {
+      return (
+        <ul>
+          {this.props.players.map(player => <li key={player.id}>{player.name}</li>)}
+        </ul>
+      );
+    }
+  };
 
   render() {
     return (
@@ -42,7 +51,7 @@ class Players extends React.Component {
 }
 
 const mapStateToProps = ({ players }) => ({
-  players: players.players
+  players: players.players,
 });
 
 const mapDispatchToProps = dispatch => {

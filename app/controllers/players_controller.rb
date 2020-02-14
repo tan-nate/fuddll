@@ -36,6 +36,7 @@ class PlayersController < ApplicationController
     else
       player = Player.create(name: params[:name], password: params[:password])
       login_player(player)
+      broadcast_player(player)
     end
   end
 
@@ -50,6 +51,7 @@ class PlayersController < ApplicationController
   def destroy
     player = Player.find(params[:id])
     player.update(logged_in: false)
+    broadcast_player(player)
     session.clear
   end
 end

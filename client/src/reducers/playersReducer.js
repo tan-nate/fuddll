@@ -6,7 +6,9 @@ const playersReducer = (state = {
 }, action) => {
   switch(action.type) {
     case 'ADD_PLAYERS':
-      return { ...state, players: action.players };
+      return { ...state, players: uniqueObjectIds([...state.players, ...action.players]) };
+    case 'ADD_PLAYER':
+      return { ...state, players: uniqueObjectIds([...state.players, action.player]) };
     case 'LOGIN_PLAYER':
       return { ...state, currentPlayer: action.player }
     case 'REMOVE_PLAYER':

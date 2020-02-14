@@ -21,7 +21,7 @@ export function createPlayer(player) {
     body: JSON.stringify(player),
   };
   
-  return dispatch => {
+  return () => {
     fetch('/players', headers)
       .then(response => {
         if (response.status === 204) {
@@ -34,7 +34,8 @@ export function createPlayer(player) {
         if (player.error) {
           console.log(player.error);
         } else {
-          window.location.reload(false);
+          window.location.reload();
+          return false;
         }
       })
       .catch(console.log);
@@ -60,7 +61,7 @@ export function getCurrentPlayer() {
 };
 
 export function addPlayer(player) {
-  return dispatch => dispatch({ type: 'ADD_PLAYERS', players: player });
+  return dispatch => dispatch({ type: 'ADD_PLAYER', player: player });
 }
 
 export function removePlayer(player) {
@@ -85,7 +86,6 @@ export function logOutPlayer(player) {
         if (player.error) {
           console.log(player.error);
         } else {
-          debugger
           dispatch({ type: 'LOGOUT_PLAYER', player: player.player });
         }
       })
