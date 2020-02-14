@@ -19,8 +19,7 @@ class PlayersController < ApplicationController
   end
   
   def index
-    players = Player.all
-    logged_in_players = players.where(logged_in: true)
+    logged_in_players = Player.all.where(logged_in: true)
     render_player(logged_in_players)
   end
   
@@ -54,5 +53,12 @@ class PlayersController < ApplicationController
     player.update(logged_in: false)
     broadcast_player(player)
     session.clear
+  end
+
+  def scoreboard
+    players = Player.all
+    players_by_wins = players.sort_by { |player| player.wins }
+    player_by_wins_desc = players_by_wins.reverse
+    render_player(player_by_wins_desc)
   end
 end

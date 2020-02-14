@@ -92,6 +92,20 @@ li.player p {
   font-weight: bold;
 }
 
+li.player-scoreboard p {
+  display: inline;
+  margin: 0 5px 0 5px;
+}
+
+li.player-scoreboard p.player-scoreboard-name {
+  margin: 0 5px 0 0;
+  font-weight: bold;
+}
+
+li.player-scoreboard {
+  margin-bottom: 10px;
+}
+
 button.challenge {
   margin-left: 10px;
   font-size: 1em;

@@ -37,7 +37,6 @@ class Players extends React.Component {
     if (this.props.players.length > 0) {
       return (
         <>
-          <h2 className="lobby">lobby</h2>
           <ul className="player-list">
             {this.props.players.map(player => <Player key={player.id} player={player} />)}
           </ul>
