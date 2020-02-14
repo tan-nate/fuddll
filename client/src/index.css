@@ -87,6 +87,11 @@ li.player {
   margin-bottom: 10px;
 }
 
+li.player p {
+  display: inline;
+  font-weight: bold;
+}
+
 button.challenge {
   margin-left: 10px;
   font-size: 1em;

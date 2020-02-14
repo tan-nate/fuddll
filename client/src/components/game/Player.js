@@ -4,7 +4,7 @@ class Player extends React.Component {
   render() {
     return (
         <li className="player">
-          {this.props.player.name}
+          <p>{this.props.player.name}</p>
           <button className="challenge">challenge</button>
         </li>
     );
