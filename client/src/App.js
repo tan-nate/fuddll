@@ -1,7 +1,6 @@
 import React from 'react';
-import Game from './components/game/Game';
+import NavBar from './components/game/NavBar';
 import Auth from './components/game/Auth';
-import Players from './components/game/Players';
 
 import { connect } from 'react-redux';
 import { getCurrentPlayer } from './actions/playerActions';
@@ -15,9 +14,7 @@ class App extends React.Component {
     if (this.props.players.currentPlayer) {
       return (
         <>
-          <Auth />
-          <Players />
-          <Game />
+          <NavBar />
         </>
       );
     } else return (
