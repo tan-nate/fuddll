@@ -13,14 +13,10 @@ function NavBar() {
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">lobby</Link>
-          </li>
-          <li>
-            <Link to="/scoreboard">scoreboard</Link>
-          </li>
-        </ul>
+        <h2>fuddll</h2>
+        <Link to="/">lobby</Link>
+        <Link to="/scoreboard">scoreboard</Link>
+        <Auth />
         <hr />
         <Switch>
           <Route exact path="/">
@@ -30,7 +26,6 @@ function NavBar() {
             <Scoreboard />
           </Route>
         </Switch>
-        <Auth />
       </div>
     </Router>
   );

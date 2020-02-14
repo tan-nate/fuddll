@@ -6,13 +6,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
+h2 {
   color: blue;
 }
 
 input {
+  font-size: 0.8em;
+  margin-bottom: 5px;
+}
+
+input.submit {
   font-size: 1em;
-  margin-top: 2px;
+  margin-top: 5px;
+  padding: 1px;
+}
+
+a, a:visited {
+  margin-right: 10px;
+  color: black;
 }
 
 p {

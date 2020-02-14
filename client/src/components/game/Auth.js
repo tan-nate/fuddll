@@ -32,11 +32,11 @@ class Auth extends React.Component {
       return <button className="logout" onClick={this.logOut}>log out</button>;
     } else return (
       <>
-        <h1>fuddll</h1>
+        <h2>fuddll</h2>
         <form onSubmit={event => this.handleSubmit(event)}>
           <input type="text" name="name" value={this.state.name} placeholder="username:" onChange={event => this.handleChange(event)} /><br />
           <input type="password" name="password" value={this.state.password} placeholder="password:" onChange={event => this.handleChange(event)} /><br />
-          <input type="submit" value="submit" />
+          <input type="submit" value="submit" class="submit" />
         </form>
       </>
     );
