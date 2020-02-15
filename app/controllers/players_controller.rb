@@ -35,8 +35,12 @@ class PlayersController < ApplicationController
       end
     else
       player = Player.create(name: shortened_name, password: params[:password])
-      login_player(player)
-      broadcast_player(player)
+      if player.errors
+        render json: player.errors.messages
+      else
+        login_player(player)
+        broadcast_player(player)
+      end
     end
   end
 

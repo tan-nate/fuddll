@@ -30,4 +30,17 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      player:
+        name: "name"
+        password: "password"
+    errors:
+      models:
+        player:
+          attributes:
+            name:
+              blank: "can't be blank"
+              invalid: "can't have spaces"
+            password:
+              blank: "is required"

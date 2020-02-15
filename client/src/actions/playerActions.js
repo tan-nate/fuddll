@@ -39,7 +39,7 @@ export function createPlayer(player) {
           function clearError() {
             p.parentNode.removeChild(p);
           }
-          setTimeout(clearError, 2000);
+          setTimeout(clearError, 3000);
         } else {
           window.location.reload();
           return false;

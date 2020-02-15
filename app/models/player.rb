@@ -11,4 +11,7 @@ class Player < ApplicationRecord
   def is_offline
     self.update_attributes(logged_in: false)
   end
+
+  validates :name, presence: true
+  validates :name, format: { without: /\s/ }
 end
