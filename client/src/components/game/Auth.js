@@ -45,6 +45,7 @@ class Auth extends React.Component {
           <input type="password" name="password" value={this.state.password} placeholder="password:" onChange={event => this.handleChange(event)} /><br />
           <input type="submit" value="submit" className="submit" />
         </form>
+        <div id="login-errors-div" />
       </>
     );
   }

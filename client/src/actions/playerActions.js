@@ -31,15 +31,22 @@ export function createPlayer(player) {
         }
       })
       .then(player => {
-        if (player.error) {
-          const p = document.createElement("p");
-          p.id = "login-error";
-          p.innerHTML = player.error;
-          document.getElementById('root').appendChild(p);
-          function clearError() {
-            p.parentNode.removeChild(p);
+        if (player.errors) {
+          Object.keys(player.errors).forEach(error => {
+            const fullError = error + ' ' + player.errors[error][0];
+            const div = document.getElementById('login-errors-div');
+            const p = document.createElement('p');
+            p.className = 'login-error';
+            p.innerHTML = fullError;
+            div.appendChild(p);
+          })
+
+          function clearErrors() {
+            const errors = document.getElementsByClassName('login-error');
+            errors[0].parentNode.innerHTML = ''
           }
-          setTimeout(clearError, 3000);
+
+          setTimeout(clearErrors, 4000);
         } else {
           window.location.reload();
           return false;

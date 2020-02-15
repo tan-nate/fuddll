@@ -51,7 +51,7 @@ input.submit {
   border-width: 0.5px;
 }
 
-p#login-error {
+p.login-error {
   color: red;
   font-size: 0.9em;
 }

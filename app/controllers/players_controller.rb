@@ -31,12 +31,13 @@ class PlayersController < ApplicationController
         login_player(player)
         broadcast_player(player)
       else
-        render json: {error: "wrong password or player taken"}, status: 422
+        error = {wrong: ["password or player taken"]}
+        render json: {errors: error}, status: 422
       end
     else
       player = Player.create(name: shortened_name, password: params[:password])
       if player.errors
-        render json: player.errors.messages
+        render json: {errors: player.errors.messages}, status: 422
       else
         login_player(player)
         broadcast_player(player)
