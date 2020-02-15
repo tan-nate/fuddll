@@ -113,8 +113,6 @@ div.challenge-alert {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 170px;
-  height: 70px;
   border: 2px solid black;
   padding: 20px;
   text-align: center;
