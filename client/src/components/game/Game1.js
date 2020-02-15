@@ -36,9 +36,9 @@ class Game1 extends React.Component {
   render() {
     if (this.state.challengerId) {
       return (
-        <div className='challenge-alert'>
+        <div className="challenge-alert">
           <p>{this.findChallenger().name} wants to play</p>
-          <button>
+          <button className="accept">
             fuddll
           </button>
           <button>

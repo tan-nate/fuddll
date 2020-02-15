@@ -107,6 +107,34 @@ li.player p {
   font-weight: bold;
 }
 
+div.challenge-alert {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 170px;
+  height: 70px;
+  border: 2px solid black;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+div.challenge-alert p {
+  font-size: 1.2em;
+  margin-top: 0;
+}
+
+div.challenge-alert button {
+  margin: 10px 5px 0 5px;
+  font-size: 1em;
+}
+
+div.challenge-alert button.accept {
+  background-color: aqua;
+}
+
 li.player-scoreboard p {
   display: inline;
   margin: 0 5px 0 5px;
