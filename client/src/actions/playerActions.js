@@ -36,6 +36,10 @@ export function createPlayer(player) {
           p.id = "login-error";
           p.innerHTML = player.error;
           document.getElementById('root').appendChild(p);
+          function clearError() {
+            p.parentNode.removeChild(p);
+          }
+          setTimeout(clearError, 2000);
         } else {
           window.location.reload();
           return false;

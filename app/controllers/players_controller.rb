@@ -24,16 +24,17 @@ class PlayersController < ApplicationController
   end
   
   def create
-    player = Player.find_by(name: params[:name])
+    shortened_name = params[:name].slice(0, 10)
+    player = Player.find_by(name: shortened_name)
     if player
       if player.authenticate(params[:password])
         login_player(player)
         broadcast_player(player)
       else
-        render json: {error: "check password or create new player"}, status: 422
+        render json: {error: "wrong password or player taken"}, status: 422
       end
     else
-      player = Player.create(name: params[:name], password: params[:password])
+      player = Player.create(name: shortened_name, password: params[:password])
       login_player(player)
       broadcast_player(player)
     end
