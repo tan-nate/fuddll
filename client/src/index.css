@@ -155,6 +155,13 @@ button.challenge {
   background-color: aqua;
 }
 
+button.waiting {
+  margin-left: 10px;
+  font-size: 1em;
+  border: 0.5px solid black;
+  border-radius: 10px;
+}
+
 .board-container {
   width: 100%;
   float: left;

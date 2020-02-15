@@ -1,6 +1,13 @@
 import React from 'react';
 
 class Player extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      waiting: false,
+    };
+  }
+  
   sendChallenge = ({ playerId }) => {
     const headers = {
       method: "POST",
@@ -14,7 +21,9 @@ class Player extends React.Component {
   
     fetch('/challenge', headers)
       .then(response => response.json())
-      .then(console.log);
+      .then(this.setState({
+        waiting: true,
+      }));
   }
   
   handleClick = () => {
@@ -22,12 +31,21 @@ class Player extends React.Component {
   }
   
   render() {
-    return (
+    if (this.state.waiting) {
+      return (
+        <li className="player">
+          <p>{this.props.player.name}</p>
+          <button disabled className="waiting">waiting</button>
+        </li>
+      );
+    } else {
+      return (
         <li className="player">
           <p>{this.props.player.name}</p>
           <button onClick={this.handleClick} className="challenge">play</button>
         </li>
-    );
+      );
+    }
   }
 }
 
