@@ -10,52 +10,6 @@ export function fetchPlayers(currentPlayer) {
   };
 };
 
-export function createPlayer(player) {
-  const headers = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify(player),
-  };
-  
-  return () => {
-    fetch('/players', headers)
-      .then(response => {
-        if (response.status === 204) {
-          throw new Error("no content");
-        } else {
-          return response.json();
-        }
-      })
-      .then(player => {
-        if (player.errors) {
-          Object.keys(player.errors).forEach(error => {
-            const fullError = error + ' ' + player.errors[error][0];
-            const div = document.getElementById('login-errors-div');
-            const p = document.createElement('p');
-            p.className = 'login-error';
-            p.innerHTML = fullError;
-            div.appendChild(p);
-          })
-
-          function clearErrors() {
-            const errors = document.getElementsByClassName('login-error');
-            errors[0].parentNode.innerHTML = ''
-          }
-
-          setTimeout(clearErrors, 4000);
-        } else {
-          window.location.reload();
-          return false;
-        }
-      })
-      .catch(console.log);
-  }
-};
-
 export function getCurrentPlayer() {
   const headers = {
     credentials: "include",

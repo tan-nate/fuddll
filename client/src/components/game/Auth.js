@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createPlayer, logOutPlayer } from '../../actions/playerActions';
+import { logOutPlayer } from '../../actions/playerActions';
 
 class Auth extends React.Component {
   constructor(props) {
@@ -8,18 +8,52 @@ class Auth extends React.Component {
     this.state = {
       name: "",
       password: "",
+      errors: [],
     }
   }
+
+  createPlayer = player => {
+    const headers = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(player),
+    };
+    
+    fetch('/players', headers)
+      .then(response => response.json())
+      .then(player => {
+        if (player.errors) {
+          const errors = Object.keys(player.errors).map(error => {
+            return error + ' ' + player.errors[error][0];
+          })
+          this.setState({
+            errors: errors,
+          })
+        } else {
+          window.location.reload();
+          return false;
+        }
+      });
+  };
 
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value,
+      errors: [],
     })
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createPlayer(this.state);
+    this.createPlayer({ name: this.state.name, password: this.state.password });
+  }
+
+  renderErrors = () => {
+    return this.state.errors.map(error => <p key={error.index} className="login-error">{error}</p>);
   }
 
   logOut = event => {
@@ -41,11 +75,13 @@ class Auth extends React.Component {
       <>
         <h1>fuddll</h1>
         <form onSubmit={event => this.handleSubmit(event)}>
-          <input type="text" name="name" value={this.state.name} placeholder="username:" onChange={event => this.handleChange(event)} /><br />
+          <input type="text" name="name" value={this.state.name} placeholder="name:" onChange={event => this.handleChange(event)} /><br />
           <input type="password" name="password" value={this.state.password} placeholder="password:" onChange={event => this.handleChange(event)} /><br />
           <input type="submit" value="submit" className="submit" />
         </form>
-        <div id="login-errors-div" />
+        <div id="login-errors">
+          {this.renderErrors()}
+        </div>
       </>
     );
   }
@@ -57,7 +93,6 @@ const mapStateToProps = ({ players }) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    createPlayer: player => dispatch(createPlayer(player)),
     logOutPlayer: player => dispatch(logOutPlayer(player)),
   };
 };
