@@ -1,3 +1,13 @@
+@media only screen and (max-width: 600px) {
+  div.user-info {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 0.9em;
+    background-color: white;
+  }
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
