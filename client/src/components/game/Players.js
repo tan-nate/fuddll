@@ -22,6 +22,12 @@ class Players extends React.Component {
     cable.subscriptions.create("PlayersChannel", {
       received: response => {this.handleReceived(response)},
     });
+    cable.subscriptions.create({
+      channel: 'ChallengesChannel',
+      player: this.props.currentPlayer.id,
+    }, {
+      received: response => {this.handleChallenge(response)},
+    })
   }
   
   handleReceived = response => {
@@ -31,6 +37,10 @@ class Players extends React.Component {
     } else {
       this.props.addPlayer(player);
     }
+  }
+
+  handleChallenge = response => {
+    console.log(JSON.parse(response));
   }
 
   handleChange = event => {

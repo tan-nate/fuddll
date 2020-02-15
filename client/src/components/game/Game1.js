@@ -33,6 +33,22 @@ class Game1 extends React.Component {
     return this.props.players.find(player => player.id === this.state.challengerId);
   }
 
+  handleDecline = () => {
+    const headers = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ challenger_id: this.state.challengerId }),
+    };
+
+    fetch('/decline_request', headers)
+      .then(response => response.json())
+      .then(console.log);
+  }
+
   render() {
     if (this.state.challengerId) {
       return (
@@ -41,7 +57,7 @@ class Game1 extends React.Component {
           <button className="accept">
             fuddll
           </button>
-          <button>
+          <button onClick={this.handleDecline}>
             no thanks
           </button>
         </div>

@@ -73,4 +73,9 @@ class PlayersController < ApplicationController
     RequestsChannel.broadcast_to player, {challenger_id: current_player.id}.to_json
     render json: {message: "challenge sent"}
   end
+
+  def decline_request
+    challenger = Player.find(params[:challenger_id])
+    ChallengesChannel.broadcast_to challenger, {response: 'decline'}.to_json
+  end
 end
