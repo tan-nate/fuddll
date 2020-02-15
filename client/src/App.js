@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './components/game/NavBar';
+import Game1 from './components/game/Game1';
 import Auth from './components/game/Auth';
 
 import { connect } from 'react-redux';
@@ -12,16 +12,10 @@ class App extends React.Component {
   
   render() {
     if (this.props.players.currentPlayer) {
-      return (
-        <>
-          <NavBar />
-        </>
-      );
-    } else return (
-      <>
-        <Auth />
-      </>
-    );
+      return <Game1 />;
+    } else {
+      return <Auth />;
+    }
   }
 }
 
