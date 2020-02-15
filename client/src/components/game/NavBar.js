@@ -17,10 +17,15 @@ class NavBar extends React.Component {
   componentDidMount() {
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
     cable.subscriptions.create({
-      channel: 'RequestsChannel',
-      received: (response) => {this.handleReceived(response)},
+      channel: 'RequestsChannel', 
       player: this.props.currentPlayer.id,
+    }, {
+      received: response => {this.handleReceived(response)},
     });
+  }
+
+  handleReceived = (response) => {
+    console.log(response);
   }
   
   render() {

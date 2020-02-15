@@ -20,7 +20,7 @@ class Players extends React.Component {
     // change to 'ws://localhost:3000/cable' in development
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
     cable.subscriptions.create("PlayersChannel", {
-      received: (response) => {this.handleReceived(response)},
+      received: response => {this.handleReceived(response)},
     });
   }
   

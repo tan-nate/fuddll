@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :games
   get '/get_current_player', to: 'players#get_current_player'
   get '/scoreboard', to: 'players#scoreboard'
+  post '/challenge', to: 'players#challenge'
   mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

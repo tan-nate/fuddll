@@ -62,4 +62,10 @@ class PlayersController < ApplicationController
     player_by_wins_desc = players_by_wins.reverse
     render_player(player_by_wins_desc)
   end
+
+  def challenge
+    player = Player.find(params[:player_id])
+    RequestsChannel.broadcast_to player, {challenger_id: current_player.id}.to_json
+    render json: {message: "challenge sent"}
+  end
 end
