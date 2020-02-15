@@ -32,7 +32,10 @@ export function createPlayer(player) {
       })
       .then(player => {
         if (player.error) {
-          console.log(player.error);
+          const p = document.createElement("p");
+          p.id = "login-error";
+          p.innerHTML = player.error;
+          document.getElementById('root').appendChild(p);
         } else {
           window.location.reload();
           return false;

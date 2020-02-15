@@ -51,6 +51,11 @@ input.submit {
   border-width: 0.5px;
 }
 
+p#login-error {
+  color: red;
+  font-size: 0.9em;
+}
+
 a, a:visited {
   margin-right: 10px;
   color: black;

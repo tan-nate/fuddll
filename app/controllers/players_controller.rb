@@ -30,7 +30,7 @@ class PlayersController < ApplicationController
         login_player(player)
         broadcast_player(player)
       else
-        render json: {error: "incorrect password. check password or create new user"}, status: 422
+        render json: {error: "check password or create new player"}, status: 422
       end
     else
       player = Player.create(name: params[:name], password: params[:password])
