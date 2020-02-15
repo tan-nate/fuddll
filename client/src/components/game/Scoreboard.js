@@ -28,7 +28,7 @@ class Scoreboard extends React.Component {
 
   renderPlayers = () => {
     return this.state.players.map(player => 
-      <li className="player-scoreboard">
+      <li key={player.id} className="player-scoreboard">
         <p className="player-scoreboard-name">{player.name}</p>
         <p>{player.wins} W</p>
         <p>{player.losses} L</p>
