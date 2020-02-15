@@ -10,7 +10,7 @@ class Players extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: [],
+      filter: '',
     };
   }
   
@@ -33,12 +33,35 @@ class Players extends React.Component {
     }
   }
 
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  filteredPlayers = () => {
+    return this.props.players.filter(player => {
+      const regex = new RegExp(`^${this.state.filter}`);
+      return regex.test(player.name);
+    })
+  }
+
   renderPlayers = () => {
-    if (this.props.players.length > 0) {
+    if (this.props.players.length > 0 && this.state.filter === '') {
       return (
         <>
+          <input type="text" name="filter" value={this.state.filter} placeholder="filter:" onChange={event => this.handleChange(event)} />
           <ul className="player-list">
             {this.props.players.map(player => <Player key={player.id} player={player} />)}
+          </ul>
+        </>
+      );
+    } else if (this.state.filter !== '') {
+      return (
+        <>
+          <input type="text" name="filter" value={this.state.filter} placeholder="filter:" onChange={event => this.handleChange(event)} />
+          <ul className="player-list">
+            {this.filteredPlayers().map(player => <Player key={player.id} player={player} />)}
           </ul>
         </>
       );
@@ -51,9 +74,9 @@ class Players extends React.Component {
 
   render() {
     return (
-      <div className="players-list">
+      <>
         {this.renderPlayers()}
-      </div>
+      </>
     );
   }
 }
