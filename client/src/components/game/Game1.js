@@ -8,7 +8,7 @@ class Game1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      challengerId: null,
+      challengerIds: [],
     };
   }
   
@@ -25,12 +25,14 @@ class Game1 extends React.Component {
   handleReceived = (response) => {
     const json = JSON.parse(response);
     this.setState({
-      challengerId: json.challenger_id,
+      challengerIds: [...this.state.challengerIds, json.challenger_id]
     });
   }
 
-  findChallenger = () => {
-    return this.props.players.find(player => player.id === this.state.challengerId);
+  findChallengers = () => {
+    return this.state.challengerIds.map(challengerId => {
+      return this.props.players.find(player => player.id === challengerId);
+    })
   }
 
   handleDecline = () => {
@@ -46,15 +48,15 @@ class Game1 extends React.Component {
 
     fetch('/decline_request', headers)
       .then(this.setState({
-        challengerId: null,
+        challengerIds: this.state.challengerIds.slice(0, -1),
       }))
   }
 
   render() {
-    if (this.state.challengerId) {
+    if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">
-          <p>{this.findChallenger().name} wants to play</p>
+          <p>{this.findChallengers()[0].name} wants to play</p>
           <button className="accept">
             fuddll
           </button>
