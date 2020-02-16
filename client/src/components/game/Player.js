@@ -1,4 +1,5 @@
 import React from 'react';
+import ActionCable from 'actioncable';
 
 class Player extends React.Component {
   constructor(props) {
@@ -6,6 +7,16 @@ class Player extends React.Component {
     this.state = {
       waiting: false,
     };
+  }
+
+  componentDidMount() {
+    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    cable.subscriptions.create({
+      channel: 'ChallengesChannel',
+      player: this.props.currentPlayer.id,
+    }, {
+      received: response => {this.handleChallenge(response)},
+    })
   }
   
   sendChallenge = ({ playerId }) => {
@@ -24,6 +35,15 @@ class Player extends React.Component {
       .then(this.setState({
         waiting: true,
       }));
+  }
+
+  handleChallenge = response => {
+    const json = JSON.parse(response);
+    if (json.decline) {
+      this.setState({
+        waiting: false,
+      });
+    }
   }
   
   handleClick = () => {

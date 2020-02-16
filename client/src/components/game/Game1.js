@@ -45,8 +45,9 @@ class Game1 extends React.Component {
     };
 
     fetch('/decline_request', headers)
-      .then(response => response.json())
-      .then(console.log);
+      .then(this.setState({
+        challengerId: null,
+      }))
   }
 
   render() {

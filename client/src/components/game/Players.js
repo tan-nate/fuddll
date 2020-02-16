@@ -22,12 +22,6 @@ class Players extends React.Component {
     cable.subscriptions.create("PlayersChannel", {
       received: response => {this.handleReceived(response)},
     });
-    cable.subscriptions.create({
-      channel: 'ChallengesChannel',
-      player: this.props.currentPlayer.id,
-    }, {
-      received: response => {this.handleChallenge(response)},
-    })
   }
   
   handleReceived = response => {
@@ -37,10 +31,6 @@ class Players extends React.Component {
     } else {
       this.props.addPlayer(player);
     }
-  }
-
-  handleChallenge = response => {
-    console.log(JSON.parse(response));
   }
 
   handleChange = event => {
@@ -62,7 +52,7 @@ class Players extends React.Component {
         <>
           <input type="text" name="filter" value={this.state.filter} placeholder="filter:" onChange={event => this.handleChange(event)} />
           <ul className="player-list">
-            {this.props.players.map(player => <Player key={player.id} player={player} />)}
+            {this.props.players.map(player => <Player currentPlayer={this.props.currentPlayer} key={player.id} player={player} />)}
           </ul>
         </>
       );
