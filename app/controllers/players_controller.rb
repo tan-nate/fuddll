@@ -74,6 +74,12 @@ class PlayersController < ApplicationController
     render json: {message: "challenge sent"}
   end
 
+  def accept_request
+    challenger = Player.find(params[:challenger_id])
+    ChallengesChannel.broadcast_to challenger, {accept: true}.to_json
+    render json: PlayerSerializer.new(challenger).to_serialized_json
+  end
+
   def decline_request
     challenger = Player.find(params[:challenger_id])
     ChallengesChannel.broadcast_to challenger, {decline: true}.to_json

@@ -1,6 +1,8 @@
 import React from 'react';
 import ActionCable from 'actioncable';
+
 import { connect } from 'react-redux';
+import { storeOpponent } from '../../actions/playerActions';
 
 import NavBar from './NavBar';
 
@@ -35,6 +37,26 @@ class Game1 extends React.Component {
     })
   }
 
+  handleAccept = () => {
+    const headers = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ challenger_id: this.state.challengerIds[0] }),
+    };
+
+    fetch('/accept_request', headers)
+      .then(response => response.json())
+      .then(player => this.props.storeOpponent(player));
+
+    this.setState({
+      challengerIds: this.state.challengerIds.slice(1),
+    });
+  }
+
   handleDecline = () => {
     const headers = {
       method: "POST",
@@ -57,7 +79,7 @@ class Game1 extends React.Component {
       return (
         <div className="challenge-alert">
           <p>{this.findChallengers()[0].name} wants to play</p>
-          <button className="accept">
+          <button className="accept" onClick={this.handleAccept}>
             fuddll
           </button>
           <button onClick={this.handleDecline}>
@@ -74,6 +96,12 @@ class Game1 extends React.Component {
 const mapStateToProps = ({ players }) => ({
   currentPlayer: players.currentPlayer,
   players: players.players,
-})
+});
 
-export default connect(mapStateToProps)(Game1)
+const mapDispatchToProps = dispatch => {
+  return {
+    storeOpponent: opponent => dispatch(storeOpponent(opponent)),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game1)

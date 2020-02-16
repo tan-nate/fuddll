@@ -3,6 +3,7 @@ import { uniqueObjectIds } from '../methods';
 const playersReducer = (state = {
   players: [],
   currentPlayer: null,
+  opponent: null,
 }, action) => {
   switch(action.type) {
     case 'ADD_PLAYERS':
@@ -21,6 +22,8 @@ const playersReducer = (state = {
       return { ...state, players: [] }
     case 'LOGOUT_PLAYER':
       return { ...state, currentPlayer: null }
+    case 'STORE_OPPONENT':
+      return { ...state, opponent: action.opponent }
     default:
       return state;
   }

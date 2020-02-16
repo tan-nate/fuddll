@@ -61,3 +61,7 @@ export function logOutPlayer(player) {
       .catch(console.log);
   }
 }
+
+export function storeOpponent(opponent) {
+  return dispatch => dispatch({ type: 'STORE_OPPONENT' , opponent: opponent });
+}

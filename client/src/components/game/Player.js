@@ -1,6 +1,9 @@
 import React from 'react';
 import ActionCable from 'actioncable';
 
+import { connect } from 'react-redux';
+import { storeOpponent } from '../../actions/playerActions';
+
 class Player extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +46,8 @@ class Player extends React.Component {
       this.setState({
         waiting: false,
       });
+    } else if (json.accept) {
+      this.props.storeOpponent(this.props.player);
     }
   }
   
@@ -69,4 +74,10 @@ class Player extends React.Component {
   }
 }
 
-export default Player;
+const mapDispatchToProps = dispatch => {
+  return {
+    storeOpponent: opponent => dispatch(storeOpponent(opponent)),
+  }
+};
+
+export default connect(null, mapDispatchToProps)(Player);
