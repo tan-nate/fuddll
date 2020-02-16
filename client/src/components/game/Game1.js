@@ -24,6 +24,14 @@ class Game1 extends React.Component {
     });
   }
 
+  componentDidUpdate() {
+    if (this.props.opponent) {
+      this.state.challengerIds.forEach(() => {
+        this.handleDecline();
+      })
+    }
+  }
+
   handleReceived = (response) => {
     const json = JSON.parse(response);
     this.setState({
@@ -75,7 +83,9 @@ class Game1 extends React.Component {
   }
 
   render() {
-    if (this.state.challengerIds.length > 0) {
+    if (this.props.opponent) {
+      return <h1>in game</h1>;
+    } else if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">
           <p>{this.findChallengers()[0].name} wants to play</p>
@@ -96,6 +106,7 @@ class Game1 extends React.Component {
 const mapStateToProps = ({ players }) => ({
   currentPlayer: players.currentPlayer,
   players: players.players,
+  opponent: players.opponent,
 });
 
 const mapDispatchToProps = dispatch => {
