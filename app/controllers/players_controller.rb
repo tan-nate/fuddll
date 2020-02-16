@@ -36,7 +36,7 @@ class PlayersController < ApplicationController
       end
     else
       player = Player.create(name: shortened_name, password: params[:password])
-      if player.errors
+      if player.errors.messages.keys.length > 0
         render json: {errors: player.errors.messages}, status: 422
       else
         login_player(player)
