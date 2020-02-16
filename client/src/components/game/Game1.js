@@ -43,12 +43,12 @@ class Game1 extends React.Component {
         "Accept": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ challenger_id: this.state.challengerId }),
+      body: JSON.stringify({ challenger_id: this.state.challengerIds[0] }),
     };
 
     fetch('/decline_request', headers)
       .then(this.setState({
-        challengerIds: this.state.challengerIds.slice(0, -1),
+        challengerIds: this.state.challengerIds.slice(1),
       }))
   }
 
