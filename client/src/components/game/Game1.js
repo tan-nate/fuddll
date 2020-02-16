@@ -46,7 +46,7 @@ class Game1 extends React.Component {
   }
 
   handleAccept = () => {
-    const headers = {
+    const acceptRequestHeaders = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,9 +56,23 @@ class Game1 extends React.Component {
       body: JSON.stringify({ challenger_id: this.state.challengerIds[0] }),
     };
 
-    fetch('/accept_request', headers)
+    fetch('/accept_request', acceptRequestHeaders)
       .then(response => response.json())
       .then(player => this.props.storeOpponent(player));
+
+    const broadcastInGameHeaders = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ player_id: this.props.currentPlayer.id }),
+    };
+
+    fetch('/broadcast_in_game', broadcastInGameHeaders)
+      .then(response => response.json())
+      .then(console.log);
 
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),

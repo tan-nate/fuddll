@@ -9,6 +9,7 @@ class Player extends React.Component {
     super(props);
     this.state = {
       waiting: false,
+      inGame: false,
     };
   }
 
@@ -19,7 +20,10 @@ class Player extends React.Component {
       player: this.props.currentPlayer.id,
     }, {
       received: response => {this.handleChallenge(response)},
-    })
+    });
+    cable.subscriptions.create("PlayersChannel", {
+      received: response => {this.handleInGame(response)},
+    });
   }
   
   sendChallenge = ({ playerId }) => {
@@ -48,6 +52,29 @@ class Player extends React.Component {
       });
     } else if (json.accept) {
       this.props.storeOpponent(this.props.player);
+      
+      const broadcastInGameHeaders = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ player_id: this.props.player.id }),
+      };
+  
+      fetch('/broadcast_in_game', broadcastInGameHeaders)
+        .then(response => response.json())
+        .then(console.log);
+    }
+  }
+
+  handleInGame = response => {
+    const json = JSON.parse(response);
+    if (json.in_game === this.props.player.id) {
+      this.setState({
+        inGame: true,
+      });
     }
   }
   
@@ -61,6 +88,13 @@ class Player extends React.Component {
         <li className="player">
           <p>{this.props.player.name}</p>
           <button disabled className="waiting">waiting</button>
+        </li>
+      );
+    } else if (this.state.inGame) {
+      return (
+        <li className="player">
+          <p>{this.props.player.name}</p>
+          <button disabled className="waiting">in game</button>
         </li>
       );
     } else {

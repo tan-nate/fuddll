@@ -84,4 +84,10 @@ class PlayersController < ApplicationController
     challenger = Player.find(params[:challenger_id])
     ChallengesChannel.broadcast_to challenger, {decline: true}.to_json
   end
+
+  def broadcast_in_game
+    serialized_data = {in_game: params[:player_id]}.to_json
+    ActionCable.server.broadcast "players_channel", serialized_data
+    render json: {success: true}
+  end
 end
