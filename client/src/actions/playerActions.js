@@ -80,6 +80,10 @@ export function acceptRequest(challengerId) {
   }
 }
 
+export function storeOpponent(opponent) {
+  return dispatch => dispatch({ type: 'STORE_OPPONENT' , opponent: opponent });
+}
+
 export function broadcastInGame(playerId) {
   const headers = {
     method: "POST",
