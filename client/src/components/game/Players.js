@@ -28,7 +28,7 @@ class Players extends React.Component {
     const player = JSON.parse(response);
     if (!player.logged_in) {
       this.props.removePlayer(player);
-    } else {
+    } else if (player.id !== this.props.currentPlayer.id) {
       this.props.addPlayer(player);
     }
   }
