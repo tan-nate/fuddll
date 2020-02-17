@@ -86,6 +86,8 @@ class PlayersController < ApplicationController
   end
 
   def broadcast_in_game
+    player = Player.find(params[:player_id])
+    player.update(in_game: true)
     serialized_data = {in_game: params[:player_id]}.to_json
     ActionCable.server.broadcast "players_channel", serialized_data
     render json: {success: true}

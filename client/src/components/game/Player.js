@@ -9,7 +9,7 @@ class Player extends React.Component {
     super(props);
     this.state = {
       waiting: false,
-      inGame: false,
+      inGame: this.props.player.in_game,
     };
   }
 
