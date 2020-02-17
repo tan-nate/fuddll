@@ -6,7 +6,7 @@ import { broadcastInGame, acceptRequest, declineRequest } from '../../actions/pl
 
 import NavBar from './NavBar';
 
-class Game1 extends React.Component {
+class GameContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -93,4 +93,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game1)
+export default connect(mapStateToProps, mapDispatchToProps)(GameContainer)

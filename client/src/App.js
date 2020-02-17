@@ -1,5 +1,5 @@
 import React from 'react';
-import Game1 from './components/game/Game1';
+import GameContainer from './components/game/GameContainer';
 import Auth from './components/game/Auth';
 
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ class App extends React.Component {
   
   render() {
     if (this.props.players.currentPlayer) {
-      return <Game1 />;
+      return <GameContainer />;
     } else {
       return <Auth />;
     }
