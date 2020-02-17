@@ -30,3 +30,19 @@ export function fetchLines() {
       .then(lines => dispatch({ type: 'ADD_LINES', lines: lines }));
   };
 };
+
+export function createBoard(playerId) {
+  const headers = {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }, 
+    credentials: "include",
+    body: JSON.stringify({ player_id: playerId }),
+  }
+
+  fetch('/boards', headers)
+    .then(response => response.json())
+    .then(board => dispatch({ type: 'ADD_BOARD', board: board }))
+}

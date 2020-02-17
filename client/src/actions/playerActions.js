@@ -62,8 +62,22 @@ export function logOutPlayer(player) {
   }
 }
 
-export function storeOpponent(opponent) {
-  return dispatch => dispatch({ type: 'STORE_OPPONENT' , opponent: opponent });
+export function acceptRequest(challengerId) {
+  const acceptRequestHeaders = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ challenger_id: challengerId }),
+  };
+
+  return dispatch => {
+    fetch('/accept_request', acceptRequestHeaders)
+      .then(response => response.json())
+      .then(opponent => dispatch({ type: 'STORE_OPPONENT', opponent: opponent }));
+  }
 }
 
 export function broadcastInGame(playerId) {

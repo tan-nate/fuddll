@@ -2,7 +2,7 @@ import React from 'react';
 import ActionCable from 'actioncable';
 
 import { connect } from 'react-redux';
-import { storeOpponent, broadcastInGame } from '../../actions/playerActions';
+import { broadcastInGame, acceptRequest } from '../../actions/playerActions';
 
 import NavBar from './NavBar';
 
@@ -46,22 +46,8 @@ class Game1 extends React.Component {
   }
 
   handleAccept = () => {
-    const acceptRequestHeaders = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ challenger_id: this.state.challengerIds[0] }),
-    };
-
-    fetch('/accept_request', acceptRequestHeaders)
-      .then(response => response.json())
-      .then(player => this.props.storeOpponent(player));
-
+    this.props.acceptRequest(this.state.challengerIds[0]);
     broadcastInGame(this.props.currentPlayer.id);
-
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
     });
@@ -113,7 +99,7 @@ const mapStateToProps = ({ players }) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    storeOpponent: opponent => dispatch(storeOpponent(opponent)),
+    acceptRequest: challengerId => dispatch(acceptRequest(challengerId)),
   }
 };
 
