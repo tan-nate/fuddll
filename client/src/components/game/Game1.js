@@ -2,7 +2,7 @@ import React from 'react';
 import ActionCable from 'actioncable';
 
 import { connect } from 'react-redux';
-import { storeOpponent } from '../../actions/playerActions';
+import { storeOpponent, broadcastInGame } from '../../actions/playerActions';
 
 import NavBar from './NavBar';
 
@@ -60,19 +60,7 @@ class Game1 extends React.Component {
       .then(response => response.json())
       .then(player => this.props.storeOpponent(player));
 
-    const broadcastInGameHeaders = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ player_id: this.props.currentPlayer.id }),
-    };
-
-    fetch('/broadcast_in_game', broadcastInGameHeaders)
-      .then(response => response.json())
-      .then(console.log);
+    broadcastInGame(this.props.currentPlayer.id);
 
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),

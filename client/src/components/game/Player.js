@@ -2,7 +2,7 @@ import React from 'react';
 import ActionCable from 'actioncable';
 
 import { connect } from 'react-redux';
-import { storeOpponent } from '../../actions/playerActions';
+import { storeOpponent, broadcastInGame } from '../../actions/playerActions';
 
 class Player extends React.Component {
   constructor(props) {
@@ -52,20 +52,7 @@ class Player extends React.Component {
       });
     } else if (json.accept) {
       this.props.storeOpponent(this.props.player);
-      
-      const broadcastInGameHeaders = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ player_id: this.props.currentPlayer.id }),
-      };
-  
-      fetch('/broadcast_in_game', broadcastInGameHeaders)
-        .then(response => response.json())
-        .then(console.log);
+      broadcastInGame(this.props.currentPlayer.id);
     }
   }
 

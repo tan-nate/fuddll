@@ -65,3 +65,19 @@ export function logOutPlayer(player) {
 export function storeOpponent(opponent) {
   return dispatch => dispatch({ type: 'STORE_OPPONENT' , opponent: opponent });
 }
+
+export function broadcastInGame(playerId) {
+  const headers = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ player_id: playerId }),
+  };
+
+  fetch('/broadcast_in_game', headers)
+    .then(response => response.json())
+    .then(console.log);
+}
