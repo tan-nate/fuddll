@@ -31,7 +31,7 @@ export function fetchLines() {
   };
 };
 
-export function createGame({ currentPlayerId, opponentId }) {
+export function createGame({ accepterId, challengerId }) {
   const headers = {
     method: 'POST',
     headers: {
@@ -39,7 +39,7 @@ export function createGame({ currentPlayerId, opponentId }) {
       "Accept": "application/json"
     }, 
     credentials: "include",
-    body: JSON.stringify({ currentPlayerId, opponentId }),
+    body: JSON.stringify({ accepter_id: accepterId, challenger_id: challengerId }),
   }
 
   return dispatch => {

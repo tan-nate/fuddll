@@ -48,11 +48,11 @@ class GameContainer extends React.Component {
   }
 
   handleAccept = () => {
-    this.props.acceptRequest(this.state.challengerIds[0]);
     this.props.createGame({
-      currentPlayerId: this.props.currentPlayer.id,
-      opponentId: this.props.opponent.id,
+      accepterId: this.props.currentPlayer.id,
+      challengerId: this.state.challengerIds[0],
     });
+    this.props.acceptRequest(this.state.challengerIds[0]);
     broadcastInGame(this.props.currentPlayer.id);
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
@@ -96,7 +96,7 @@ const mapStateToProps = ({ players }) => ({
 const mapDispatchToProps = dispatch => {
   return {
     acceptRequest: challengerId => dispatch(acceptRequest(challengerId)),
-    createGame: ({ currentPlayerId, opponentId }) => dispatch(createGame({ currentPlayerId, opponentId })),
+    createGame: ({ accepterId, challengerId }) => dispatch(createGame({ accepterId, challengerId })),
   }
 };
 
