@@ -7,11 +7,11 @@ class GamesController < ApplicationController
     accepter_board = game.boards.find_by(player_id: accepter_id)
     challenger_board = game.boards.find_by(player_id: challenger_id)
 
-    data = {
-      accepter_board,
-      challenger_board,
-      game
+    data: {
+      accepter_board: accepter_board,
+      challenger_board: challenger_board,
+      game: game
     }
-    render json: data
+    render json: data.to_json
   end
 end

@@ -3,12 +3,9 @@ class Game < ApplicationRecord
   has_many :players, through: :boards
 
   def self.custom_create(accepter_id:, challenger_id:)
-    accepter_board = Board.custom_create(accepter_id)
-    challenger_board = Board.custom_create(challenger_id)
-
     game = self.create
-    accepter_board.game = game
-    challenger_board.game = game
+    accepter_board = Board.custom_create(player_id: accepter_id, game_id: game.id)
+    challenger_board = Board.custom_create(player_id: challenger_id, game_id: game.id)
     game
   end
 end
