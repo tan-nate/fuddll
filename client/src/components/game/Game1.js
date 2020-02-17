@@ -2,7 +2,7 @@ import React from 'react';
 import ActionCable from 'actioncable';
 
 import { connect } from 'react-redux';
-import { broadcastInGame, acceptRequest } from '../../actions/playerActions';
+import { broadcastInGame, acceptRequest, declineRequest } from '../../actions/playerActions';
 
 import NavBar from './NavBar';
 
@@ -54,20 +54,10 @@ class Game1 extends React.Component {
   }
 
   handleDecline = () => {
-    const headers = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ challenger_id: this.state.challengerIds[0] }),
-    };
-
-    fetch('/decline_request', headers)
-      .then(this.setState({
-        challengerIds: this.state.challengerIds.slice(1),
-      }))
+    declineRequest(this.state.challengerIds[0]);
+    this.setState({
+      challengerIds: this.state.challengerIds.slice(1),
+    });
   }
 
   render() {

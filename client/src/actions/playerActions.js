@@ -84,6 +84,21 @@ export function storeOpponent(opponent) {
   return dispatch => dispatch({ type: 'STORE_OPPONENT' , opponent: opponent });
 }
 
+export function declineRequest(challengerId) {
+  const headers = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ challenger_id: challengerId }),
+  };
+
+  fetch('/decline_request', headers)
+    .then(console.log);
+}
+
 export function broadcastInGame(playerId) {
   const headers = {
     method: "POST",
