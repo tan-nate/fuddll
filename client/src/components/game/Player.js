@@ -60,7 +60,7 @@ class Player extends React.Component {
           "Accept": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ player_id: this.props.player.id }),
+        body: JSON.stringify({ player_id: this.props.currentPlayer.id }),
       };
   
       fetch('/broadcast_in_game', broadcastInGameHeaders)
@@ -108,10 +108,14 @@ class Player extends React.Component {
   }
 }
 
+const mapStateToProps = ({ players }) => ({
+  currentPlayer: players.currentPlayer,
+});
+
 const mapDispatchToProps = dispatch => {
   return {
     storeOpponent: opponent => dispatch(storeOpponent(opponent)),
   }
 };
 
-export default connect(null, mapDispatchToProps)(Player);
+export default connect(mapStateToProps, mapDispatchToProps)(Player);
