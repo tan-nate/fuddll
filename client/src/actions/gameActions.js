@@ -31,7 +31,7 @@ export function fetchLines() {
   };
 };
 
-export function createBoard(playerId) {
+export function createGame({ currentPlayerId, opponentId }) {
   const headers = {
     method: 'POST',
     headers: {
@@ -39,10 +39,12 @@ export function createBoard(playerId) {
       "Accept": "application/json"
     }, 
     credentials: "include",
-    body: JSON.stringify({ player_id: playerId }),
+    body: JSON.stringify({ currentPlayerId, opponentId }),
   }
 
-  fetch('/boards', headers)
-    .then(response => response.json())
-    .then(board => dispatch({ type: 'ADD_BOARD', board: board }))
+  return dispatch => {
+    fetch('/games', headers)
+      .then(response => response.json())
+      .then(console.log)
+  }
 }

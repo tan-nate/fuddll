@@ -3,7 +3,9 @@ import ActionCable from 'actioncable';
 
 import { connect } from 'react-redux';
 import { broadcastInGame, acceptRequest, declineRequest } from '../../actions/playerActions';
+import { createGame } from '../../actions/gameActions';
 
+import Game from './Game';
 import NavBar from './NavBar';
 
 class GameContainer extends React.Component {
@@ -47,6 +49,10 @@ class GameContainer extends React.Component {
 
   handleAccept = () => {
     this.props.acceptRequest(this.state.challengerIds[0]);
+    this.props.createGame({
+      currentPlayerId: this.props.currentPlayer.id,
+      opponentId: this.props.opponent.id,
+    });
     broadcastInGame(this.props.currentPlayer.id);
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
@@ -62,7 +68,7 @@ class GameContainer extends React.Component {
 
   render() {
     if (this.props.opponent) {
-      return <h1>in game</h1>;
+      return <Game currentPlayer={this.props.currentPlayer} opponent={this.props.opponent}></Game>;
     } else if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">
@@ -90,6 +96,7 @@ const mapStateToProps = ({ players }) => ({
 const mapDispatchToProps = dispatch => {
   return {
     acceptRequest: challengerId => dispatch(acceptRequest(challengerId)),
+    createGame: ({ currentPlayerId, opponentId }) => dispatch(createGame({ currentPlayerId, opponentId })),
   }
 };
 
