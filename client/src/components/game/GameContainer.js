@@ -69,8 +69,7 @@ class GameContainer extends React.Component {
     broadcastInGame(this.props.currentPlayer.id);
   }
 
-  handleDecline = event => {
-    event.preventDefault();
+  handleDecline = () => {
     declineRequest(this.state.challengerIds[0]);
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
@@ -87,7 +86,7 @@ class GameContainer extends React.Component {
           <button className="accept" onClick={event => this.handleAccept(event)}>
             fuddll
           </button>
-          <button onClick={event > this.handleDecline(event)}>
+          <button onClick={this.handleDecline}>
             no thanks
           </button>
         </div>
