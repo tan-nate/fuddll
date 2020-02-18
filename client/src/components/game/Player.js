@@ -51,10 +51,11 @@ class Player extends React.Component {
         waiting: false,
       });
     } else {
-      this.props.storeOpponent(this.props.player);
+      debugger
       this.props.addBoard(json.accepter_board);
       this.props.addBoard(json.challenger_board);
       broadcastInGame(this.props.currentPlayer.id);
+      this.props.storeOpponent(this.props.player);
     }
   }
 

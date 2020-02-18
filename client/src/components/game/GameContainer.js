@@ -38,7 +38,7 @@ class GameContainer extends React.Component {
         accepterId: this.props.currentPlayer.id,
         challengerId: this.state.challengerIds[0], 
         gameId: this.props.boards[0].game_id,
-      })
+      });
     }
   }
 
@@ -62,10 +62,6 @@ class GameContainer extends React.Component {
     });
 
     broadcastInGame(this.props.currentPlayer.id);
-
-    this.setState({
-      challengerIds: this.state.challengerIds.slice(1),
-    });
   }
 
   handleDecline = () => {
