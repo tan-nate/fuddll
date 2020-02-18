@@ -76,7 +76,6 @@ class GameContainer extends React.Component {
   }
 
   render() {
-    debugger
     if (this.props.opponent) {
       return <Game currentPlayer={this.props.currentPlayer} opponent={this.props.opponent} boards={this.props.boards}></Game>;
     } else if (this.state.challengerIds.length > 0) {

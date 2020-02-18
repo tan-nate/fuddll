@@ -1,5 +1,7 @@
 class Board < ApplicationRecord
   has_many :points
+  has_many :lines
+  has_many :guesses
   belongs_to :player
   belongs_to :game
 

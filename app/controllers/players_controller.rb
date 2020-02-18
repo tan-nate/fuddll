@@ -76,8 +76,8 @@ class PlayersController < ApplicationController
 
   def accept_request
     game = Game.find(params[:game_id])
-    accepter_board = game.boards.find_by(player_id: accepter_id)
-    challenger_board = game.boards.find_by(player_id: challenger_id)
+    accepter_board = game.boards.find_by(player_id: params[:accepter_id])
+    challenger_board = game.boards.find_by(player_id: params[:challenger_id])
     data = {
       accepter_board: accepter_board,
       challenger_board: challenger_board

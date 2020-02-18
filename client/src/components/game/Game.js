@@ -5,7 +5,6 @@ import Guesses from '../boards/Guesses';
 
 class Game extends React.Component {
   render() {
-    debugger
     return (
       <>
         <Board board={this.props.boards[0]} />

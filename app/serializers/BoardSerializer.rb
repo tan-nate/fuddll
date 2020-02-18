@@ -5,17 +5,7 @@ class BoardSerializer
   def to_serialized_json
     options = {
       except: [:created_at, :updated_at],
-      include: {
-        points: {
-          except: [:created_at, :updated_at]
-        }
-        lines: {
-          except: [:created_at, :updated_at]
-        }
-        guesses: {
-          except: [:created_at, :updated_at]
-        }
-      }
+      include: [:points, :lines, :guesses]
     }
     @board.to_json(options)
   end

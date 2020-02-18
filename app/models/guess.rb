@@ -2,6 +2,8 @@ class Guess < ApplicationRecord
   belongs_to :point1, class_name: 'Point'
   belongs_to :point2, class_name: 'Point'
 
+  belongs_to :board
+
   validate :points_must_be_adjacent, :points_must_be_different
 
   def points_must_be_adjacent
