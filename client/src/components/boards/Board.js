@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendPoints, deleteLine } from '../../actions/drawingActions';
+import { fetchPoints, fetchLines } from '../../actions/gameActions';
+
 import Point from './Point';
 import Line from '../drawing/Line';
 import Shapes from '../drawing/Shapes';
@@ -13,9 +15,15 @@ class Board extends React.Component {
       connectedPoints: []
     };
   }
+
+  componentDidMount() {
+    this.props.fetchPoints(this.props.board.id)
+    this.props.fetchLines(this.props.board.id)
+  }
   
   filteredPoints = () => {
     if (this.props.board !== undefined) {
+
       return this.props.points.filter(point => point.board_id === this.props.board.id);
     } else {
       return [];
@@ -117,6 +125,8 @@ const mapDispatchToProps = dispatch => {
   return {
     sendPoints: ({ points, board }) => dispatch(sendPoints({ points, board })),
     deleteLine: line => dispatch(deleteLine(line)),
+    fetchPoints: boardId => dispatch(fetchPoints(boardId)),
+    fetchLines: boardId => dispatch(fetchLines(boardId)),
   };
 };
 
