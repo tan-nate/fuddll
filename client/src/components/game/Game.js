@@ -1,27 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchBoards, fetchPoints, fetchLines } from '../../actions/gameActions';
+import { fetchPoints, fetchLines } from '../../actions/gameActions';
 import { fetchGuesses } from '../../actions/guessingActions';
 import Board from '../boards/Board';
 import Guesses from '../boards/Guesses';
 
 class Game extends React.Component {
   componentDidMount() {
-    this.props.fetchBoards();
-    this.props.fetchPoints();
-    this.props.fetchLines();
-    this.props.fetchGuesses();
+    this.props.fetchPoints(this.props.boards[0]);
+    this.props.fetchPoints(this.props.boards[1]);
+    this.props.fetchLines(this.props.boards[0]);
+    this.props.fetchLines(this.props.boards[1]);
+    this.props.fetchGuesses(this.props.boards[0]);
+    this.props.fetchGuesses(this.props.boards[1]);
   }
 
   render() {
     return (
       <>
-        <h2>natedogg</h2>
         <Board board={this.props.boards[0]} />
         <Guesses board={this.props.boards[1]} />
-        <h2>opponent</h2>
-        <Board board={this.props.boards[1]} />
-        <Guesses board={this.props.boards[0]} />
       </>
     );
   }
@@ -31,10 +29,9 @@ const mapStateToProps = ({ boards }) => ({ boards });
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchBoards: () => dispatch(fetchBoards()),
-    fetchPoints: () => dispatch(fetchPoints()),
-    fetchLines: () => dispatch(fetchLines()),
-    fetchGuesses: () => dispatch(fetchGuesses()),
+    fetchPoints: boardId => dispatch(fetchPoints(boardId)),
+    fetchLines: boardId => dispatch(fetchLines(boardId)),
+    fetchGuesses: boardId => dispatch(fetchGuesses(boardId)),
   }
 };
 

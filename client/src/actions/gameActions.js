@@ -1,33 +1,22 @@
-export function fetchBoards() {
-  return dispatch => {
-    const headers = {
-      credentials: "include",
-    }
-    fetch('/boards', headers)
-      .then(response => response.json())
-      .then(boards => dispatch({ type: 'ADD_BOARDS', boards: boards }));
-  };
-};
-
-export function fetchPoints() {
+export function fetchPoints(boardId) {
   const headers = {
     credentials: "include",
   }
   return dispatch => {
-    fetch('/points', headers)
+    fetch(`/boards/${boardId}`, headers)
       .then(response => response.json())
-      .then(points => dispatch({ type: 'ADD_POINTS', points: points }));
+      .then(board => dispatch({ type: 'ADD_POINTS', points: board.points }));
   };
 };
 
-export function fetchLines() {
+export function fetchLines(boardId) {
   return dispatch => {
     const headers = {
       credentials: "include",
     }
-    fetch('/lines', headers)
+    fetch(`/boards/${boardId}`, headers)
       .then(response => response.json())
-      .then(lines => dispatch({ type: 'ADD_LINES', lines: lines }));
+      .then(board => dispatch({ type: 'ADD_LINES', lines: board.lines }));
   };
 };
 

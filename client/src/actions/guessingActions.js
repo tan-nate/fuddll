@@ -1,12 +1,12 @@
-export function fetchGuesses() {
+export function fetchGuesses(boardId) {
   return dispatch => {
     const headers = {
       credentials: "include",
     }
 
-    fetch('/guesses', headers)
+    fetch(`/boards/${boardId}`, headers)
       .then(response => response.json())
-      .then(guesses => dispatch({ type: 'ADD_GUESSES', guesses: guesses }));
+      .then(board => dispatch({ type: 'ADD_GUESSES', guesses: board.guesses }));
   };
 };
 

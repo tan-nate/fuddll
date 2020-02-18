@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
-  def index
-    boards = Board.all
-    render json: BoardSerializer.new(boards).to_serialized_json
+  def show
+    board = Board.find(params[:id])
+    render json: BoardSerializer.new(board).to_serialized_json
   end
 end

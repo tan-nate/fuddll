@@ -52,7 +52,7 @@ class GameContainer extends React.Component {
       accepterId: this.props.currentPlayer.id,
       challengerId: this.state.challengerIds[0],
     });
-    this.props.acceptRequest(this.state.challengerIds[0]);
+    this.props.acceptRequest({ challengerId: this.state.challengerIds[0],  });
     broadcastInGame(this.props.currentPlayer.id);
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
@@ -68,7 +68,7 @@ class GameContainer extends React.Component {
 
   render() {
     if (this.props.opponent) {
-      return <Game currentPlayer={this.props.currentPlayer} opponent={this.props.opponent}></Game>;
+      return <Game currentPlayer={this.props.currentPlayer} opponent={this.props.opponent} boards={this.props.boards}></Game>;
     } else if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">
@@ -87,10 +87,11 @@ class GameContainer extends React.Component {
   }
 }
 
-const mapStateToProps = ({ players }) => ({
+const mapStateToProps = ({ players, boards }) => ({
   currentPlayer: players.currentPlayer,
   players: players.players,
   opponent: players.opponent,
+  boards
 });
 
 const mapDispatchToProps = dispatch => {
