@@ -51,18 +51,18 @@ class Player extends React.Component {
   }
   
   render() {
-    if (this.state.waiting) {
-      return (
-        <li className="player">
-          <p>{this.props.player.name}</p>
-          <button disabled className="waiting">waiting</button>
-        </li>
-      );
-    } else if (this.state.inGame) {
+    if (this.state.inGame) {
       return (
         <li className="player">
           <p>{this.props.player.name}</p>
           <button disabled className="waiting">in game</button>
+        </li>
+      );
+    } else if (this.state.waiting) {
+      return (
+        <li className="player">
+          <p>{this.props.player.name}</p>
+          <button disabled className="waiting">waiting</button>
         </li>
       );
     } else {

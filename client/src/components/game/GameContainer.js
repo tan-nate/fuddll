@@ -45,6 +45,13 @@ class GameContainer extends React.Component {
     }
   }
 
+  handleReceived = (response) => {
+    const json = JSON.parse(response);
+    this.setState({
+      challengerIds: [...this.state.challengerIds, json.challenger_id]
+    });
+  }
+
   handleChallenge = response => {
     const json = JSON.parse(response);
     if (json.decline) {
@@ -57,13 +64,6 @@ class GameContainer extends React.Component {
       broadcastInGame(this.props.currentPlayer.id);
       this.props.storeOpponent(this.findChallenger(json.accepter_board.player_id));
     }
-  }
-
-  handleReceived = (response) => {
-    const json = JSON.parse(response);
-    this.setState({
-      challengerIds: [...this.state.challengerIds, json.challenger_id]
-    });
   }
 
   findChallengers = () => {
