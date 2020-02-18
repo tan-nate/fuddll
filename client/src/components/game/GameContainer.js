@@ -53,18 +53,24 @@ class GameContainer extends React.Component {
     })
   }
 
-  handleAccept = () => {
+  findChallenger = (challengerId) => {
+    return this.props.players.find(player => player.id === challengerId);
+  }
+
+  handleAccept = event => {
+    event.preventDefault();
     this.props.createGame({
       accepterId: this.props.currentPlayer.id,
       challengerId: this.state.challengerIds[0],
     });
 
-    this.props.storeOpponent(this.findChallengers(this.state.challengerIds[0]));
+    this.props.storeOpponent(this.findChallenger(this.state.challengerIds[0]));
 
     broadcastInGame(this.props.currentPlayer.id);
   }
 
-  handleDecline = () => {
+  handleDecline = event => {
+    event.preventDefault();
     declineRequest(this.state.challengerIds[0]);
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
@@ -73,15 +79,15 @@ class GameContainer extends React.Component {
 
   render() {
     if (this.props.opponent && this.props.boards.length === 2) {
-      return <Game boards={this.props.boards} />;
+      return <Game />;
     } else if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">
           <p>{this.findChallengers()[0].name} wants to play</p>
-          <button className="accept" onClick={this.handleAccept}>
+          <button className="accept" onClick={event => this.handleAccept(event)}>
             fuddll
           </button>
-          <button onClick={this.handleDecline}>
+          <button onClick={event > this.handleDecline(event)}>
             no thanks
           </button>
         </div>

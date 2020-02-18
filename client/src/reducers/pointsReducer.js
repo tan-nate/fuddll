@@ -4,7 +4,7 @@ const pointsReducer = (state = {
 }, action) => {
   switch(action.type) {
     case 'ADD_POINTS':
-      return { ...state, points: action.points };
+      return { ...state, points: [...state.points, ...action.points] };
     case 'STORE_POINT_POSITION':
       return { ...state, pointPositions: [...state.pointPositions, action.point] };
     default:
