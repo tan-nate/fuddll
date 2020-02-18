@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendGuess, fetchGuesses } from '../../actions/guessingActions';
+import { fetchPoints } from '../../actions/gameActions';
+
 
 import GuessPoint from './GuessPoint';
 import Guess from '../drawing/Guess';
@@ -14,6 +16,7 @@ class Guesses extends React.Component {
   }
 
   componentDidMount() {
+    this.props.fetchPoints(this.props.board.id);
     this.props.fetchGuesses(this.props.board.id);
   }
 
@@ -95,6 +98,7 @@ const mapStateToProps = ({ points, guesses, guessPointPositions }) => ({
 const mapDispatchToProps = dispatch => {
   return {
     sendGuess: ({ points, board }) => dispatch(sendGuess({ points, board })),
+    fetchPoints: boardId => dispatch(fetchPoints(boardId)),
     fetchGuesses: boardId => dispatch(fetchGuesses(boardId)),
   };
 };

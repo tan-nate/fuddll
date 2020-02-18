@@ -26,14 +26,14 @@ class GameContainer extends React.Component {
     });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.opponent) {
       this.state.challengerIds.forEach(() => {
         this.handleDecline();
       })
     }
     
-    if (this.props.boards.length === 1) {
+    if (this.props.boards.length === 2 && this.props.boards.length > prevProps.boards.length) {
       this.props.acceptRequest({
         accepterId: this.props.currentPlayer.id,
         challengerId: this.state.challengerIds[0], 
@@ -73,7 +73,7 @@ class GameContainer extends React.Component {
 
   render() {
     if (this.props.opponent) {
-      return <Game currentPlayer={this.props.currentPlayer} opponent={this.props.opponent} boards={this.props.boards}></Game>;
+      return <Game />;
     } else if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">

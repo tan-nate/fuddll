@@ -1,19 +1,44 @@
 import React from 'react';
+import ActionCable from 'actioncable';
 import { connect } from 'react-redux';
+
 import Board from '../boards/Board';
 import Guesses from '../boards/Guesses';
 
 class Game extends React.Component {
+  componentDidMount() {
+    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    cable.subscriptions.create({
+      channel: 'GamesChannel', 
+      game: this.props.boards[0].game_id,
+    }, {
+      received: response => {this.handleReceived(response)},
+    });
+  }
+
+  handleReceived = response => {
+    const json = JSON.parse(response);
+    console.log(json);
+  }
+
+  ownBoard = () => {
+    return this.props.boards.find(board => board.player_id === this.props.currentPlayer.id);
+  }
+
+  opponentBoard = () => {
+    return this.props.boards.find(board => board.player_id === this.props.opponent.id);
+  }
+  
   render() {
     return (
       <>
-        <Board board={this.props.boards[0]} />
-        <Guesses board={this.props.boards[1]} />
+        <Board board={this.ownBoard()} />
+        <Guesses board={this.opponentBoard()} />
       </>
     );
   }
 }
 
-const mapStateToProps = ({ boards }) => ({ boards });
+const mapStateToProps = ({ boards, players }) => ({ boards, currentPlayer: players.currentPlayer, opponent: players.opponent });
 
 export default connect(mapStateToProps)(Game);
