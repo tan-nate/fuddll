@@ -90,8 +90,8 @@ class PlayersController < ApplicationController
   end
 
   def decline_request
-    challenger = Player.find(params[:challenger_id])
-    ChallengesChannel.broadcast_to challenger, {decline: true}.to_json
+    current_player = Player.find(params[:current_player_id])
+    ChallengesChannel.broadcast_to current_player, {decline: true}.to_json
   end
 
   def broadcast_in_game

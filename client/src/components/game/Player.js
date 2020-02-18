@@ -14,9 +14,26 @@ class Player extends React.Component {
 
   componentDidMount() {
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+
     cable.subscriptions.create("PlayersChannel", {
       received: response => {this.handleInGame(response)},
     });
+
+    cable.subscriptions.create({
+      channel: 'ChallengesChannel',
+      player: this.props.player.id,
+    }, {
+      received: response => {this.handleDecline(response)},
+    });
+  }
+
+  handleDecline = response => {
+    const json = JSON.parse(response);
+    if (json.decline) {
+      this.setState({
+        waiting: false,
+      });
+    }
   }
   
   sendChallenge = ({ playerId }) => {

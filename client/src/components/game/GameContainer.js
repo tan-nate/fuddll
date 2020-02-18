@@ -54,11 +54,7 @@ class GameContainer extends React.Component {
 
   handleChallenge = response => {
     const json = JSON.parse(response);
-    if (json.decline) {
-      this.setState({
-        waiting: false,
-      });
-    } else {
+    if (json.accepter_board) {
       this.props.addBoard(json.accepter_board);
       this.props.addBoard(json.challenger_board);
       broadcastInGame(this.props.currentPlayer.id);
@@ -90,7 +86,7 @@ class GameContainer extends React.Component {
 
   handleDecline = event => {
     event.preventDefault();
-    declineRequest(this.state.challengerIds[0]);
+    declineRequest(this.props.currentPlayer.id);
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
     });
