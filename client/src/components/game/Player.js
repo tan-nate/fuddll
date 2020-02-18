@@ -50,8 +50,10 @@ class Player extends React.Component {
       this.setState({
         waiting: false,
       });
-    } else if (json.accept) {
+    } else {
       this.props.storeOpponent(this.props.player);
+      this.props.addBoard(json.accepter_board);
+      this.props.addBoard(json.challenger_board);
       broadcastInGame(this.props.currentPlayer.id);
     }
   }
@@ -102,6 +104,7 @@ const mapStateToProps = ({ players }) => ({
 const mapDispatchToProps = dispatch => {
   return {
     storeOpponent: opponent => dispatch(storeOpponent(opponent)),
+    addBoard: board => dispatch({ type: 'ADD_BOARD', board: board }),
   }
 };
 

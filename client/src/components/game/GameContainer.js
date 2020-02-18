@@ -32,6 +32,14 @@ class GameContainer extends React.Component {
         this.handleDecline();
       })
     }
+    
+    if (this.props.boards.length === 2) {
+      this.props.acceptRequest({
+        accepterId: this.props.currentPlayer.id,
+        challengerId: this.state.challengerIds[0], 
+        gameId: this.props.boards[0].game_id,
+      })
+    }
   }
 
   handleReceived = (response) => {
@@ -52,8 +60,9 @@ class GameContainer extends React.Component {
       accepterId: this.props.currentPlayer.id,
       challengerId: this.state.challengerIds[0],
     });
-    this.props.acceptRequest({ challengerId: this.state.challengerIds[0],  });
+
     broadcastInGame(this.props.currentPlayer.id);
+
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
     });
@@ -67,6 +76,7 @@ class GameContainer extends React.Component {
   }
 
   render() {
+    debugger
     if (this.props.opponent) {
       return <Game currentPlayer={this.props.currentPlayer} opponent={this.props.opponent} boards={this.props.boards}></Game>;
     } else if (this.state.challengerIds.length > 0) {

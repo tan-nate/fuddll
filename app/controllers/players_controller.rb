@@ -75,8 +75,14 @@ class PlayersController < ApplicationController
   end
 
   def accept_request
-    challenger = Player.find(params[:challenger_id])
-    ChallengesChannel.broadcast_to challenger, {accept: true}.to_json
+    game = Game.find(params[:game_id])
+    accepter_board = game.boards.find_by(player_id: accepter_id)
+    challenger_board = game.boards.find_by(player_id: challenger_id)
+    data = {
+      accepter_board: accepter_board,
+      challenger_board: challenger_board
+    }
+    ChallengesChannel.broadcast_to challenger, data.to_json
     render json: PlayerSerializer.new(challenger).to_serialized_json
   end
 

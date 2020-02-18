@@ -62,7 +62,7 @@ export function logOutPlayer(player) {
   }
 }
 
-export function acceptRequest(challengerId) {
+export function acceptRequest({ accepterId, challengerId, gameId }) {
   const acceptRequestHeaders = {
     method: "POST",
     headers: {
@@ -70,7 +70,7 @@ export function acceptRequest(challengerId) {
       "Accept": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify({ challenger_id: challengerId }),
+    body: JSON.stringify({ accepter_id: accepterId, challenger_id: challengerId, game_id: gameId }),
   };
 
   return dispatch => {
