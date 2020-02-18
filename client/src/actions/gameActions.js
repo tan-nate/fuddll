@@ -45,6 +45,9 @@ export function createGame({ accepterId, challengerId }) {
   return dispatch => {
     fetch('/games', headers)
       .then(response => response.json())
-      .then(console.log)
+      .then(boards => {
+        dispatch({ type: 'ADD_BOARD', board: boards.accepter_board });
+        dispatch({ type: 'ADD_BOARD', board: boards.challenger_board });
+      })
   }
 }
