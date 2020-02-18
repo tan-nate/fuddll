@@ -73,11 +73,8 @@ export function acceptRequest({ accepterId, challengerId, gameId }) {
     body: JSON.stringify({ accepter_id: accepterId, challenger_id: challengerId, game_id: gameId }),
   };
 
-  return dispatch => {
-    fetch('/accept_request', acceptRequestHeaders)
-      .then(response => response.json())
-      .then(opponent => dispatch({ type: 'STORE_OPPONENT', opponent: opponent }));
-  }
+  fetch('/accept_request', acceptRequestHeaders)
+    .then(response => response.json());
 }
 
 export function storeOpponent(opponent) {

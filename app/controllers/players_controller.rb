@@ -86,7 +86,7 @@ class PlayersController < ApplicationController
     }
 
     ChallengesChannel.broadcast_to challenger, data.to_json
-    render json: PlayerSerializer.new(challenger).to_serialized_json
+    render json: {success: true}
   end
 
   def decline_request

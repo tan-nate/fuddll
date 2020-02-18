@@ -2,7 +2,7 @@ import React from 'react';
 import ActionCable from 'actioncable';
 
 import { connect } from 'react-redux';
-import { broadcastInGame, acceptRequest, declineRequest } from '../../actions/playerActions';
+import { broadcastInGame, acceptRequest, declineRequest, storeOpponent } from '../../actions/playerActions';
 import { createGame } from '../../actions/gameActions';
 
 import Game from './Game';
@@ -27,16 +27,14 @@ class GameContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.opponent) {
+    if (this.props.opponent && this.props.boards.length > prevProps.boards.length && this.props.boards.length === 2) {
       this.state.challengerIds.forEach(() => {
         this.handleDecline();
       })
-    }
-    
-    if (this.props.boards.length === 2 && this.props.boards.length > prevProps.boards.length) {
-      this.props.acceptRequest({
+
+      acceptRequest({
         accepterId: this.props.currentPlayer.id,
-        challengerId: this.state.challengerIds[0], 
+        challengerId: this.props.opponent.id, 
         gameId: this.props.boards[0].game_id,
       });
     }
@@ -61,6 +59,8 @@ class GameContainer extends React.Component {
       challengerId: this.state.challengerIds[0],
     });
 
+    this.props.storeOpponent(this.findChallengers(this.state.challengerIds[0]));
+
     broadcastInGame(this.props.currentPlayer.id);
   }
 
@@ -72,8 +72,8 @@ class GameContainer extends React.Component {
   }
 
   render() {
-    if (this.props.opponent) {
-      return <Game />;
+    if (this.props.opponent && this.props.boards.length === 2) {
+      return <Game boards={this.props.boards} />;
     } else if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">
@@ -101,8 +101,8 @@ const mapStateToProps = ({ players, boards }) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    acceptRequest: challengerId => dispatch(acceptRequest(challengerId)),
     createGame: ({ accepterId, challengerId }) => dispatch(createGame({ accepterId, challengerId })),
+    storeOpponent: opponent => dispatch(storeOpponent(opponent)),
   }
 };
 
