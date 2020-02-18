@@ -103,9 +103,9 @@ class Board extends React.Component {
     return (
       <div className="board-container">
         <div className="board">
-          {/* {this.renderPoints()}
+          {this.renderPoints()}
           {this.renderLines()}
-          {this.renderGuesses()} */}
+          {this.renderGuesses()}
         </div>
         <Shapes board={this.props.board} filteredPoints={this.filteredPoints} filteredLines={this.filteredLines} />
       </div>

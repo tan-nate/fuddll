@@ -33,7 +33,7 @@ class GameContainer extends React.Component {
       })
     }
     
-    if (this.props.boards.length === 2) {
+    if (this.props.boards.length === 1) {
       this.props.acceptRequest({
         accepterId: this.props.currentPlayer.id,
         challengerId: this.state.challengerIds[0], 

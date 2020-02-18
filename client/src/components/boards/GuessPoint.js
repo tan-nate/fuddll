@@ -42,7 +42,7 @@ class GuessPoint extends React.Component {
     return (
       <div className="point">
         <div className="button" ref={this.pointRef}>
-          <button className="board" onClick={this.handleClick} className={this.state.buttonColor}></button>
+          <button onClick={this.handleClick} className={this.state.buttonColor}></button>
         </div>
       </div>
     );
