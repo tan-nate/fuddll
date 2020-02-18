@@ -30,7 +30,7 @@ class Player extends React.Component {
 
   handleDecline = response => {
     const json = JSON.parse(response);
-    if (json.decline) {
+    if (json.decline && json.challenger_id === this.props.currentPlayer.id) {
       this.setState({
         waiting: false,
       });

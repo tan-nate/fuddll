@@ -81,7 +81,7 @@ export function storeOpponent(opponent) {
   return dispatch => dispatch({ type: 'STORE_OPPONENT' , opponent: opponent });
 }
 
-export function declineRequest(currentPlayerId) {
+export function declineRequest({ currentPlayerId, challengerId }) {
   const headers = {
     method: "POST",
     headers: {
@@ -89,7 +89,7 @@ export function declineRequest(currentPlayerId) {
       "Accept": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify({ current_player_id: currentPlayerId }),
+    body: JSON.stringify({ current_player_id: currentPlayerId, challenger_id: challengerId }),
   };
 
   fetch('/decline_request', headers)

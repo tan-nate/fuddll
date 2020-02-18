@@ -86,7 +86,7 @@ class GameContainer extends React.Component {
 
   handleDecline = event => {
     event.preventDefault();
-    declineRequest(this.props.currentPlayer.id);
+    declineRequest({ currentPlayerId: this.props.currentPlayer.id, challengerId: this.state.challengerIds[0] });
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
     });
