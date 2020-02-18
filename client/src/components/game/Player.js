@@ -9,6 +9,7 @@ class Player extends React.Component {
     this.state = {
       waiting: false,
       inGame: this.props.player.in_game,
+      declined: false,
     };
   }
 
@@ -33,6 +34,16 @@ class Player extends React.Component {
       this.setState({
         waiting: false,
       });
+
+      this.setState({
+        declined: true,
+      });
+
+      setTimeout(() => {
+        this.setState({
+          declined: false,
+        });
+      }, 4000);
     }
   }
   
@@ -80,6 +91,13 @@ class Player extends React.Component {
         <li className="player">
           <p>{this.props.player.name}</p>
           <button disabled className="waiting">waiting</button>
+        </li>
+      );
+    } else if (this.state.declined) {
+      return (
+        <li className="player">
+          <p>{this.props.player.name}</p>
+          <button disabled className="declined">declined</button>
         </li>
       );
     } else {

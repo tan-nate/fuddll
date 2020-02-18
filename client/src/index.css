@@ -52,7 +52,7 @@ input.submit {
 }
 
 p.login-error {
-  color: red;
+  color: rgb(255, 85, 85);
   font-size: 0.9em;
 }
 
@@ -162,6 +162,15 @@ button.waiting {
   border-radius: 10px;
 }
 
+button.declined {
+  margin-left: 10px;
+  font-size: 1em;
+  border: 0.5px solid black;
+  border-radius: 10px;
+  background-color: rgb(255, 85, 85);
+  color: black;
+}
+
 .board-container {
   width: 100%;
   float: left;
@@ -223,7 +232,7 @@ div.button button {
 }
 
 .red {
-  background-color: rgb(251, 57, 57);
+  background-color: rgb(255, 85, 85);
   color: white;
   content: 'x';
 }
@@ -281,7 +290,7 @@ html, body {
 
 .line-red {
   stroke-width: 2px;
-  stroke: rgb(251, 57, 57);
+  stroke: rgb(255, 85, 85);
 }
 
 .line-blue {
