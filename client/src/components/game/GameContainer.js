@@ -18,25 +18,44 @@ class GameContainer extends React.Component {
   
   componentDidMount() {
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+
     cable.subscriptions.create({
       channel: 'RequestsChannel', 
       player: this.props.currentPlayer.id,
     }, {
       received: response => {this.handleReceived(response)},
     });
+
+
+    cable.subscriptions.create({
+      channel: 'ChallengesChannel',
+      player: this.props.currentPlayer.id,
+    }, {
+      received: response => {this.handleChallenge(response)},
+    });
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.opponent && this.props.boards.length > prevProps.boards.length && this.props.boards.length === 2) {
-      this.state.challengerIds.forEach(() => {
-        this.handleDecline();
-      })
-
       acceptRequest({
         accepterId: this.props.currentPlayer.id,
         challengerId: this.props.opponent.id, 
         gameId: this.props.boards[0].game_id,
       });
+    }
+  }
+
+  handleChallenge = response => {
+    const json = JSON.parse(response);
+    if (json.decline) {
+      this.setState({
+        waiting: false,
+      });
+    } else {
+      this.props.addBoard(json.accepter_board);
+      this.props.addBoard(json.challenger_board);
+      broadcastInGame(this.props.currentPlayer.id);
+      this.props.storeOpponent(this.findChallenger(json.accepter_board.player_id));
     }
   }
 
@@ -69,7 +88,8 @@ class GameContainer extends React.Component {
     broadcastInGame(this.props.currentPlayer.id);
   }
 
-  handleDecline = () => {
+  handleDecline = event => {
+    event.preventDefault();
     declineRequest(this.state.challengerIds[0]);
     this.setState({
       challengerIds: this.state.challengerIds.slice(1),
@@ -78,7 +98,7 @@ class GameContainer extends React.Component {
 
   render() {
     if (this.props.opponent && this.props.boards.length === 2) {
-      return <Game />;
+      return <Game boards={this.props.boards} />;
     } else if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">
@@ -86,7 +106,7 @@ class GameContainer extends React.Component {
           <button className="accept" onClick={event => this.handleAccept(event)}>
             fuddll
           </button>
-          <button onClick={this.handleDecline}>
+          <button onClick={event => this.handleDecline(event)}>
             no thanks
           </button>
         </div>
@@ -108,6 +128,7 @@ const mapDispatchToProps = dispatch => {
   return {
     createGame: ({ accepterId, challengerId }) => dispatch(createGame({ accepterId, challengerId })),
     storeOpponent: opponent => dispatch(storeOpponent(opponent)),
+    addBoard: board => dispatch({ type: 'ADD_BOARD', board: board }),
   }
 };
 

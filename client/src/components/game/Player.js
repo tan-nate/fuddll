@@ -2,7 +2,6 @@ import React from 'react';
 import ActionCable from 'actioncable';
 
 import { connect } from 'react-redux';
-import { storeOpponent, broadcastInGame } from '../../actions/playerActions';
 
 class Player extends React.Component {
   constructor(props) {
@@ -15,12 +14,6 @@ class Player extends React.Component {
 
   componentDidMount() {
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
-    cable.subscriptions.create({
-      channel: 'ChallengesChannel',
-      player: this.props.currentPlayer.id,
-    }, {
-      received: response => {this.handleChallenge(response)},
-    });
     cable.subscriptions.create("PlayersChannel", {
       received: response => {this.handleInGame(response)},
     });
@@ -42,20 +35,6 @@ class Player extends React.Component {
       .then(this.setState({
         waiting: true,
       }));
-  }
-
-  handleChallenge = response => {
-    const json = JSON.parse(response);
-    if (json.decline) {
-      this.setState({
-        waiting: false,
-      });
-    } else {
-      this.props.addBoard(json.accepter_board);
-      this.props.addBoard(json.challenger_board);
-      broadcastInGame(this.props.currentPlayer.id);
-      this.props.storeOpponent(this.props.player);
-    }
   }
 
   handleInGame = response => {
@@ -101,11 +80,4 @@ const mapStateToProps = ({ players }) => ({
   currentPlayer: players.currentPlayer,
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    storeOpponent: opponent => dispatch(storeOpponent(opponent)),
-    addBoard: board => dispatch({ type: 'ADD_BOARD', board: board }),
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default connect(mapStateToProps)(Player);

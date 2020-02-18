@@ -11,6 +11,7 @@ class GamesController < ApplicationController
       accepter_board: accepter_board,
       challenger_board: challenger_board
     }
+    
     render json: data.to_json
   end
 end

@@ -86,7 +86,7 @@ class PlayersController < ApplicationController
     }
 
     ChallengesChannel.broadcast_to challenger, data.to_json
-    render json: {success: true}
+    render json: {accept_request: true}
   end
 
   def decline_request
@@ -99,6 +99,6 @@ class PlayersController < ApplicationController
     player.update(in_game: true)
     serialized_data = {in_game: params[:player_id]}.to_json
     ActionCable.server.broadcast "players_channel", serialized_data
-    render json: {success: true}
+    render json: {broadcast_in_game: true}
   end
 end
