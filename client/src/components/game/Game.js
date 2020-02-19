@@ -19,6 +19,9 @@ class Game extends React.Component {
   handleReceived = response => {
     const json = JSON.parse(response);
     console.log(json);
+    if (json[0].board_id === this.opponentBoard().id) {
+      this.props.addLines(json);
+    }
   }
 
   ownBoard = () => {
@@ -41,4 +44,10 @@ class Game extends React.Component {
 
 const mapStateToProps = ({ boards, players }) => ({ boards, currentPlayer: players.currentPlayer, opponent: players.opponent });
 
-export default connect(mapStateToProps)(Game);
+const mapDispatchToProps = dispatch => {
+  return {
+    addLines: lines => dispatch({ type: 'ADD_LINES', lines }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

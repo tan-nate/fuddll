@@ -21,7 +21,7 @@ class LinesController < ApplicationController
 
   def broadcast_fuddll
     board = Board.find(params[:board_id])
-    GamesChannel.broadcast_to board.game, BoardSerializer.new(board).to_serialized_json
+    GamesChannel.broadcast_to board.game, board.lines.to_json
     render json: {broadcast_fuddll: true}
   end
 
