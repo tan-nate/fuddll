@@ -107,7 +107,7 @@ class Board extends React.Component {
           {this.renderLines()}
           {this.renderGuesses()}
         </div>
-        <Toolbox board={this.props.board} filteredPoints={this.filteredPoints} filteredLines={this.filteredLines} />
+        <Toolbox board={this.props.board} filteredPoints={this.filteredPoints} filteredLines={this.filteredLines} setFuddllSent={this.props.setFuddllSent} />
       </div>
     );
   }

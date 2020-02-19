@@ -49,6 +49,7 @@ class Toolbox extends React.Component {
   handleClick = event => {
     event.preventDefault();
     broadcastFuddll(this.props.board.id);
+    this.props.setFuddllSent();
   }
   
   render() {

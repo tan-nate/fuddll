@@ -6,6 +6,13 @@ import Board from '../boards/Board';
 import Guesses from '../boards/Guesses';
 
 class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.setState({
+      fuddllSent: false,
+    })
+  }
+
   componentDidMount() {
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
     cable.subscriptions.create({
@@ -33,11 +40,17 @@ class Game extends React.Component {
   opponentBoard = () => {
     return this.props.boards.find(board => board.player_id === this.props.opponent.id);
   }
+
+  setFuddllSent = () => {
+    this.setState({
+      fuddllSent: true,
+    });
+  }
   
   render() {
     return (
       <>
-        <Board board={this.ownBoard()} />
+        <Board board={this.ownBoard()} setFuddllSent={this.setFuddllSent} />
         <Guesses board={this.opponentBoard()} />
       </>
     );
