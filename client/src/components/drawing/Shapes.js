@@ -11,7 +11,7 @@ class Shapes extends React.Component {
   } 
   
   componentDidUpdate(prevProps) {
-    if (this.props.lines > prevProps.lines) {
+    if (this.props.filteredLines() > prevProps.filteredLines()) {
       this.groupLinesByShapeAndSendToCanvas();
     }
 
