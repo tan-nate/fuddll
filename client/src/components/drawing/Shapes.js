@@ -8,9 +8,13 @@ class Shapes extends React.Component {
     this.state = {
       shapes: []
     };
-  }
+  } 
+  
+  componentDidUpdate(prevProps) {
+    if (this.props.lines > prevProps.lines) {
+      this.groupLinesByShapeAndSendToCanvas();
+    }
 
-  componentDidUpdate() {
     this.fitSvgs();
   }
 
@@ -74,7 +78,9 @@ class Shapes extends React.Component {
   }
 
   renderShapes = () => {
-    return this.state.shapes.map(shape => <Shape key={this.state.shapes.indexOf(shape)} shape={shape} />);
+    if (this.state.shapes.length > 0) {
+      return this.state.shapes.map(shape => <Shape key={this.state.shapes.indexOf(shape)} shape={shape} />);
+    }
   }
 
   fitSvgs = () => {
@@ -92,7 +98,6 @@ class Shapes extends React.Component {
   }
   
   render() {
-    this.groupLinesByShapeAndSendToCanvas()
     return (
       <div className="shapes">
         <div className="rotated-shapes-svg">
