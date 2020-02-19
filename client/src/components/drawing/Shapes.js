@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { broadcastFuddll } from '../../actions/gameActions';
+
 import Shape from '../drawing/Shape';
 
 class Shapes extends React.Component {
@@ -133,6 +135,12 @@ class Shapes extends React.Component {
       resizeSVG(svg);
     });
   }
+
+  handleClick = event => {
+    event.preventDefault();
+    this.groupLinesByShapeAndSendToCanvas();
+    broadcastFuddll(this.props.board.id);
+  }
   
   render() {
     return (
@@ -146,7 +154,7 @@ class Shapes extends React.Component {
               close shapes
             </p>
           </div>
-          <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={this.groupLinesByShapeAndSendToCanvas}>fuddl</button>
+          <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={event => this.handleClick(event)}>fuddl</button>
         </div>
         <div className="rotated-shapes-svg">
           {this.renderShapes()}

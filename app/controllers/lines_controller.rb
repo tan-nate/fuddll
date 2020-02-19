@@ -19,6 +19,12 @@ class LinesController < ApplicationController
     line.destroy
   end
 
+  def broadcast_fuddll
+    board = Board.find(params[:board_id])
+    GamesChannel.broadcast_to board.game, BoardSerializer.new(board).to_serialized_json
+    render json: {broadcast_fuddll: true}
+  end
+
   private
 
   def line_params

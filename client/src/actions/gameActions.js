@@ -40,3 +40,19 @@ export function createGame({ accepterId, challengerId }) {
       })
   }
 }
+
+export function broadcastFuddll(boardId) {
+  const headers = {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }, 
+    credentials: "include",
+    body: JSON.stringify({ board_id: boardId }),
+  }
+
+  fetch('/broadcast_fuddll', headers)
+    .then(response => response.json())
+    .then(console.log);
+}
