@@ -88,7 +88,7 @@ class Guesses extends React.Component {
 
   renderShapes = () => {
     if (this.filteredLines().length > 0) {
-      return <Shapes board={this.props.board} filteredPoints={this.filteredPoints} filteredLines={this.filteredLines} />
+      return <Shapes board={this.props.board} filteredLines={this.filteredLines} />
     }
   }
 

@@ -72,15 +72,9 @@ class Shapes extends React.Component {
     }
   }
 
-  groupLinesByShapeAndSendToCanvas = () => {
-    const shapes = this.isolateAllShapes().map(shape => this.props.filteredLines().filter(line => shape.includes(line.point1_id) || shape.includes(line.point2_id)));
-    this.setState({ shapes: shapes });
-  }
-
   renderShapes = () => {
-    if (this.state.shapes.length > 0) {
-      return this.state.shapes.map(shape => <Shape key={this.state.shapes.indexOf(shape)} shape={shape} />);
-    }
+    const shapes = this.isolateAllShapes().map(shape => this.props.filteredLines().filter(line => shape.includes(line.point1_id) || shape.includes(line.point2_id)));
+    return shapes.map(shape => <Shape key={shapes.indexOf(shape)} shape={shape} />);
   }
 
   fitSvgs = () => {

@@ -19,11 +19,11 @@ class Game extends React.Component {
   handleReceived = response => {
     const json = JSON.parse(response);
     console.log(json);
-    if (json.lines && json.lines[0].board_id === this.opponentBoard().id) {
-      this.props.addLines(json.lines);
-    } else if (json.guess && json.guess.board_id === this.ownBoard().id) {
+    if (json.guess && json.guess.board_id === this.ownBoard().id) {
       this.props.addGuess(json.guess);
-    }
+    } else if (json[0].board_id === this.opponentBoard().id) {
+      this.props.addLines(json);
+    } 
   }
 
   ownBoard = () => {
