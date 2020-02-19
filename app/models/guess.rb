@@ -17,4 +17,8 @@ class Guess < ApplicationRecord
       errors.add(:base, message: "connected points must be different")
     end
   end
+
+  def game
+    self.board.game
+  end
 end

@@ -93,7 +93,7 @@ class GameContainer extends React.Component {
   }
 
   render() {
-    if (this.props.opponent && this.props.boards.length === 2) {
+    if (this.props.opponent && this.props.boards.length >= 2) {
       return <Game boards={this.props.boards} />;
     } else if (this.state.challengerIds.length > 0) {
       return (
