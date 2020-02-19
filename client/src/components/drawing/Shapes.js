@@ -8,14 +8,14 @@ class Shapes extends React.Component {
     this.state = {
       shapes: []
     };
-  } 
-  
-  componentDidUpdate(prevProps) {
-    if (this.props.filteredLines() > prevProps.filteredLines()) {
-      this.groupLinesByShapeAndSendToCanvas();
-    }
+  }
 
+  componentDidMount() {
     this.fitSvgs();
+  }
+
+  shouldComponentUpdate() {
+    return false;
   }
 
   isolateShape = (firstLine) => {
@@ -93,10 +93,8 @@ class Shapes extends React.Component {
   
   render() {
     return (
-      <div className="shapes">
-        <div className="rotated-shapes-svg">
-          {this.renderShapes()}
-        </div>
+      <div className="rotated-shapes-svg">
+        {this.renderShapes()}
       </div>
     );
   }

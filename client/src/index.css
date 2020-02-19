@@ -284,16 +284,11 @@ html, body {
 }
 
 .line-green {
-  stroke-width: 2px;
-  stroke: rgb(0, 180, 80);
+  stroke-width: 3px;
+  stroke: blue;
 }
 
 .line-red {
-  stroke-width: 2px;
-  stroke: rgb(255, 85, 85);
-}
-
-.line-blue {
   stroke-width: 3px;
-  stroke: blue;
+  stroke: rgb(160, 160, 160);
 }

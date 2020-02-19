@@ -95,7 +95,7 @@ class Board extends React.Component {
 
   renderGuesses = () => {
     if (this.props.guesses.length !== 0) {
-      return this.filteredGuesses().map(guess => <OpponentGuess key={guess.id} guess={guess} pointPositions={this.filteredPointPositions()} />);
+      return this.filteredGuesses().map(guess => <OpponentGuess key={guess.id} guess={guess} pointPositions={this.filteredPointPositions()} board={this.props.board} />);
     }
   }
 
