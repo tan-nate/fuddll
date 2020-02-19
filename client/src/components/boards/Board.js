@@ -5,7 +5,7 @@ import { fetchPoints, fetchLines } from '../../actions/gameActions';
 
 import Point from './Point';
 import Line from '../drawing/Line';
-import Shapes from '../drawing/Shapes';
+import Toolbox from '../drawing/Toolbox';
 import OpponentGuess from './OpponentGuess';
 
 class Board extends React.Component {
@@ -107,7 +107,7 @@ class Board extends React.Component {
           {this.renderLines()}
           {this.renderGuesses()}
         </div>
-        <Shapes board={this.props.board} filteredPoints={this.filteredPoints} filteredLines={this.filteredLines} />
+        <Toolbox board={this.props.board} filteredPoints={this.filteredPoints} filteredLines={this.filteredLines} />
       </div>
     );
   }

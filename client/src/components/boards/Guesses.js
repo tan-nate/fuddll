@@ -6,6 +6,7 @@ import { fetchPoints } from '../../actions/gameActions';
 
 import GuessPoint from './GuessPoint';
 import Guess from '../drawing/Guess';
+import Shapes from '../drawing/Shapes';
 
 class Guesses extends React.Component {
   constructor(props) {
@@ -67,6 +68,14 @@ class Guesses extends React.Component {
     }
   }
 
+  filteredLines = () => {
+    if (this.props.lines.length !== 0 && this.props.board !== undefined) {
+      return this.props.lines.filter(line => line.board_id === this.props.board.id);
+    } else {
+      return [];
+    }
+  }
+
   filteredGuessPointPositions = () => {
     return this.props.guessPointPositions.filter(pointPosition => pointPosition.board_id === this.props.board.id);
   }
@@ -77,6 +86,12 @@ class Guesses extends React.Component {
     }
   }
 
+  renderShapes = () => {
+    if (this.filteredLines().length > 0) {
+      return <Shapes board={this.props.board} filteredPoints={this.filteredPoints} filteredLines={this.filteredLines} />
+    }
+  }
+
   render() {
     return (
       <div className="board-container">
@@ -84,15 +99,17 @@ class Guesses extends React.Component {
           {this.renderPoints()}
           {this.renderGuesses()}
         </div>
+        {this.renderShapes()}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ points, guesses, guessPointPositions }) => ({
+const mapStateToProps = ({ points, guesses, guessPointPositions, lines }) => ({
   points: points.points, 
   guesses,
   guessPointPositions,
+  lines,
 });
 
 const mapDispatchToProps = dispatch => {

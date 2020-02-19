@@ -227,7 +227,7 @@ div.button button {
 }
 
 .green {
-  background-color: rgb(8, 160, 79);
+  background-color: rgb(0, 180, 80);
   color: white;
 }
 
@@ -285,7 +285,7 @@ html, body {
 
 .line-green {
   stroke-width: 2px;
-  stroke: rgb(8, 160, 79);
+  stroke: rgb(0, 180, 80);
 }
 
 .line-red {
