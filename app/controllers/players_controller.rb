@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   include ActionController::Cookies
 
   def login_player(player)
-    player.update(logged_in: true)
+    player.update(logged_in: true, in_game: false)
     session[:player_id] = player.id
     cookies.signed[:player_id] = player.id
   end
@@ -56,7 +56,7 @@ class PlayersController < ApplicationController
 
   def destroy
     player = Player.find(params[:id])
-    player.update(logged_in: false)
+    player.update(logged_in: false, in_game: false)
     broadcast_player(player)
     session.clear
   end
