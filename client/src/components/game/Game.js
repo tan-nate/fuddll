@@ -49,7 +49,7 @@ class Game extends React.Component {
     if (this.state.fuddlling && !prevState.fuddlling) {
       if (this.props.boards[0].player_id === this.props.currentPlayer.id) {
         this.setState({
-          waiting: false
+          waiting: false,
         });
       }
     }

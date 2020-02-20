@@ -213,7 +213,7 @@ button.declined {
 }
 
 .toolbox {
-  margin: 0 0 10px 20px;
+  margin: 0 0 10px 10px;
   border: solid blue 1.5px;
   padding: 0 10px 0 10px;
   border-radius: 10px;
@@ -308,15 +308,17 @@ button.submit:disabled {
   height: 100%;
 }
 
-div.rotated-shapes-svg {
+.rotated-shapes-svg {
   border: 1.5px solid black;
   border-radius: 10px;
-  margin-left: 20px;
+  padding: 20px;
+  margin: 10px 10px 0 0;
   float: left;
+  clear: left;
 }
 
 .rotate-svg {
-  margin: 20px;
+  margin: 10px;
 }
 
 .line {
