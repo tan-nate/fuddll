@@ -12,6 +12,8 @@ class Game extends React.Component {
       fuddllSent: false,
       fuddlling: false,
       fuddllReceived: false,
+      renderingIntro: true,
+      renderingFuddllIntro: false,
     };
   }
 
@@ -31,6 +33,20 @@ class Game extends React.Component {
         fuddlling: true,
       });
     }
+  }
+
+  stopRenderingIntro = () => {
+    setTimeout(() => {
+      this.setState({
+        renderingFuddllIntro: true,
+      })
+    }, 3000);
+    setTimeout(() => {
+      this.setState({
+        renderingIntro: false,
+        renderingFuddllIntro: false,
+      })
+    }, 6000);
   }
 
   setFuddllSent = () => {
@@ -59,19 +75,33 @@ class Game extends React.Component {
   }
   
   render() {
-    if (this.state.fuddlling) {
+    if (this.state.renderingFuddllIntro && this.state.renderingIntro) {
+      return (
+        <div className="intro fuddll-intro">
+          <p>fuddll</p>
+        </div>
+      );
+    } else if (this.state.renderingIntro) {
+      this.stopRenderingIntro();
+      return (
+        <div className="intro">
+          <p><strong>{this.props.currentPlayer.name}</strong> vs <strong>{this.props.opponent.name}</strong></p>
+        </div>
+      );
+    } else if (this.state.fuddlling) {
       return (
         <>
           <Board board={this.ownBoard()} fuddlling={this.state.fuddlling} />
           <Guesses board={this.opponentBoard()} />
         </>
       );
+    } else {
+      return (
+        <>
+          <Board board={this.ownBoard()} setFuddllSent={this.setFuddllSent} fuddlling={this.state.fuddlling} />
+        </>
+      );
     }
-    return (
-      <>
-        <Board board={this.ownBoard()} setFuddllSent={this.setFuddllSent} fuddlling={this.state.fuddlling} />
-      </>
-    );
   }
 }
 

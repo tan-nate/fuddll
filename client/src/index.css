@@ -125,8 +125,28 @@ div.challenge-alert {
   border-radius: 10px;
 }
 
+div.intro {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border: 2px solid black;
+  text-align: center;
+  border-radius: 10px;
+}
+
+div.intro p {
+  font-size: 1.3em;
+  margin: 8px 15px;
+}
+
+div.fuddll-intro {
+  background-color: aqua;
+}
+
 div.challenge-alert p {
-  font-size: 1.2em;
+  font-size: 1.3em;
   margin-top: 0;
 }
 
