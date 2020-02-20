@@ -313,7 +313,6 @@ div.rotated-shapes-svg {
   border-radius: 10px;
   margin-left: 20px;
   float: left;
-  width: fit-content(140%);
 }
 
 .rotate-svg {

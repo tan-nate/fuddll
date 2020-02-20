@@ -14,8 +14,9 @@ class Game extends React.Component {
       fuddllReceived: false,
       renderingIntro: true,
       renderingFuddllIntro: false,
-      fuddllCount: 10,
+      fuddllCount: 120,
       guessCount: 20,
+      waiting: true,
     };
   }
 
@@ -30,16 +31,34 @@ class Game extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // if (!this.state.renderingIntro && this.state.fuddllCount === 120) {
+    //   setInterval(() => {
+    //     const newCount = this.state.fuddllCount - 1;
+    //     this.setState({
+    //       fuddllCount: newCount,
+    //     });
+    //   }, 1000);
+    // }
+    
     if (this.state.fuddllSent && this.state.fuddllReceived && (!prevState.fuddllSent || !prevState.fuddllReceived)) {
       this.setState({
         fuddlling: true,
       });
     }
-    if (!this.state.renderingIntro && this.state.fuddllCount === 10) {
-      setInterval(() => {
-        const newCount = this.state.fuddllCount - 1;
+
+    if (this.state.fuddlling && !prevState.fuddlling) {
+      if (this.props.boards[0].player_id === this.props.currentPlayer.id) {
         this.setState({
-          fuddllCount: newCount,
+          waiting: false
+        });
+      }
+    }
+
+    if (!this.state.waiting && this.state.guessCount === 20) {
+      setInterval(() => {
+        const newCount = this.state.guessCount - 1;
+        this.setState({
+          guessCount: newCount,
         });
       }, 1000);
     }
@@ -95,7 +114,7 @@ class Game extends React.Component {
       this.gameOverTimeout();
       return (
         <div className="intro">
-          <p>you lose</p>
+          <p>{this.props.opponent.name} won</p>
         </div>
       )
     } else if (this.state.renderingFuddllIntro && this.state.renderingIntro) {
@@ -115,7 +134,7 @@ class Game extends React.Component {
       return (
         <>
           <Board board={this.ownBoard()} fuddlling={this.state.fuddlling} />
-          <Guesses board={this.opponentBoard()} />
+          <Guesses board={this.opponentBoard()} waiting={this.state.waiting} guessCount={this.state.guessCount} />
         </>
       );
     } else {

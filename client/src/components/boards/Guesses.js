@@ -99,6 +99,10 @@ class Guesses extends React.Component {
           {this.renderPoints()}
           {this.renderGuesses()}
         </div>
+        <div className="toolbox countdown">
+          <p>{this.props.guessCount}</p>
+        </div>
+        <br />
         {this.renderShapes()}
       </div>
     );
