@@ -228,6 +228,10 @@ div.button button {
   border: 1px solid black;
 }
 
+div.button button.fuddlling {
+  border: 0;
+}
+
 .blank {
   background-color: white;
 }
@@ -285,7 +289,7 @@ button.submit:disabled {
 }
 
 div.rotated-shapes-svg {
-  border: 1.5px solid blue;
+  border: 1.5px solid black;
   border-radius: 10px;
   margin-left: 20px;
   float: left;
@@ -301,12 +305,17 @@ div.rotated-shapes-svg {
   stroke: black;
 }
 
-.line-green {
+.line-blue {
   stroke-width: 3px;
   stroke: blue;
 }
 
-.line-red {
+.line-gray {
   stroke-width: 3px;
   stroke: rgb(160, 160, 160);
+}
+
+.line-aqua {
+  stroke-width: 3px;
+  stroke: aqua;
 }

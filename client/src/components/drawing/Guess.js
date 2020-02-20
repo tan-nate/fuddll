@@ -16,9 +16,9 @@ class Guess extends React.Component {
         [this.props.guess.point1_id, this.props.guess.point2_id].includes(point)
       )
     ).length > 0) {
-      return "green";
+      return "blue";
     } else {
-      return "red";
+      return "gray";
     }
   }
 

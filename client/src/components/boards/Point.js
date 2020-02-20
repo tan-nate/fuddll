@@ -83,6 +83,15 @@ class Point extends React.Component {
   
   render() {
     this.clearRed();
+    if (this.props.fuddlling) {
+      return (
+        <div className="point">
+          <div className="button" ref={this.pointRef}>
+            <button className="fuddlling" disabled></button>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="point">
         <div className="button" ref={this.pointRef}>
