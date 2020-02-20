@@ -200,7 +200,7 @@ button.declined {
 .board-container {
   width: 100%;
   float: left;
-  margin-bottom: 20px;;
+  margin-bottom: 10px;;
 }
 
 .board {
@@ -213,11 +213,17 @@ button.declined {
 }
 
 .toolbox {
-  margin: 0 0 10px 10px;
+  margin: 10px 10px 0 0;
+  clear: left;
   border: solid blue 1.5px;
   padding: 0 10px 0 10px;
   border-radius: 10px;
-  display: inline-block;
+  float: left;
+}
+
+.toolbox.countdown {
+  margin: 0 0 10px 10px;
+  clear: none;
 }
 
 .toolbox[data-hidden=true] {
@@ -249,7 +255,8 @@ div.button button {
 }
 
 div.button button.fuddlling {
-  border: 0;
+  background-color: rgb(230, 230, 230);
+  border: none;
 }
 
 .blank {
