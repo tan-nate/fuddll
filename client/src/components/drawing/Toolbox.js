@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 import { broadcastFuddll } from '../../actions/gameActions';
 
 class Toolbox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      waiting: false,
+    };
+  }
+
   checkPointForLines = (point) => {
     return this.props.filteredLines().filter(line => line.point1_id === point.id || line.point2_id === point.id);
   }
@@ -50,9 +57,27 @@ class Toolbox extends React.Component {
     event.preventDefault();
     broadcastFuddll(this.props.board.id);
     this.props.setFuddllSent();
+    this.setState({
+      waiting: true,
+    });
   }
   
   render() {
+    if (this.state.waiting) {
+      return (
+        <div className="toolbox" data-hidden={this.checkLinesLeftAndShapesClosed()}>
+          <div className="lines-left" hidden={this.props.filteredLines().length === 12}>
+            {this.linesLeft()}
+          </div>
+          <div className="instructions" hidden={this.checkShapesClosed()}>
+            <p>
+              close shapes
+            </p>
+          </div>
+          <button className="waiting" type="submit" disabled>waiting</button>
+        </div>
+      );
+    }
     return (
       <div className="toolbox" data-hidden={this.checkLinesLeftAndShapesClosed()}>
         <div className="lines-left" hidden={this.props.filteredLines().length === 12}>

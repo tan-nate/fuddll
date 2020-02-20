@@ -100,6 +100,17 @@ class Board extends React.Component {
   }
 
   render() {
+    if (this.props.fuddlling) {
+      return (
+        <div className="board-container">
+          <div className="board">
+            {this.renderPoints()}
+            {this.renderLines()}
+            {this.renderGuesses()}
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="board-container">
         <div className="board">

@@ -8,9 +8,11 @@ import Guesses from '../boards/Guesses';
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state = {
       fuddllSent: false,
-    })
+      fuddlling: false,
+      fuddllReceived: false,
+    };
   }
 
   componentDidMount() {
@@ -23,6 +25,20 @@ class Game extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.fuddllSent && this.state.fuddllReceived && (!prevState.fuddllSent || !prevState.fuddllReceived)) {
+      this.setState({
+        fuddlling: true,
+      });
+    }
+  }
+
+  setFuddllSent = () => {
+    this.setState({
+      fuddllSent: true,
+    });
+  }
+
   handleReceived = response => {
     const json = JSON.parse(response);
     console.log(json);
@@ -30,6 +46,7 @@ class Game extends React.Component {
       this.props.addGuess(json.guess);
     } else if (Array.isArray(json) && json[0].board_id === this.opponentBoard().id) {
       this.props.addLines(json);
+      this.setState({ fuddllReceived: true });
     } 
   }
 
@@ -40,18 +57,19 @@ class Game extends React.Component {
   opponentBoard = () => {
     return this.props.boards.find(board => board.player_id === this.props.opponent.id);
   }
-
-  setFuddllSent = () => {
-    this.setState({
-      fuddllSent: true,
-    });
-  }
   
   render() {
+    if (this.state.fuddlling) {
+      return (
+        <>
+          <Board board={this.ownBoard()} fuddlling={this.state.fuddlling} />
+          <Guesses board={this.opponentBoard()} />
+        </>
+      );
+    }
     return (
       <>
-        <Board board={this.ownBoard()} setFuddllSent={this.setFuddllSent} />
-        <Guesses board={this.opponentBoard()} />
+        <Board board={this.ownBoard()} setFuddllSent={this.setFuddllSent} fuddlling={this.state.fuddlling} />
       </>
     );
   }
