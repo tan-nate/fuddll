@@ -213,11 +213,11 @@ button.declined {
 }
 
 .toolbox {
-  float: left;
-  margin-left: 20px;
+  margin: 0 0 10px 20px;
   border: solid blue 1.5px;
   padding: 0 10px 0 10px;
   border-radius: 10px;
+  display: inline-block;
 }
 
 .toolbox[data-hidden=true] {

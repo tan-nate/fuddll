@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import Board from '../boards/Board';
 import Guesses from '../boards/Guesses';
 
+let channel;
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -14,14 +16,14 @@ class Game extends React.Component {
       fuddllReceived: false,
       renderingIntro: true,
       renderingFuddllIntro: false,
-      fuddllCount: 120,
+      fuddllCount: 10,
       guessCount: 20,
     };
   }
 
   componentDidMount() {
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
-    cable.subscriptions.create({
+    channel = cable.subscriptions.create({
       channel: 'GamesChannel', 
       game: this.props.boards[0].game_id,
     }, {
@@ -35,23 +37,18 @@ class Game extends React.Component {
         fuddlling: true,
       });
     }
-
-    if (!this.state.renderingIntro && this.state.fuddllCount === 120) {
-      var countdown = this.startFuddllCountdown();
-    }
-
-    if (this.state.fuddllCount === 0) {
-      clearInterval(countdown);
+    if (!this.state.renderingIntro && this.state.fuddllCount === 10) {
+      setInterval(() => {
+        const newCount = this.state.fuddllCount - 1;
+        this.setState({
+          fuddllCount: newCount,
+        });
+      }, 1000);
     }
   }
 
-  startFuddllCountdown = () => {
-    setInterval(() => {
-      const newCount = this.state.fuddllCount - 1;
-      this.setState({
-        fuddllCount: newCount,
-      });
-    }, 1000);
+  componentWillUnmount() {
+    channel.unsubscribe();
   }
 
   handleReceived = response => {
@@ -84,7 +81,7 @@ class Game extends React.Component {
         renderingIntro: false,
         renderingFuddllIntro: false,
       })
-    }, 6000);
+    }, 5000);
   }
 
   setFuddllSent = () => {
@@ -92,12 +89,22 @@ class Game extends React.Component {
       fuddllSent: true,
     });
   }
+
+  gameOverTimeout = () => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 3000);
+  }
   
   render() {
-    if (this.state.fuddllCount === 0) {
-      clearInterval(this.startFuddllCountdown());
-    }
-    if (this.state.renderingFuddllIntro && this.state.renderingIntro) {
+    if (this.state.fuddllCount <= 0) {
+      this.gameOverTimeout();
+      return (
+        <div className="intro">
+          <p>you lose</p>
+        </div>
+      )
+    } else if (this.state.renderingFuddllIntro && this.state.renderingIntro) {
       return (
         <div className="intro fuddll-intro">
           <p>fuddll</p>
@@ -107,7 +114,7 @@ class Game extends React.Component {
       this.stopRenderingIntro();
       return (
         <div className="intro">
-          <p>{this.props.currentPlayer.name} <strong>vs</strong> {this.props.opponent.name}</p>
+          <p>{this.props.currentPlayer.name} vs {this.props.opponent.name}</p>
         </div>
       );
     } else if (this.state.fuddlling) {
