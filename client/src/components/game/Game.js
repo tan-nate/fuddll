@@ -14,6 +14,8 @@ class Game extends React.Component {
       fuddllReceived: false,
       renderingIntro: true,
       renderingFuddllIntro: false,
+      fuddllCount: 120,
+      guessCount: 20,
     };
   }
 
@@ -33,6 +35,42 @@ class Game extends React.Component {
         fuddlling: true,
       });
     }
+
+    if (!this.state.renderingIntro && this.state.fuddllCount === 120) {
+      var countdown = this.startFuddllCountdown();
+    }
+
+    if (this.state.fuddllCount === 0) {
+      clearInterval(countdown);
+    }
+  }
+
+  startFuddllCountdown = () => {
+    setInterval(() => {
+      const newCount = this.state.fuddllCount - 1;
+      this.setState({
+        fuddllCount: newCount,
+      });
+    }, 1000);
+  }
+
+  handleReceived = response => {
+    const json = JSON.parse(response);
+    console.log(json);
+    if (json.guess && json.guess.board_id === this.ownBoard().id) {
+      this.props.addGuess(json.guess);
+    } else if (Array.isArray(json) && json[0].board_id === this.opponentBoard().id) {
+      this.props.addLines(json);
+      this.setState({ fuddllReceived: true });
+    } 
+  }
+
+  ownBoard = () => {
+    return this.props.boards.find(board => board.player_id === this.props.currentPlayer.id);
+  }
+
+  opponentBoard = () => {
+    return this.props.boards.find(board => board.player_id === this.props.opponent.id);
   }
 
   stopRenderingIntro = () => {
@@ -54,27 +92,11 @@ class Game extends React.Component {
       fuddllSent: true,
     });
   }
-
-  handleReceived = response => {
-    const json = JSON.parse(response);
-    console.log(json);
-    if (json.guess && json.guess.board_id === this.ownBoard().id) {
-      this.props.addGuess(json.guess);
-    } else if (Array.isArray(json) && json[0].board_id === this.opponentBoard().id) {
-      this.props.addLines(json);
-      this.setState({ fuddllReceived: true });
-    } 
-  }
-
-  ownBoard = () => {
-    return this.props.boards.find(board => board.player_id === this.props.currentPlayer.id);
-  }
-
-  opponentBoard = () => {
-    return this.props.boards.find(board => board.player_id === this.props.opponent.id);
-  }
   
   render() {
+    if (this.state.fuddllCount === 0) {
+      clearInterval(this.startFuddllCountdown());
+    }
     if (this.state.renderingFuddllIntro && this.state.renderingIntro) {
       return (
         <div className="intro fuddll-intro">
@@ -85,7 +107,7 @@ class Game extends React.Component {
       this.stopRenderingIntro();
       return (
         <div className="intro">
-          <p><strong>{this.props.currentPlayer.name}</strong> vs <strong>{this.props.opponent.name}</strong></p>
+          <p>{this.props.currentPlayer.name} <strong>vs</strong> {this.props.opponent.name}</p>
         </div>
       );
     } else if (this.state.fuddlling) {
@@ -98,7 +120,7 @@ class Game extends React.Component {
     } else {
       return (
         <>
-          <Board board={this.ownBoard()} setFuddllSent={this.setFuddllSent} fuddlling={this.state.fuddlling} />
+          <Board board={this.ownBoard()} setFuddllSent={this.setFuddllSent} fuddlling={this.state.fuddlling} fuddllCount={this.state.fuddllCount} />
         </>
       );
     }

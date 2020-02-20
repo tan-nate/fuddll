@@ -5,5 +5,8 @@ class GamesChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
+    current_player.update(in_game: false)
+    serialized_data = {out_of_game: params[:player_id]}.to_json
+    ActionCable.server.broadcast "players_channel", serialized_data
   end
 end

@@ -71,6 +71,10 @@ class Player extends React.Component {
       this.setState({
         inGame: true,
       });
+    } else if (json.out_of_game === this.props.player.id) {
+      this.setState({
+        inGame: false,
+      });
     }
   }
   
