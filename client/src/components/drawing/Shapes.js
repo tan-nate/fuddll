@@ -93,7 +93,7 @@ class Shapes extends React.Component {
   
   render() {
     return (
-      <div className="rotated-shapes-svg">
+      <div class="shapes-container">
         {this.renderShapes()}
       </div>
     );
