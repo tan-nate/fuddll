@@ -91,14 +91,15 @@ class Point extends React.Component {
           </div>
         </div>
       );
-    }
-    return (
-      <div className="point">
-        <div className="button" ref={this.pointRef}>
-          <button onClick={this.handleClick} className={this.state.buttonColor}></button>
+    } else {
+      return (
+        <div className="point">
+          <div className="button" ref={this.pointRef}>
+            <button onClick={this.handleClick} className={this.state.buttonColor}></button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

@@ -39,13 +39,23 @@ class GuessPoint extends React.Component {
   }
   
   render() {
-    return (
-      <div className="point">
-        <div className="button" ref={this.pointRef}>
-          <button onClick={this.handleClick} className={this.state.buttonColor}></button>
+    if (this.props.waiting) {
+      return (
+        <div className="point">
+          <div className="button" ref={this.pointRef}>
+            <button disabled className="fuddlling"></button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="point">
+          <div className="button" ref={this.pointRef}>
+            <button onClick={this.handleClick} className={this.state.buttonColor}></button>
+          </div>
+        </div>
+      );
+    }
   }
 }
 

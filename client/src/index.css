@@ -8,6 +8,24 @@
   }
 }
 
+@media only screen and (max-width: 380px) {
+  html body {
+    zoom: 1.2;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  html body {
+    zoom: 1.1;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  html body {
+    zoom: 1;
+  }
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -226,6 +244,11 @@ button.declined {
   clear: none;
 }
 
+.toolbox.waiting {
+  color: gray;
+  border: solid black 1.5px;
+}
+
 .toolbox[data-hidden=true] {
   border: none;
 }
@@ -325,7 +348,7 @@ button.submit:disabled {
 }
 
 .rotate-svg {
-  margin: 10px;
+  margin: 20px;
 }
 
 .line {
@@ -340,7 +363,7 @@ button.submit:disabled {
 
 .line-gray {
   stroke-width: 3px;
-  stroke: rgb(160, 160, 160);
+  stroke: rgb(180, 180, 180);
 }
 
 .line-aqua {

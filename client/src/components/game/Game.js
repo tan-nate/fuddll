@@ -69,6 +69,9 @@ class Game extends React.Component {
     console.log(json);
     if (json.guess && json.guess.board_id === this.ownBoard().id) {
       this.props.addGuess(json.guess);
+      this.setState({
+        waiting: false,
+      })
     } else if (Array.isArray(json) && json[0].board_id === this.opponentBoard().id) {
       this.props.addLines(json);
       this.setState({ fuddllReceived: true });
@@ -103,6 +106,12 @@ class Game extends React.Component {
     });
   }
 
+  setWaitingTrue = () => {
+    this.setState({
+      waiting: true,
+    })
+  }
+
   gameOverTimeout = () => {
     setTimeout(() => {
       window.location.reload(false);
@@ -114,7 +123,7 @@ class Game extends React.Component {
       this.gameOverTimeout();
       return (
         <div className="intro">
-          <p>{this.props.opponent.name} won</p>
+          <p>you lose</p>
         </div>
       )
     } else if (this.state.renderingFuddllIntro && this.state.renderingIntro) {
@@ -134,7 +143,7 @@ class Game extends React.Component {
       return (
         <>
           <Board board={this.ownBoard()} fuddlling={this.state.fuddlling} />
-          <Guesses board={this.opponentBoard()} waiting={this.state.waiting} guessCount={this.state.guessCount} />
+          <Guesses board={this.opponentBoard()} waiting={this.state.waiting} guessCount={this.state.guessCount} setWaitingTrue={this.setWaitingTrue} />
         </>
       );
     } else {

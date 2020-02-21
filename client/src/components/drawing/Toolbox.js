@@ -74,7 +74,7 @@ class Toolbox extends React.Component {
               close shapes
             </p>
           </div>
-          <button className="waiting" type="submit" disabled>waiting</button>
+          <button className="waiting" type="submit" disabled>wait</button>
         </div>
       );
     } else {

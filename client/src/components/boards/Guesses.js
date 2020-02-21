@@ -31,7 +31,7 @@ class Guesses extends React.Component {
 
   renderPoints = () => {
     if (this.filteredPoints().length !== 0) {
-      return this.filteredPoints().map(point => <GuessPoint key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} connectedPoints={this.state.connectedPoints} />);
+      return this.filteredPoints().map(point => <GuessPoint key={point.id} point={point} connectPoints={this.connectPoints} removePoint={this.removePoint} connectedPoints={this.state.connectedPoints} waiting={this.props.waiting} />);
     } else {
       return null;
     }
@@ -54,6 +54,7 @@ class Guesses extends React.Component {
   checkAndSendPoints = () => {
     if (this.state.connectedPoints.length === 2) {
       this.props.sendGuess({ points: this.state.connectedPoints, board: this.props.board.id });
+      this.props.setWaitingTrue();
       this.setState({
         connectedPoints: []
       });
@@ -93,19 +94,35 @@ class Guesses extends React.Component {
   }
 
   render() {
-    return (
-      <div className="board-container">
-        <div className="board">
-          {this.renderPoints()}
-          {this.renderGuesses()}
+    if (this.props.waiting) {
+      return (
+        <div className="board-container">
+          <div className="board">
+            {this.renderPoints()}
+            {this.renderGuesses()}
+          </div>
+          <div className="toolbox countdown waiting">
+            <p>wait</p>
+          </div>
+          <br />
+          {this.renderShapes()}
         </div>
-        <div className="toolbox countdown">
-          <p>{this.props.guessCount}</p>
+      );
+    } else {
+      return (
+        <div className="board-container">
+          <div className="board">
+            {this.renderPoints()}
+            {this.renderGuesses()}
+          </div>
+          <div className="toolbox countdown">
+            <p>{this.props.guessCount}</p>
+          </div>
+          <br />
+          {this.renderShapes()}
         </div>
-        <br />
-        {this.renderShapes()}
-      </div>
-    );
+      );
+    }
   }
 }
 
