@@ -17,4 +17,8 @@ class Line < ApplicationRecord
       errors.add(:base, message: "connected points must be different")
     end
   end
+
+  def player_id
+    self.board.player_id
+  end
 end

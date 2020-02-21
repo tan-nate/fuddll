@@ -21,4 +21,8 @@ class Guess < ApplicationRecord
   def game
     self.board.game
   end
+
+  def player_id
+    self.board.player_id
+  end
 end

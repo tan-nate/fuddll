@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/decline_request', to: 'players#decline_request'
   post '/broadcast_in_game', to: 'players#broadcast_in_game'
   post '/broadcast_fuddll', to: 'lines#broadcast_fuddll'
+  post '/send_win', to: 'players#send_win'
   mount ActionCable.server => '/cable'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -12,7 +12,8 @@ class GuessSerializer
         point2: {
           only: [:x, :y]
         }
-      }
+      },
+      methods: :player_id
     }
     @guess.to_json(options)
   end

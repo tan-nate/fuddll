@@ -56,3 +56,19 @@ export function broadcastFuddll(boardId) {
     .then(response => response.json())
     .then(console.log);
 }
+
+export function sendWin({ winnerId, loserId }) {
+  const headers = {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }, 
+    credentials: "include",
+    body: JSON.stringify({ winner_id: winnerId, loser_id: loserId }),
+  }
+
+  fetch('/send_win', headers)
+    .then(response => response.json())
+    .then(console.log);
+}

@@ -12,7 +12,8 @@ class LineSerializer
         point2: {
           only: [:x, :y]
         }
-      }
+      },
+      methods: :player_id
     }
     @line.to_json(options)
   end

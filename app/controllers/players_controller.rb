@@ -102,4 +102,12 @@ class PlayersController < ApplicationController
     ActionCable.server.broadcast "players_channel", serialized_data
     render json: {broadcast_in_game: true}
   end
+
+  def send_win
+    winner = Player.find(params[:winner_id])
+    loser = Player.find(params[:loser_id])
+    winner.update(wins: winner.wins + 1)
+    loser.update(losses: loser.losses + 1)
+    render json: {win_sent: true}
+  end
 end

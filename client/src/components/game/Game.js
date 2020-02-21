@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Board from '../boards/Board';
 import Guesses from '../boards/Guesses';
+import { sendWin } from '../../actions/gameActions';
 
 class Game extends React.Component {
   constructor(props) {
@@ -15,8 +16,9 @@ class Game extends React.Component {
       renderingIntro: true,
       renderingFuddllIntro: false,
       fuddllCount: 120,
-      guessCount: 20,
+      guessCount: 25,
       waiting: true,
+      won: false,
     };
   }
 
@@ -54,7 +56,7 @@ class Game extends React.Component {
       }
     }
 
-    if (!this.state.waiting && this.state.guessCount === 20) {
+    if (!this.state.waiting && this.state.guessCount === 25) {
       setInterval(() => {
         const newCount = this.state.guessCount - 1;
         this.setState({
@@ -63,10 +65,22 @@ class Game extends React.Component {
       }, 1000);
     }
 
+    if (this.state.waiting && !prevState.waiting) {
+      this.setState({
+        guessCount: 1000,
+      });
+    }
+
     if (!this.state.waiting && prevState.waiting) {
       this.setState({
-        guessCount: 19,
+        guessCount: 24,
       })
+    }
+
+    if (this.fuddlling && this.opponentLines().length > 0 && this.ownGuesses() > 0) {
+      if (this.checkForWin()) {
+        this.winAction();
+      }
     }
   }
 
@@ -81,7 +95,9 @@ class Game extends React.Component {
     } else if (Array.isArray(json) && json[0].board_id === this.opponentBoard().id) {
       this.props.addLines(json);
       this.setState({ fuddllReceived: true });
-    } 
+    } else if (json.leftGamePlayerId === this.props.opponent.id) {
+      this.winAction();
+    }
   }
 
   ownBoard = () => {
@@ -123,9 +139,28 @@ class Game extends React.Component {
       window.location.reload(false);
     }, 3000);
   }
+
+  opponentLines = () => {
+    return this.props.lines.filter(line => line.player_id === this.props.opponent.id);
+  }
+
+  ownGuesses = () => {
+    return this.props.guesses.filter(guess => guess.player_id === this.props.currentPlayer.id);
+  }
+
+  checkForWin = () => {
+    return this.opponentLines().every(line => this.ownGuesses().includes(line));
+  }
+
+  winAction = () => {
+    sendWin({ winnerId: this.props.currentPlayer.id, loserId: this.props.opponent.id });
+    this.setState({
+      won: true,
+    });
+  }
   
   render() {
-    if (this.state.fuddllCount <= 0) {
+    if (this.state.fuddllCount <= 0 || this.state.guessCount <= 0) {
       this.gameOverTimeout();
       return (
         <div className="intro">
