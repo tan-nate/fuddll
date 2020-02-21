@@ -108,6 +108,20 @@ class Guesses extends React.Component {
           {this.renderShapes()}
         </div>
       );
+    } else if (this.props.guessCount <= 10) {
+      return (
+        <div className="board-container">
+          <div className="board">
+            {this.renderPoints()}
+            {this.renderGuesses()}
+          </div>
+          <div className="toolbox countdown warning">
+            <p>{this.props.guessCount}</p>
+          </div>
+          <br />
+          {this.renderShapes()}
+        </div>
+      );
     } else {
       return (
         <div className="board-container">

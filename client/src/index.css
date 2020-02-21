@@ -243,6 +243,10 @@ button.declined {
   clear: none;
 }
 
+.toolbox.countdown.warning {
+  border: solid rgb(255, 85, 85) 1.5px;
+}
+
 .toolbox.waiting {
   color: gray;
   border: solid black 1.5px;
