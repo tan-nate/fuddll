@@ -62,6 +62,12 @@ class Game extends React.Component {
         });
       }, 1000);
     }
+
+    if (!this.state.waiting && prevState.waiting) {
+      this.setState({
+        guessCount: 19,
+      })
+    }
   }
 
   handleReceived = response => {
@@ -123,7 +129,7 @@ class Game extends React.Component {
       this.gameOverTimeout();
       return (
         <div className="intro">
-          <p>you lose</p>
+          <p>you lost</p>
         </div>
       )
     } else if (this.state.renderingFuddllIntro && this.state.renderingIntro) {
