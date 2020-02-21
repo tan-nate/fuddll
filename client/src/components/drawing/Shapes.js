@@ -93,7 +93,7 @@ class Shapes extends React.Component {
   
   render() {
     return (
-      <div class="shapes-container" id="shapes-container">
+      <div className="shapes-container">
         {this.renderShapes()}
       </div>
     );

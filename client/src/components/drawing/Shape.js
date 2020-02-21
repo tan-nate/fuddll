@@ -5,13 +5,10 @@ function Shape(props) {
   const scale = 50;
   const randomAngle = (Math.floor(Math.random() * 4)) * 90;
   const rotation = `rotate(${randomAngle})`;
-  const svglines = shape.map(line => <line key={line.id} className="line-blue" x1={line.point1.x * scale} x2={line.point2.x * scale} y1={line.point1.y * scale} y2={line.point2.y * scale} />);
+  const svglines = shape.map(line => <line key={line.id} className="line-blue"  transform={rotation} x1={line.point1.x * scale} x2={line.point2.x * scale} y1={line.point1.y * scale} y2={line.point2.y * scale} />);
   return (
-    <svg className="rotate-svg" transform={rotation}>
-      {/* required for safari */}
-      {/* <g transform={rotation}> */}
+    <svg className="rotate-svg">
         {svglines}
-      {/* </g> */}
     </svg>
   );
 }
