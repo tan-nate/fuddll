@@ -15,7 +15,7 @@ class Game extends React.Component {
       fuddllReceived: false,
       renderingIntro: true,
       renderingFuddllIntro: false,
-      fuddllCount: 120,
+      fuddllCount: 90,
       guessCount: 25,
       waiting: true,
       won: false,
@@ -34,7 +34,7 @@ class Game extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.renderingIntro && this.state.fuddllCount === 120) {
+    if (!this.state.renderingIntro && this.state.fuddllCount === 90) {
       setInterval(() => {
         const newCount = this.state.fuddllCount - 1;
         this.setState({
