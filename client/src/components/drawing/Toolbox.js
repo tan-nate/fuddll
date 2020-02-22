@@ -77,6 +77,26 @@ class Toolbox extends React.Component {
           <button className="waiting" type="submit" disabled>wait</button>
         </div>
       );
+    } else if (this.props.fuddllCount <= 20) {
+      return (
+        <>
+          <div className="toolbox countdown warning">
+            <p>{this.props.fuddllCount}</p>
+          </div>
+          <br />
+          <div className="toolbox" data-hidden={this.checkLinesLeftAndShapesClosed()}>
+            <div className="lines-left" hidden={this.props.filteredLines().length === 12}>
+              {this.linesLeft()}
+            </div>
+            <div className="instructions" hidden={this.checkShapesClosed()}>
+              <p>
+                close shapes
+              </p>
+            </div>
+            <button className="submit" type="submit" disabled={!this.checkLinesLeftAndShapesClosed()} onClick={event => this.handleClick(event)}>fuddl</button>
+          </div>
+        </>
+      );
     } else {
       return (
         <>

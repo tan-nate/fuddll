@@ -34,7 +34,7 @@ class Game extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (!this.state.renderingIntro && this.state.fuddllCount === 120) {
-      var fuddllCount = setInterval(() => {
+      setInterval(() => {
         const newCount = this.state.fuddllCount - 1;
         this.setState({
           fuddllCount: newCount,
@@ -43,7 +43,9 @@ class Game extends React.Component {
     }
 
     if (this.state.fuddllSent && !prevState.fuddllSent) {
-      clearInterval(fuddllCount);
+      this.setState({
+        fuddllCount: 10000,
+      });
     }
     
     if (this.state.fuddllSent && this.state.fuddllReceived && (!prevState.fuddllSent || !prevState.fuddllReceived)) {
@@ -53,7 +55,7 @@ class Game extends React.Component {
     }
 
     if (this.state.fuddlling && !prevState.fuddlling) {
-      if (this.props.boards[0].player_id === this.props.currentPlayer.id) {
+      if (this.props.boards[1].player_id === this.props.currentPlayer.id) {
         this.setState({
           waiting: false,
         });
@@ -61,7 +63,7 @@ class Game extends React.Component {
     }
 
     if (!this.state.waiting && this.state.guessCount === 25) {
-      var guessCount = setInterval(() => {
+      setInterval(() => {
         const newCount = this.state.guessCount - 1;
         this.setState({
           guessCount: newCount,
@@ -70,12 +72,14 @@ class Game extends React.Component {
     }
 
     if (this.state.waiting && !prevState.waiting) {
-      clearInterval(guessCount);
+      this.setState({
+        guessCount: 10000,
+      })
     }
 
     if (!this.state.waiting && prevState.waiting) {
       this.setState({
-        guessCount: 25,
+        guessCount: 24,
       })
     }
 
@@ -89,8 +93,8 @@ class Game extends React.Component {
   handleReceived = response => {
     const json = JSON.parse(response);
     console.log(json);
-    if (json.guess && json.guess.board_id === this.ownBoard().id) {
-      this.props.addGuess(json.guess);
+    if (json.board_id && json.board_id === this.ownBoard().id) {
+      this.props.addGuess({ guess: json });
       this.setState({
         waiting: false,
       })
@@ -207,7 +211,7 @@ const mapStateToProps = ({ boards, players }) => ({ boards, currentPlayer: playe
 const mapDispatchToProps = dispatch => {
   return {
     addLines: lines => dispatch({ type: 'ADD_LINES', lines }),
-    addGuess: guess => dispatch({ type: 'ADD_GUESS', guess }),
+    addGuess: ({ guess }) => dispatch({ type: 'ADD_GUESS', guess }),
   }
 }
 

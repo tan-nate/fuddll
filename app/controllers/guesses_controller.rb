@@ -7,8 +7,9 @@ class GuessesController < ApplicationController
   def create
     guess = Guess.find_or_initialize_by(guess_params)
     if guess.save
-      render json: GuessSerializer.new(guess).to_serialized_json
-      GamesChannel.broadcast_to guess.game, {guess: guess}.to_json
+      data = GuessSerializer.new(guess).to_serialized_json
+      render json: data
+      GamesChannel.broadcast_to guess.game, data
     else
       render json: guess.errors, status: :unprocessable_entity
     end

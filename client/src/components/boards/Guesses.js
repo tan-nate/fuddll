@@ -16,6 +16,12 @@ class Guesses extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.guesses > prevProps.guesses) {
+      this.props.setWaitingTrue();
+    }
+  }
+
   componentDidMount() {
     this.props.fetchPoints(this.props.board.id);
     this.props.fetchGuesses(this.props.board.id);
@@ -54,7 +60,6 @@ class Guesses extends React.Component {
   checkAndSendPoints = () => {
     if (this.state.connectedPoints.length === 2) {
       this.props.sendGuess({ points: this.state.connectedPoints, board: this.props.board.id });
-      this.props.setWaitingTrue();
       this.setState({
         connectedPoints: []
       });

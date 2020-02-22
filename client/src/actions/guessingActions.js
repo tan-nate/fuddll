@@ -38,10 +38,12 @@ export function sendGuess({ points, board }) {
           throw new Error("Connected points must be adjacent");
         }
       })
-      .then(guess => dispatch({ type: 'ADD_GUESS', guess: guess }))
+      .then(guess => {
+        dispatch({ type: 'ADD_GUESS', guess: guess })
+      })
       .catch(error => {
         console.log(error);
-      });
+      })
   };
 };
 
