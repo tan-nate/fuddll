@@ -16,6 +16,7 @@ class OpponentGuess extends React.Component {
         [this.props.guess.point1_id, this.props.guess.point2_id].includes(point)
       )
     ).length > 0) {
+      this.props.storeHit(this.props.guess.id);
       return "aqua";
     } else {
       return "gray";

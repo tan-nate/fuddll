@@ -19,12 +19,13 @@ class Game extends React.Component {
       guessCount: 25,
       waiting: true,
       won: false,
+      hits: [],
     };
   }
 
   componentDidMount() {
     const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
-    cable.subscriptions.create({
+    this.channel = cable.subscriptions.create({
       channel: 'GamesChannel', 
       game: this.props.boards[0].game_id,
     }, {
@@ -54,7 +55,7 @@ class Game extends React.Component {
       });
     }
 
-    if (this.state.fuddlling && !prevState.fuddlling) {
+    if (this.state.fuddlling && !prevState.fuddlling) {      
       if (this.props.boards[1].player_id === this.props.currentPlayer.id) {
         this.setState({
           waiting: false,
@@ -81,12 +82,6 @@ class Game extends React.Component {
       this.setState({
         guessCount: 24,
       })
-    }
-
-    if (this.fuddlling && this.opponentLines().length > 0 && this.ownGuesses() > 0) {
-      if (this.opponentLines().every(line => this.ownGuesses().includes(line))) {
-        this.winAction();
-      }
     }
   }
 
@@ -141,17 +136,10 @@ class Game extends React.Component {
   }
 
   gameOverTimeout = () => {
+    this.channel.unsubscribe();
     setTimeout(() => {
       window.location.reload(false);
     }, 4000);
-  }
-
-  opponentLines = () => {
-    return this.props.lines.filter(line => line.player_id === this.props.opponent.id);
-  }
-
-  ownGuesses = () => {
-    return this.props.guesses.filter(guess => guess.player_id === this.props.currentPlayer.id);
   }
 
   winAction = () => {
@@ -161,6 +149,13 @@ class Game extends React.Component {
     });
     this.gameOverTimeout();
   }
+
+  storeHit = (guessId) => {
+    const prevHits = this.state.hits;
+    this.setState({
+      hits: [...prevHits, guessId],
+    })
+  }
   
   render() {
     if (this.state.won) {
@@ -169,7 +164,7 @@ class Game extends React.Component {
           <p>you won</p>
         </div>
       );
-    } else if (this.state.fuddllCount <= 0 || this.state.guessCount <= 0) {
+    } else if (this.state.fuddllCount <= 0 || this.state.guessCount <= 0 || [...new Set(this.state.hits)].length === 12) {
       this.gameOverTimeout();
       return (
         <div className="intro">
@@ -192,7 +187,7 @@ class Game extends React.Component {
     } else if (this.state.fuddlling) {
       return (
         <>
-          <Board board={this.ownBoard()} fuddlling={this.state.fuddlling} />
+          <Board board={this.ownBoard()} fuddlling={this.state.fuddlling} storeHit={this.storeHit} />
           <Guesses board={this.opponentBoard()} waiting={this.state.waiting} guessCount={this.state.guessCount} setWaitingTrue={this.setWaitingTrue} />
         </>
       );
