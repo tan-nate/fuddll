@@ -33,14 +33,18 @@ class Game extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // if (!this.state.renderingIntro && this.state.fuddllCount === 120) {
-    //   setInterval(() => {
-    //     const newCount = this.state.fuddllCount - 1;
-    //     this.setState({
-    //       fuddllCount: newCount,
-    //     });
-    //   }, 1000);
-    // }
+    if (!this.state.renderingIntro && this.state.fuddllCount === 120) {
+      var fuddllCount = setInterval(() => {
+        const newCount = this.state.fuddllCount - 1;
+        this.setState({
+          fuddllCount: newCount,
+        });
+      }, 1000);
+    }
+
+    if (this.state.fuddllSent && !prevState.fuddllSent) {
+      clearInterval(fuddllCount);
+    }
     
     if (this.state.fuddllSent && this.state.fuddllReceived && (!prevState.fuddllSent || !prevState.fuddllReceived)) {
       this.setState({
@@ -57,7 +61,7 @@ class Game extends React.Component {
     }
 
     if (!this.state.waiting && this.state.guessCount === 25) {
-      setInterval(() => {
+      var guessCount = setInterval(() => {
         const newCount = this.state.guessCount - 1;
         this.setState({
           guessCount: newCount,
@@ -66,19 +70,17 @@ class Game extends React.Component {
     }
 
     if (this.state.waiting && !prevState.waiting) {
-      this.setState({
-        guessCount: 1000,
-      });
+      clearInterval(guessCount);
     }
 
     if (!this.state.waiting && prevState.waiting) {
       this.setState({
-        guessCount: 24,
+        guessCount: 25,
       })
     }
 
     if (this.fuddlling && this.opponentLines().length > 0 && this.ownGuesses() > 0) {
-      if (this.checkForWin()) {
+      if (this.opponentLines().every(line => this.ownGuesses().includes(line))) {
         this.winAction();
       }
     }
@@ -95,7 +97,7 @@ class Game extends React.Component {
     } else if (Array.isArray(json) && json[0].board_id === this.opponentBoard().id) {
       this.props.addLines(json);
       this.setState({ fuddllReceived: true });
-    } else if (json.leftGamePlayerId === this.props.opponent.id) {
+    } else if (json.out_of_game === this.props.opponent.id) {
       this.winAction();
     }
   }
@@ -137,7 +139,7 @@ class Game extends React.Component {
   gameOverTimeout = () => {
     setTimeout(() => {
       window.location.reload(false);
-    }, 3000);
+    }, 4000);
   }
 
   opponentLines = () => {
@@ -148,19 +150,22 @@ class Game extends React.Component {
     return this.props.guesses.filter(guess => guess.player_id === this.props.currentPlayer.id);
   }
 
-  checkForWin = () => {
-    return this.opponentLines().every(line => this.ownGuesses().includes(line));
-  }
-
   winAction = () => {
     sendWin({ winnerId: this.props.currentPlayer.id, loserId: this.props.opponent.id });
     this.setState({
       won: true,
     });
+    this.gameOverTimeout();
   }
   
   render() {
-    if (this.state.fuddllCount <= 0 || this.state.guessCount <= 0) {
+    if (this.state.won) {
+      return (
+        <div className="intro fuddll-intro">
+          <p>you won</p>
+        </div>
+      );
+    } else if (this.state.fuddllCount <= 0 || this.state.guessCount <= 0) {
       this.gameOverTimeout();
       return (
         <div className="intro">
