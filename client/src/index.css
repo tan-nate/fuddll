@@ -13,13 +13,8 @@
     zoom: 1.2;
   }
 
-  div.button button {
-    border-radius: 50%;
-    width: 17px;
-    height: 20px;
-    border: 1px solid black;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  div.challenge-alert, div.intro {
+    width: 70%;
   }
 }
 
@@ -192,6 +187,7 @@ div.intro p {
 
 div.fuddll-intro {
   background-color: aqua;
+  width: auto;
 }
 
 div.challenge-alert p {

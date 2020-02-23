@@ -15,6 +15,7 @@ class GameContainer extends React.Component {
     this.state = {
       challengerIds: [],
       challengerInGame: false,
+      challengerName: null,
     };
   }
   
@@ -28,12 +29,15 @@ class GameContainer extends React.Component {
       received: response => {this.handleReceived(response)},
     });
 
-
     cable.subscriptions.create({
       channel: 'ChallengesChannel',
       player: this.props.currentPlayer.id,
     }, {
       received: response => {this.handleChallenge(response)},
+    });
+
+    cable.subscriptions.create("PlayersChannel", {
+      received: response => {this.handleInGame(response)},
     });
   }
 
@@ -64,6 +68,17 @@ class GameContainer extends React.Component {
     }
   }
 
+  handleInGame = response => {
+    const json = JSON.parse(response);
+    if (json.in_game && this.findChallengers()[0] && json.in_game === this.findChallengers()[0].id) {
+      this.setState({ challengerInGame: true });
+      this.setState({ challengerName: this.findChallengers()[0].name })
+      this.setState({
+        challengerIds: this.state.challengerIds.slice(1),
+      });
+    }
+  }
+
   findChallengers = () => {
     return this.state.challengerIds.map(challengerId => {
       return this.props.players.find(player => player.id === challengerId);
@@ -76,9 +91,7 @@ class GameContainer extends React.Component {
 
   handleAccept = event => {
     event.preventDefault();
-    if (this.findChallenger(this.state.challengerIds[0]).in_game) {
-      this.setState({ challengerInGame: true });
-    } else {
+    if (!this.state.challengerInGame) {
       this.props.createGame({
         accepterId: this.props.currentPlayer.id,
         challengerId: this.state.challengerIds[0],
@@ -100,9 +113,12 @@ class GameContainer extends React.Component {
     if (this.props.opponent && this.props.boards.length >= 2) {
       return <Game boards={this.props.boards} />;
     } else if (this.state.challengerInGame) {
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 3000);
       return (
-        <div className="challenge-alert">
-          <p>{this.findChallengers()[0].name} is in a game</p>
+        <div className="intro">
+          <p>{this.state.challengerName} is in a game</p>
         </div>
       );
     } else if (this.state.challengerIds.length > 0) {
