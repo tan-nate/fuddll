@@ -61,8 +61,17 @@ button {
 }
 
 input {
+  border: 1px solid black;
+  border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+
+input.submit {
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 1em;
+  margin-top: 5px;
 }
 
 code {
@@ -84,13 +93,6 @@ h2 {
 input {
   font-size: 0.8em;
   margin-bottom: 5px;
-}
-
-input.submit {
-  font-size: 1em;
-  margin-top: 5px;
-  padding: 0 5px 0 5px;
-  border-width: 0.5px;
 }
 
 p.login-error {
