@@ -178,7 +178,7 @@ div.intro {
   border: 2px solid black;
   text-align: center;
   border-radius: 10px;
-  width: auto;
+  width: fit-content(100%);
 }
 
 div.intro p {

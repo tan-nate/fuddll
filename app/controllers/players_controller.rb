@@ -63,7 +63,7 @@ class PlayersController < ApplicationController
 
   def scoreboard
     players = Player.all
-    players_by_wins = players.order(wins: :desc, losses: :asc)
+    players_by_wins = players.order(wins: :asc, losses: :desc)
     player_by_wins_desc = players_by_wins.reverse
     render_player(player_by_wins_desc)
   end
