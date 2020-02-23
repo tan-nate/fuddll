@@ -50,7 +50,7 @@ class Players extends React.Component {
     if (this.props.players.length > 0 && this.state.filter === '') {
       return (
         <>
-          <input type="text" name="filter" value={this.state.filter} placeholder="filter:" onChange={event => this.handleChange(event)} />
+          <input type="text" id="filter" name="filter" value={this.state.filter} placeholder="filter:" onChange={event => this.handleChange(event)} />
           <ul className="player-list">
             {this.props.players.map(player => <Player key={player.id} currentPlayer={this.props.currentPlayer} player={player} />)}
           </ul>
