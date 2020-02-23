@@ -282,6 +282,7 @@ div.button button {
   width: 20px;
   height: 20px;
   border: 1px solid black;
+  -webkit-appearance: none;
 }
 
 div.button button.fuddlling {
