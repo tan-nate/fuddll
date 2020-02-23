@@ -14,6 +14,7 @@ class GameContainer extends React.Component {
     super(props);
     this.state = {
       challengerIds: [],
+      challengerInGame: false,
     };
   }
   
@@ -75,14 +76,16 @@ class GameContainer extends React.Component {
 
   handleAccept = event => {
     event.preventDefault();
-    this.props.createGame({
-      accepterId: this.props.currentPlayer.id,
-      challengerId: this.state.challengerIds[0],
-    });
-
-    this.props.storeOpponent(this.findChallenger(this.state.challengerIds[0]));
-
-    broadcastInGame(this.props.currentPlayer.id);
+    if (this.findChallenger(this.state.challengerIds[0]).in_game) {
+      this.setState({ challengerInGame: true });
+    } else {
+      this.props.createGame({
+        accepterId: this.props.currentPlayer.id,
+        challengerId: this.state.challengerIds[0],
+      });
+      this.props.storeOpponent(this.findChallenger(this.state.challengerIds[0]));
+      broadcastInGame(this.props.currentPlayer.id);
+    } 
   }
 
   handleDecline = event => {
@@ -96,6 +99,12 @@ class GameContainer extends React.Component {
   render() {
     if (this.props.opponent && this.props.boards.length >= 2) {
       return <Game boards={this.props.boards} />;
+    } else if (this.state.challengerInGame) {
+      return (
+        <div className="challenge-alert">
+          <p>{this.findChallengers()[0].name} is in a game</p>
+        </div>
+      );
     } else if (this.state.challengerIds.length > 0) {
       return (
         <div className="challenge-alert">
