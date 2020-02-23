@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { fetchPlayers, addPlayer, removePlayer } from '../../actions/playerActions';
 
 import Player from './Player';
+import { WS_URL } from '../../constants';
 
 class Players extends React.Component {
   constructor(props) {
@@ -16,9 +17,7 @@ class Players extends React.Component {
   
   componentDidMount() {
     this.props.fetchPlayers(this.props.currentPlayer);
-    // change to 'wss://fuddll.herokuapp.com/cable' in production
-    // change to 'ws://localhost:3000/cable' in development
-    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
+    const cable = ActionCable.createConsumer(WS_URL);
     cable.subscriptions.create("PlayersChannel", {
       received: response => {this.handleReceived(response)},
     });

@@ -7,6 +7,7 @@ import { createGame } from '../../actions/gameActions';
 
 import Game from './Game';
 import NavBar from './NavBar';
+import { WS_URL } from '../../constants';
 
 class GameContainer extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class GameContainer extends React.Component {
   }
   
   componentDidMount() {
-    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
+    const cable = ActionCable.createConsumer(WS_URL);
 
     cable.subscriptions.create({
       channel: 'RequestsChannel', 

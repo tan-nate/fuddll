@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Board from '../boards/Board';
 import Guesses from '../boards/Guesses';
 import { sendWin } from '../../actions/gameActions';
+import { WS_URL } from '../../constants';
 
 class Game extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
+    const cable = ActionCable.createConsumer(WS_URL);
     this.channel = cable.subscriptions.create({
       channel: 'GamesChannel', 
       game: this.props.boards[0].game_id,

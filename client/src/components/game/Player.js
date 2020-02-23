@@ -1,7 +1,7 @@
 import React from 'react';
 import ActionCable from 'actioncable';
-
 import { connect } from 'react-redux';
+import { WS_URL } from '../../constants';
 
 class Player extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Player extends React.Component {
   }
 
   componentDidMount() {
-    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
+    const cable = ActionCable.createConsumer(WS_URL);
 
     cable.subscriptions.create("PlayersChannel", {
       received: response => {this.handleInGame(response)},
