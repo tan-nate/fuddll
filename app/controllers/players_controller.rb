@@ -19,8 +19,8 @@ class PlayersController < ApplicationController
   end
   
   def index
-    logged_in_players = Player.all.where(logged_in: true)
-    render_player(logged_in_players)
+    players = Player.all
+    render_player(players)
   end
   
   def create

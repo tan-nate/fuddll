@@ -39,8 +39,12 @@ class Players extends React.Component {
     })
   }
 
+  onlinePlayers = () => {
+    this.props.players.filter(player => player.logged_in === true);
+  }
+
   filteredPlayers = () => {
-    return this.props.players.filter(player => {
+    return this.onlinePlayers().filter(player => {
       const regex = new RegExp(`^${this.state.filter}`);
       return regex.test(player.name);
     })
@@ -52,7 +56,7 @@ class Players extends React.Component {
         <>
           <input type="text" id="filter" name="filter" value={this.state.filter} placeholder="filter:" onChange={event => this.handleChange(event)} />
           <ul className="player-list">
-            {this.props.players.map(player => <Player key={player.id} currentPlayer={this.props.currentPlayer} player={player} />)}
+            {this.onlinePlayers().map(player => <Player key={player.id} currentPlayer={this.props.currentPlayer} player={player} />)}
           </ul>
         </>
       );
