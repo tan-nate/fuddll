@@ -3,3 +3,5 @@ fuddll is a game where you draw shapes onto your secret board to befuddll your o
 To run the app, fork and clone this repo onto your machine. Ensure that you have postgres installed. In the root directory, run "bundle install", then "rake db:migrate", then "rails s". Create a new terminal and cd into the client folder. Run "yarn install", then "yarn start". In the latest version of Chrome, navigate to localhost:3001. 
 
 To simulate playing a game with an opponent, open a new Chrome window as a Guest or as a new "Person". You can open new windows as new people to simulate multiple users. 
+
+You also need to change all the references to 'wss://fuddll.herokuapp.com/cable' to 'ws://localhost:3000/cable'. 
