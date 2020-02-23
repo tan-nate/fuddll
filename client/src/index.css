@@ -58,6 +58,7 @@ p {
 button {
   border: 1px solid black;
   border-radius: 0;
+  background-color: white;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
