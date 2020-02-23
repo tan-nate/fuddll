@@ -72,6 +72,7 @@ input.submit {
   border-radius: 10px;
   font-size: 1em;
   margin-top: 5px;
+  background-color: white;
 }
 
 code {
