@@ -24,7 +24,7 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
     this.channel = cable.subscriptions.create({
       channel: 'GamesChannel', 
       game: this.props.boards[0].game_id,

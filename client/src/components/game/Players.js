@@ -18,7 +18,7 @@ class Players extends React.Component {
     this.props.fetchPlayers(this.props.currentPlayer);
     // change to 'wss://fuddll.herokuapp.com/cable' in production
     // change to 'ws://localhost:3000/cable' in development
-    const cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    const cable = ActionCable.createConsumer('wss://fuddll.herokuapp.com/cable');
     cable.subscriptions.create("PlayersChannel", {
       received: response => {this.handleReceived(response)},
     });
