@@ -56,6 +56,12 @@ class Auth extends React.Component {
     return this.state.errors.map(error => <p key={error.index} className="login-error">{error}</p>);
   }
 
+  renderNameError = () => {
+    if (this.state.name.length > 10) {
+      return <p className="login-error">name must be less than 10 characters</p>;
+    }
+  }
+
   logOut = event => {
     event.preventDefault();
     this.props.logOutPlayer(this.props.currentPlayer);
@@ -80,6 +86,7 @@ class Auth extends React.Component {
           <input type="submit" value="submit" className="submit" />
         </form>
         <div id="login-errors">
+          {this.renderNameError()}
           {this.renderErrors()}
         </div>
       </>
