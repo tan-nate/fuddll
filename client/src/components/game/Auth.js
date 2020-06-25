@@ -89,6 +89,7 @@ class Auth extends React.Component {
           {this.renderNameError()}
           {this.renderErrors()}
         </div>
+        <p id="welcome-instruction">if this is your first time, fill out the form to sign up!</p>
       </>
     );
   }

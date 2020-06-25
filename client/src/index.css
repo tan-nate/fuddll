@@ -105,6 +105,10 @@ a, a:visited {
   color: black;
 }
 
+#welcome-instruction {
+  color: gray;
+}
+
 div.user-info p {
   display: inline;
   margin: 0 5px 0 5px;
