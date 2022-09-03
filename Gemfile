@@ -26,6 +26,7 @@ gem 'rack-cors'
 
 gem 'beer-advocate-cli', '~> 0.2.4'
 gem 'jwt'
+gem 'net-smtp', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
